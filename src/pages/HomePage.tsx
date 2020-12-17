@@ -1,5 +1,5 @@
-const HomePage:React.FC = () => {
-  return <div>홈</div>
-}
+const HomePage = () => {
+  return <div>홈</div>;
+};
 
-export default HomePage
+export default HomePage;

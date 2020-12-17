@@ -1,5 +1,7 @@
-const LoginPage= () => {
-  return(<div>로그인 페이지</div>)
-}
+import Button from '../components/common/Button';
 
-export default LoginPage
+const LoginPage = () => {
+  return <Button>로그인</Button>;
+};
+
+export default LoginPage;
