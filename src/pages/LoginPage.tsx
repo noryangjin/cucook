@@ -1,7 +1,12 @@
-import Button from '../components/common/Button';
+import AuthForm from '../components/auth/AuthForm';
+import AuthTemplate from '../components/auth/AuthTemplate';
 
 const LoginPage = () => {
-  return <Button>로그인</Button>;
+  return (
+    <AuthTemplate>
+      <AuthForm />
+    </AuthTemplate>
+  );
 };
 
 export default LoginPage;

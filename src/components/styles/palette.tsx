@@ -1,9 +1,11 @@
 type Object = {
+  backgroundColor: string;
   gray: Array<string>;
   cyan: Array<string>;
 };
 
 const palette: Object = {
+  backgroundColor: '#faf5f5',
   gray: [
     '#f8f9fa',
     '#f1f3f5',
@@ -12,9 +14,6 @@ const palette: Object = {
     '#ced4da',
     '#adb5bd',
     '#868e96',
-    '#495057',
-    '#343a40',
-    '#212529',
   ],
   cyan: [
     '#e3fafc',
@@ -24,9 +23,6 @@ const palette: Object = {
     '#3b8edb',
     '#22b8cf',
     '#15aabf',
-    '#1098ad',
-    '#0c8599',
-    '#0b7285',
   ],
 };
 
