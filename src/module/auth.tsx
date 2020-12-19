@@ -32,7 +32,7 @@ const initialState: any = {
 const auth = handleActions(
   {
     [CHANGE_FIELD]: (state, { payload: { form, key, value } }) =>
-      produce((state, draft) => {
+      produce(state, (draft: any) => {
         draft[form][key] = value;
       }),
     [INITIALIZE]: (state, { payload: form }) => ({

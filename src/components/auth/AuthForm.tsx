@@ -46,7 +46,7 @@ const Footer = styled.div`
 
 type Props = {
   type: string;
-  form: { username: string; password: string };
+  form: { username: string; password: string; confirmPassword?: string };
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
@@ -67,13 +67,20 @@ const AuthForm: React.FC<Props> = ({ type, form, onChange }) => {
           value={form.username}
           onChange={onChange}
         />
-        {console.log('s', form, form.username, form['username'])}
-        <StyledInput name="password" placeholder="password" type="password" />
+        <StyledInput
+          name="password"
+          placeholder="password"
+          type="password"
+          value={form.password}
+          onChange={onChange}
+        />
         {text === '회원가입' && (
           <StyledInput
-            name="confirm-password"
+            name="confirmPassword"
             placeholder="confirm password"
             type="password"
+            value={form.confirmPassword}
+            onChange={onChange}
           />
         )}
         <StyledButton cyan fullWidth>

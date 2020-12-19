@@ -1,4 +1,4 @@
-import { useEffect, ChangeEvent } from 'react';
+import { useEffect, ChangeEvent, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import AuthForm from '../../components/auth/AuthForm';
 import { changeField, initialize } from '../../module/auth';
@@ -12,10 +12,13 @@ const LoginForm = () => {
     dispatch(initialize('login'));
   }, [dispatch]);
 
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value, name } = e.target;
-    dispatch(changeField({ form: 'login', key: name, value }));
-  };
+  const onChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      const { value, name } = e.target;
+      dispatch(changeField({ form: 'login', key: name, value }));
+    },
+    [dispatch]
+  );
 
   return <AuthForm type="login" form={form} onChange={onChange} />;
 };
