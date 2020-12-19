@@ -4,6 +4,10 @@ import Button from '../common/Button';
 import { Link } from 'react-router-dom';
 import palette from '../styles/palette';
 
+type Props = {
+  type: string;
+};
+
 const AuthFormBlock = styled.div`
   display: flex;
   flex-direction: column;
@@ -29,9 +33,7 @@ const StyledInput = styled.input`
 `;
 
 const StyledButton = styled(Button)`
-  width: 100%;
   margin-top: 1rem;
-  letter-spacing: 2px;
   text-transform: uppercase;
 `;
 
@@ -41,21 +43,40 @@ const Footer = styled.div`
   a {
     text-transform: uppercase;
     letter-spacing: 2px;
-    border-bottom: 1px solid gray;
+    text-decoration: underline;
   }
 `;
 
-const AuthForm = () => {
+const AuthForm = ({ type }: Props) => {
+  const name: any = {
+    register: '회원가입',
+    login: '로그인',
+  };
+  const text = name[type];
+
   return (
     <AuthFormBlock>
-      <h2>로그인</h2>
+      <h2>{text}</h2>
       <form>
-        <StyledInput name="username" placeholder="username" />
+        <StyledInput name="username" placeholder="ID" />
         <StyledInput name="password" placeholder="password" type="password" />
-        <StyledButton>login</StyledButton>
+        {text === '회원가입' && (
+          <StyledInput
+            name="confirm-password"
+            placeholder="confirm password"
+            type="password"
+          />
+        )}
+        <StyledButton cyan fullWidth>
+          {text}
+        </StyledButton>
       </form>
       <Footer>
-        <Link to="/register">join</Link>
+        {text === '로그인' ? (
+          <Link to="/register">join</Link>
+        ) : (
+          <Link to="/login">login</Link>
+        )}
       </Footer>
     </AuthFormBlock>
   );
