@@ -29,7 +29,11 @@ const AuthForm = styled.div`
   }
 `;
 
-const AuthTemplate: React.FC<any> = ({ children }) => {
+type Props = {
+  children: React.ReactNode;
+};
+
+const AuthTemplate: React.FC<Props> = ({ children }) => {
   return (
     <AuthTemplateBlock>
       <AuthForm>

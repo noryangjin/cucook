@@ -1,12 +1,9 @@
 import React from 'react';
+import { ChangeEvent } from 'react';
 import styled from 'styled-components';
 import Button from '../common/Button';
 import { Link } from 'react-router-dom';
 import palette from '../styles/palette';
-
-type Props = {
-  type: string;
-};
 
 const AuthFormBlock = styled.div`
   display: flex;
@@ -47,18 +44,30 @@ const Footer = styled.div`
   }
 `;
 
-const AuthForm = ({ type }: Props) => {
+type Props = {
+  type: string;
+  form: { username: string; password: string };
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+};
+
+const AuthForm: React.FC<Props> = ({ type, form, onChange }) => {
   const name: any = {
     register: '회원가입',
     login: '로그인',
   };
-  const text = name[type];
+  const text: string = name[type];
 
   return (
     <AuthFormBlock>
       <h2>{text}</h2>
       <form>
-        <StyledInput name="username" placeholder="ID" />
+        <StyledInput
+          name="username"
+          placeholder="ID"
+          value={form.username}
+          onChange={onChange}
+        />
+        {console.log('s', form, form.username, form['username'])}
         <StyledInput name="password" placeholder="password" type="password" />
         {text === '회원가입' && (
           <StyledInput
