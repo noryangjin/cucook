@@ -1,4 +1,4 @@
-import { useEffect, ChangeEvent, useCallback } from 'react';
+import { useEffect, ChangeEvent, FormEvent, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import AuthForm from '../../components/auth/AuthForm';
 import { changeField, initialize } from '../../module/auth';
@@ -20,7 +20,17 @@ const LoginForm = () => {
     [dispatch]
   );
 
-  return <AuthForm type="login" form={form} onChange={onChange} />;
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
+  return (
+    <AuthForm
+      type="login"
+      form={form}
+      onChange={onChange}
+      onSubmit={onSubmit}
+    />
+  );
 };
 
 export default LoginForm;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, FormEvent } from 'react';
 import styled from 'styled-components';
 import Button from '../common/Button';
 import { Link } from 'react-router-dom';
@@ -48,9 +48,10 @@ type Props = {
   type: string;
   form: { username: string; password: string; confirmPassword?: string };
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onSubmit: (e: FormEvent<HTMLFormElement>) => void;
 };
 
-const AuthForm: React.FC<Props> = ({ type, form, onChange }) => {
+const AuthForm = ({ type, form, onChange, onSubmit }: Props) => {
   const name: any = {
     register: '회원가입',
     login: '로그인',
@@ -60,7 +61,7 @@ const AuthForm: React.FC<Props> = ({ type, form, onChange }) => {
   return (
     <AuthFormBlock>
       <h2>{text}</h2>
-      <form>
+      <form onSubmit={onSubmit}>
         <StyledInput
           name="username"
           placeholder="ID"
