@@ -1,11 +1,13 @@
 type Object = {
   backgroundColor: string;
+  errorColor: string;
   gray: Array<string>;
   cyan: Array<string>;
 };
 
 const palette: Object = {
   backgroundColor: '#faf5f5',
+  errorColor: '#ce3333',
   gray: [
     '#f8f9fa',
     '#f1f3f5',

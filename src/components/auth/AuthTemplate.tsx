@@ -46,4 +46,4 @@ const AuthTemplate: React.FC<Props> = ({ children }) => {
   );
 };
 
-export default AuthTemplate;
+export default React.memo(AuthTemplate);

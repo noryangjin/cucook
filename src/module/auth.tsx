@@ -77,6 +77,7 @@ const auth = handleActions<any | typeAction>(
     [INITIALIZE]: (state, { payload: form }) => ({
       ...state,
       [form]: initialState[form],
+      authError: null,
     }),
     [LOGIN_SUCCESS]: (state, { payload: auth }) => ({
       ...state,

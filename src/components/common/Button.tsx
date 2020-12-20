@@ -33,4 +33,4 @@ const StyledButton: any = styled.button<Props>`
 
 const Button: React.FC<Props> = (props) => <StyledButton {...props} />;
 
-export default Button;
+export default React.memo(Button);

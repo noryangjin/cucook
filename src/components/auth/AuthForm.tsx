@@ -44,14 +44,19 @@ const Footer = styled.div`
   }
 `;
 
+const Error = styled.div`
+  color: ${palette.errorColor};
+`;
+
 type Props = {
   type: string;
   form: { username: string; password: string; confirmPassword?: string };
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
+  error: string | null;
 };
 
-const AuthForm = ({ type, form, onChange, onSubmit }: Props) => {
+const AuthForm = ({ type, form, onChange, onSubmit, error }: Props) => {
   const name: any = {
     register: '회원가입',
     login: '로그인',
@@ -84,6 +89,7 @@ const AuthForm = ({ type, form, onChange, onSubmit }: Props) => {
             onChange={onChange}
           />
         )}
+        {error && <Error>{error}</Error>}
         <StyledButton cyan fullWidth>
           {text}
         </StyledButton>
@@ -99,4 +105,4 @@ const AuthForm = ({ type, form, onChange, onSubmit }: Props) => {
   );
 };
 
-export default AuthForm;
+export default React.memo(AuthForm);
