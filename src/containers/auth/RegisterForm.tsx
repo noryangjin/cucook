@@ -9,28 +9,42 @@ import AuthForm from '../../components/auth/AuthForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../module/index';
 import { changeField, initialize, register } from '../../module/auth';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 
-const RegisterForm = () => {
+const RegisterForm = ({ history }: RouteComponentProps<any>) => {
   const [error, setError] = useState<string | null>(null);
   const dispatch = useDispatch();
-  const { form, auth, authError } = useSelector(({ auth }: RootState) => ({
-    form: auth.register,
-    auth: auth.auth,
-    authError: auth.authError,
-  }));
+  const { form, authRegister, authError } = useSelector(
+    ({ auth }: RootState) => ({
+      form: auth.register,
+      authRegister: auth.authRegister,
+      authError: auth.authError,
+    })
+  );
 
   useEffect(() => {
     dispatch(initialize('register'));
   }, [dispatch]);
 
   useEffect(() => {
-    if (auth) {
-      console.log('auth', auth);
+    if (authRegister) {
+      alert('회원가입 성공!! 로그인해 주시기 바랍니다.');
+      history.push('/login');
     }
     if (authError) {
-      console.log('authError', authError);
+      if (authError.response.status === 409) {
+        setError('이미 존재하는 계정입니다.');
+        return;
+      }
+      if (authError.response.status === 400) {
+        setError('아이디는 3~20자 이어야 합니다.');
+        return;
+      }
     }
-  }, [auth, authError]);
+    return () => {
+      setError(null);
+    };
+  }, [authRegister, authError, dispatch, history]);
 
   const onChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
@@ -69,4 +83,4 @@ const RegisterForm = () => {
   );
 };
 
-export default RegisterForm;
+export default withRouter(RegisterForm);

@@ -17,8 +17,8 @@ const [REGISTER, REGISTER_SUCCESS, REGISTER_FAILURE] = createRequestActionTypes(
 
 type typeChangeField = {
   form: string;
-  key: string;
-  value: string;
+  key?: string;
+  value: string | null;
 };
 
 type typeLoginRegister = {
@@ -64,7 +64,8 @@ const initialState: any = {
     password: '',
     confirmPassword: '',
   },
-  auth: null,
+  authLogin: null,
+  authRegister: null,
   authError: null,
 };
 
@@ -79,18 +80,18 @@ const auth = handleActions<any | typeAction>(
       [form]: initialState[form],
       authError: null,
     }),
-    [LOGIN_SUCCESS]: (state, { payload: auth }) => ({
+    [LOGIN_SUCCESS]: (state, { payload: authLogin }) => ({
       ...state,
-      auth,
+      authLogin,
       authError: null,
     }),
     [LOGIN_FAILURE]: (state, { payload: error }) => ({
       ...state,
       authError: error,
     }),
-    [REGISTER_SUCCESS]: (state, { payload: auth }) => ({
+    [REGISTER_SUCCESS]: (state, { payload: authRegister }) => ({
       ...state,
-      auth,
+      authRegister,
       authError: null,
     }),
     [REGISTER_FAILURE]: (state, { payload: error }) => ({

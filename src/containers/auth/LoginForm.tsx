@@ -1,4 +1,4 @@
-import {
+import React, {
   useState,
   useEffect,
   ChangeEvent,
@@ -9,27 +9,45 @@ import { useSelector, useDispatch } from 'react-redux';
 import AuthForm from '../../components/auth/AuthForm';
 import { changeField, initialize, login } from '../../module/auth';
 import { RootState } from '../../module/index';
+import { check } from '../../module/user';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 
-const LoginForm = () => {
+const LoginForm = ({ history }: RouteComponentProps<any>) => {
   const [error, setError] = useState<string | null>(null);
   const dispatch = useDispatch();
-  const { form, auth, authError } = useSelector(({ auth }: RootState) => ({
-    form: auth.login,
-    auth: auth.auth,
-    authError: auth.authError,
-  }));
+  const { form, authLogin, authError, user } = useSelector(
+    ({ auth, user }: RootState) => ({
+      form: auth.login,
+      authLogin: auth.authLogin,
+      authError: auth.authError,
+      user: user.user,
+    })
+  );
 
   useEffect(() => {
     dispatch(initialize('login'));
   }, [dispatch]);
+
   useEffect(() => {
-    if (auth) {
-      console.log('auth', auth);
+    if (authLogin) {
+      dispatch(check());
     }
     if (authError) {
-      console.log('auth', authError);
+      if (authError.response.status === 401) {
+        setError('없는 계정 입니다.');
+        return;
+      }
     }
-  }, [auth, authError]);
+    return () => {
+      setError(null);
+    };
+  }, [authLogin, authError, dispatch]);
+
+  useEffect(() => {
+    if (user) {
+      history.push('/');
+    }
+  }, [history, user]);
 
   const onChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
@@ -60,4 +78,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default withRouter(LoginForm);

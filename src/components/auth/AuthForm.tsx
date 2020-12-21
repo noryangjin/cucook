@@ -46,6 +46,8 @@ const Footer = styled.div`
 
 const Error = styled.div`
   color: ${palette.errorColor};
+  text-align: center;
+  margin-top: 1rem;
 `;
 
 type Props = {

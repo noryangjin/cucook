@@ -13,6 +13,10 @@ export const register = ({ username, password }: insert) => {
   return client.post('/api/user/register', { username, password });
 };
 
+export const check = () => {
+  return client.get('/api/user/check');
+};
+
 export const logout = () => {
   return client.get('/api/user/logout');
 };
