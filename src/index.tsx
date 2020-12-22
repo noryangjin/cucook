@@ -9,13 +9,24 @@ import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer, { rootSaga } from './module/index';
 import createSagaMiddleware from 'redux-saga';
+import { check } from './module/user';
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
   rootReducer,
   composeWithDevTools(applyMiddleware(sagaMiddleware))
 );
+
+const check_ = () => {
+  try {
+    store.dispatch(check());
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 sagaMiddleware.run(rootSaga);
+check_();
 
 ReactDOM.render(
   <React.StrictMode>

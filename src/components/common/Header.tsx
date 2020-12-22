@@ -1,3 +1,4 @@
+import React, { MouseEvent } from 'react';
 import styled from 'styled-components';
 import Responsive from './Responsive';
 import Button from './Button';
@@ -44,9 +45,10 @@ const Spacer = styled.div`
 
 type typeProps = {
   user: any;
+  onLogout: (e: MouseEvent<HTMLButtonElement>) => void;
 };
 
-const Header = ({ user }: typeProps) => {
+const Header = ({ user, onLogout }: typeProps) => {
   return (
     <>
       <HeaderBlock>
@@ -58,7 +60,7 @@ const Header = ({ user }: typeProps) => {
             {user ? (
               <>
                 <UserInfo>{user.username}</UserInfo>
-                <Button>logout</Button>
+                <Button onClick={onLogout}>logout</Button>
               </>
             ) : (
               <Button to="/login">login</Button>

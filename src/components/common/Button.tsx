@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { MouseEvent } from 'react';
 import styled, { css } from 'styled-components';
 import palette from '../styles/palette';
 import { Link } from 'react-router-dom';
@@ -8,6 +8,7 @@ type Props = {
   cyan?: boolean;
   fullWidth?: boolean;
   to?: any;
+  onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
 };
 
 const StyledButton: any = css<Props>`
