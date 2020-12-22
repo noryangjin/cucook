@@ -14,6 +14,7 @@ const StyledButton: any = css<Props>`
   border: none;
   cursor: pointer;
   outline: none;
+  font-size: 1rem;
   padding: 5px 10px;
   background: ${palette.gray[3]};
   &:hover {

@@ -25,13 +25,28 @@ const Wrapper = styled(Responsive)`
   a {
     text-transform: uppercase;
   }
+  button {
+    text-transform: uppercase;
+  }
+  .right {
+    display: flex;
+  }
+`;
+
+const UserInfo = styled.div`
+  font-size: 1.125rem;
+  margin-right: 5px;
 `;
 
 const Spacer = styled.div`
   height: 4.5rem;
 `;
 
-const Header = () => {
+type typeProps = {
+  user: any;
+};
+
+const Header = ({ user }: typeProps) => {
   return (
     <>
       <HeaderBlock>
@@ -39,7 +54,16 @@ const Header = () => {
           <div className="logo">
             <Link to="/">cucook</Link>
           </div>
-          <Button to="/login">login</Button>
+          <div className="right">
+            {user ? (
+              <>
+                <UserInfo>{user.username}</UserInfo>
+                <Button>logout</Button>
+              </>
+            ) : (
+              <Button to="/login">login</Button>
+            )}
+          </div>
         </Wrapper>
       </HeaderBlock>
       <Spacer />
