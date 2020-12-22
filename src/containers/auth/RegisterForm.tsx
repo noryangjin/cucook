@@ -14,11 +14,12 @@ import { RouteComponentProps, withRouter } from 'react-router-dom';
 const RegisterForm = ({ history }: RouteComponentProps<any>) => {
   const [error, setError] = useState<string | null>(null);
   const dispatch = useDispatch();
-  const { form, authRegister, authError } = useSelector(
-    ({ auth }: RootState) => ({
+  const { form, authRegister, authError, user } = useSelector(
+    ({ auth, user }: RootState) => ({
       form: auth.register,
       authRegister: auth.authRegister,
       authError: auth.authError,
+      user: user.user,
     })
   );
 
@@ -45,6 +46,12 @@ const RegisterForm = ({ history }: RouteComponentProps<any>) => {
       setError(null);
     };
   }, [authRegister, authError, dispatch, history]);
+
+  useEffect(() => {
+    if (user) {
+      history.push('/');
+    }
+  }, [user, history]);
 
   const onChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {

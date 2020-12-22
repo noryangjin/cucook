@@ -4,6 +4,7 @@ import Responsive from './Responsive';
 import Button from './Button';
 import palette from '../styles/palette';
 import { Link } from 'react-router-dom';
+import FlashMessage from 'react-flash-message';
 
 const HeaderBlock = styled.div`
   width: 100%;
@@ -43,14 +44,65 @@ const Spacer = styled.div`
   height: 4.5rem;
 `;
 
+const Message = styled.div`
+  z-index: 1;
+  position: fixed;
+  background: ${palette.cyan[3]};
+  width: 100%;
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @keyframes okAnimation {
+    0% {
+      opacity: 25%;
+      transform: translateY(-30px);
+    }
+    30% {
+      transform: translateY(0);
+      opacity: 100%;
+    }
+    70% {
+      transform: translateY(0);
+      opacity: 100%;
+    }
+    80% {
+      transform: translateY(-15px);
+      opacity: 50%;
+    }
+    90% {
+      transform: translateY(-30px);
+      opacity: 25%;
+    }
+    100% {
+      transform: translateY(-40px);
+      opacity: 0%;
+    }
+  }
+  animation: okAnimation 3.5s linear forwards;
+  .text {
+    font-weight: bold;
+    letter-spacing: 2px;
+  }
+`;
+
 type typeProps = {
   user: any;
   onLogout: (e: MouseEvent<HTMLButtonElement>) => void;
+  welcomeMessage: string;
 };
 
-const Header = ({ user, onLogout }: typeProps) => {
+const Header = ({ user, onLogout, welcomeMessage }: typeProps) => {
   return (
     <>
+      {welcomeMessage && (
+        <FlashMessage duration={3500}>
+          <Message>
+            <div className="text">{welcomeMessage}</div>
+          </Message>
+        </FlashMessage>
+      )}
       <HeaderBlock>
         <Wrapper>
           <div className="logo">
