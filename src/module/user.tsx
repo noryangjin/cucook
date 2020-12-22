@@ -31,7 +31,7 @@ const initialState: typeInitialState = {
   checkError: null,
 };
 
-const user = handleActions<typeInitialState | any | typeAction>(
+const user = handleActions<(typeInitialState | any) | typeAction>(
   {
     [TEMP_SET_USER]: (state, { payload: user }) => ({
       ...state,

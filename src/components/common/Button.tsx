@@ -1,19 +1,24 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import palette from '../styles/palette';
+import { Link } from 'react-router-dom';
 
 type Props = {
   children: string;
-  cyan: boolean;
-  fullWidth: boolean;
+  cyan?: boolean;
+  fullWidth?: boolean;
+  to?: any;
 };
 
-const StyledButton: any = styled.button<Props>`
+const StyledButton: any = css<Props>`
   border: none;
   cursor: pointer;
   outline: none;
-  padding: 5px 3px;
-
+  padding: 5px 10px;
+  background: ${palette.gray[3]};
+  &:hover {
+    background: ${palette.gray[5]};
+  }
   ${(props) =>
     props.fullWidth &&
     css`
@@ -31,6 +36,15 @@ const StyledButton: any = styled.button<Props>`
     `}
 `;
 
-const Button: React.FC<Props> = (props) => <StyledButton {...props} />;
+const ButtonStyled = styled.button`
+  ${StyledButton}
+`;
 
+const LinkStyled = styled(Link)<any>`
+  ${StyledButton}
+`;
+
+const Button: React.FC<Props> = (props) => {
+  return props.to ? <LinkStyled {...props} /> : <ButtonStyled {...props} />;
+};
 export default React.memo(Button);

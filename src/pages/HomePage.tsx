@@ -1,5 +1,12 @@
+import Header from '../components/common/Header';
+
 const HomePage = () => {
-  return <div>홈</div>;
+  return (
+    <>
+      <Header />
+      <div>홈</div>
+    </>
+  );
 };
 
 export default HomePage;
