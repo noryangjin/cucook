@@ -1,11 +1,10 @@
-import React from 'react';
-import './App.css';
+import { FunctionComponent } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import HomePage from './pages/HomePage';
 
-const App: React.FC = () => {
+const App: FunctionComponent = () => {
   return (
     <Switch>
       <Route path="/" component={HomePage} exact />
