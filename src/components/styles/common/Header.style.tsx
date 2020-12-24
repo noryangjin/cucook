@@ -3,6 +3,8 @@ import Responsive from '../../common/Responsive';
 import palette from '../palette';
 
 export const HeaderBlock = styled.div`
+  background: ${palette.Header};
+  z-index: 1;
   width: 100%;
   position: fixed;
   border-bottom: 1px solid ${palette.gray[3]};
@@ -19,6 +21,7 @@ export const Wrapper = styled(Responsive)`
     letter-spacing: 2px;
     text-transform: uppercase;
     font-size: 1.125rem;
+    font-weight: bold;
   }
   a {
     text-transform: uppercase;
@@ -41,7 +44,7 @@ export const Spacer = styled.div`
 `;
 
 export const Message = styled.div`
-  z-index: 1;
+  z-index: 2;
   position: fixed;
   background: ${palette.cyan[3]};
   width: 100%;

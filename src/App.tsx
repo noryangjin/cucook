@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import HomePage from './pages/HomePage';
+import WritePage from './pages/WritePage';
 
 const App: FunctionComponent = () => {
   return (
@@ -10,6 +11,7 @@ const App: FunctionComponent = () => {
       <Route path="/" component={HomePage} exact />
       <Route path="/login" component={LoginPage} />
       <Route path="/register" component={RegisterPage} />
+      <Route path="/write" component={WritePage} />
       <Route
         render={({ location }) => (
           <div>

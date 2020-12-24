@@ -12,6 +12,7 @@ type Props = {
 };
 
 const StyledButton: any = css<Props>`
+  border-radius: 4px;
   border: none;
   cursor: pointer;
   outline: none;

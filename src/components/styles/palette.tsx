@@ -1,6 +1,7 @@
 type Object = {
   backgroundColor: string;
   errorColor: string;
+  Header: string;
   gray: Array<string>;
   cyan: Array<string>;
 };
@@ -8,6 +9,7 @@ type Object = {
 const palette: Object = {
   backgroundColor: '#faf5f5',
   errorColor: '#ce3333',
+  Header: '#ffffff',
   gray: [
     '#f8f9fa',
     '#f1f3f5',
