@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { ChangeEvent, FormEvent, MouseEvent, useState } from 'react';
 import {
   TagBoxBlock,
@@ -12,6 +12,7 @@ type Props = {
   tag?: string;
   tags?: Array<string>;
   onRemove?: (tag: string, e?: MouseEvent<HTMLElement>) => void;
+  onChangeTags?: (tagValue: Array<string>) => void;
 };
 
 const TagItem = React.memo(({ tag, onRemove }: Props) => {
@@ -37,9 +38,13 @@ const TagList = React.memo(({ tags, onRemove }: Props) => {
   );
 });
 
-const TagBox = () => {
+const TagBox = ({ tags, onChangeTags }: Props) => {
   const [input, setInput] = useState<string>('');
   const [localTags, setLocalTags] = useState<Array<string>>([]);
+
+  useEffect(() => {
+    tags && setLocalTags(tags);
+  }, [tags]);
 
   const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -56,18 +61,24 @@ const TagBox = () => {
         return setInput('');
       }
       if (!checkIncludesInput && trimInput) {
-        setLocalTags([...localTags, input.replace(/\s/g, '')]);
-        setInput('');
+        const setTags = [...localTags, input.replace(/\s/g, '')];
+
+        return [
+          setLocalTags(setTags),
+          onChangeTags && onChangeTags(setTags),
+          setInput(''),
+        ];
       }
     },
-    [input, localTags]
+    [input, localTags, onChangeTags]
   );
 
   const onRemove = useCallback(
     (tag: string, e?: MouseEvent<HTMLElement>) => {
-      return setLocalTags([...localTags.filter((local) => local !== tag)]);
+      const setTags = [...localTags.filter((local) => local !== tag)];
+      return [setLocalTags(setTags), onChangeTags && onChangeTags(setTags)];
     },
-    [localTags]
+    [localTags, onChangeTags]
   );
 
   return (

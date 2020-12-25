@@ -1,6 +1,6 @@
 import HeaderContainer from '../containers/common/HeaderContainer';
 import EditorContainer from '../containers/write/EditorContainer';
-import TagBox from '../components/write/TagBox';
+import TagBoxContainer from '../containers/write/TagBoxContainer';
 import Responsive from '../components/common/Responsive';
 
 const WritePage = () => {
@@ -9,7 +9,7 @@ const WritePage = () => {
       <HeaderContainer />
       <Responsive>
         <EditorContainer />
-        <TagBox />
+        <TagBoxContainer />
       </Responsive>
     </>
   );
