@@ -7,9 +7,9 @@ type Object = {
 };
 
 const palette: Object = {
-  backgroundColor: '#faf5f5',
+  backgroundColor: '#ffffff',
   errorColor: '#ce3333',
-  Header: '#ffffff',
+  Header: '#fcf9f9',
   gray: [
     '#f8f9fa',
     '#f1f3f5',
