@@ -53,4 +53,5 @@ export const Tag = styled.div`
   margin-right: 0.5rem;
   color: ${palette.gray[6]};
   font-size: 1.125rem;
+  cursor: pointer;
 `;
