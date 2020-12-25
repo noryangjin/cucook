@@ -1,3 +1,4 @@
+import React, { useCallback } from 'react';
 import { ChangeEvent, FormEvent, MouseEvent, useState } from 'react';
 import {
   TagBoxBlock,
@@ -13,7 +14,7 @@ type Props = {
   onRemove?: (tag: string, e?: MouseEvent<HTMLElement>) => void;
 };
 
-const TagItem = ({ tag, onRemove }: Props) => {
+const TagItem = React.memo(({ tag, onRemove }: Props) => {
   return (
     <Tag
       onClick={() => {
@@ -23,9 +24,9 @@ const TagItem = ({ tag, onRemove }: Props) => {
       #{tag}
     </Tag>
   );
-};
+});
 
-const TagList = ({ tags, onRemove }: Props) => {
+const TagList = React.memo(({ tags, onRemove }: Props) => {
   return (
     <TagListBlock>
       {tags !== undefined &&
@@ -34,34 +35,40 @@ const TagList = ({ tags, onRemove }: Props) => {
         ))}
     </TagListBlock>
   );
-};
+});
 
 const TagBox = () => {
   const [input, setInput] = useState<string>('');
   const [localTags, setLocalTags] = useState<Array<string>>([]);
 
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setInput(value);
-  };
+  }, []);
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const checkIncludesInput = localTags.includes(input);
-    const trimInput = input.trim();
+  const onSubmit = useCallback(
+    (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      const checkIncludesInput = localTags.includes(input);
+      const trimInput = input.trim();
 
-    if (checkIncludesInput || !trimInput) {
-      return setInput('');
-    }
-    if (!checkIncludesInput && trimInput) {
-      setLocalTags([...localTags, input.replace(/\s/g, '')]);
-      setInput('');
-    }
-  };
+      if (checkIncludesInput || !trimInput) {
+        return setInput('');
+      }
+      if (!checkIncludesInput && trimInput) {
+        setLocalTags([...localTags, input.replace(/\s/g, '')]);
+        setInput('');
+      }
+    },
+    [input, localTags]
+  );
 
-  const onRemove = (tag: string, e?: MouseEvent<HTMLElement>) => {
-    return setLocalTags([...localTags.filter((local) => local !== tag)]);
-  };
+  const onRemove = useCallback(
+    (tag: string, e?: MouseEvent<HTMLElement>) => {
+      return setLocalTags([...localTags.filter((local) => local !== tag)]);
+    },
+    [localTags]
+  );
 
   return (
     <TagBoxBlock>

@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, ChangeEvent } from 'react';
 import Quill from 'quill';
 import 'quill/dist/quill.snow.css';
 import {
@@ -7,7 +7,13 @@ import {
   QuillWrapper,
 } from '../styles/write/Editor.style';
 
-const Editor = () => {
+type Props = {
+  title: string;
+  body: string | any;
+  onChange: (payload: { key: string; value: any | string }) => void;
+};
+
+const Editor = ({ title, body, onChange }: Props) => {
   const quillElement: any = useRef(null);
   const quillInstance: any = useRef(null);
 
@@ -24,11 +30,26 @@ const Editor = () => {
         ],
       },
     });
-  }, []);
+
+    const quill = quillInstance.current;
+    quill.on('text-change', (delta: any, oldDelta: any, source: any) => {
+      if (source === 'user') {
+        onChange({ key: 'body', value: quill.root.innerHTML });
+      }
+    });
+  }, [onChange]);
+
+  const onChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
+    onChange({ key: 'title', value: e.target.value });
+  };
 
   return (
     <EditorBlock>
-      <TitleInput placeholder="제목을 입력하세요." />
+      <TitleInput
+        value={title}
+        onChange={onChangeTitle}
+        placeholder="제목을 입력하세요."
+      />
       <QuillWrapper>
         <div ref={quillElement} />
       </QuillWrapper>
@@ -36,4 +57,4 @@ const Editor = () => {
   );
 };
 
-export default Editor;
+export default React.memo(Editor);
