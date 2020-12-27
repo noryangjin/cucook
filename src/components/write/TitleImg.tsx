@@ -1,3 +1,4 @@
+import React from 'react';
 import { ChangeEvent } from 'react';
 import { Img, TitleImgInput, FormBlock } from '../styles/write/TitleImg.style';
 
@@ -26,4 +27,4 @@ const TitleImg = ({ onChange, imgFile }: Props) => {
   );
 };
 
-export default TitleImg;
+export default React.memo(TitleImg);
