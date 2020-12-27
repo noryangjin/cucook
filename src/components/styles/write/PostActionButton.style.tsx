@@ -10,7 +10,11 @@ export const PostActionButtonBlock = styled.div`
   }
   @media (max-width: 450px) {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    div {
+      display: flex;
+      justify-content: space-between;
+    }
     width: 100%;
     margin-left: 0;
   }

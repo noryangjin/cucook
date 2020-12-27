@@ -8,9 +8,10 @@ import { RootState } from '../../module/index';
 const PostActionButtonContainer = ({ history }: RouteComponentProps<any>) => {
   const [error, setError] = useState<null | string>(null);
   const dispatch = useDispatch();
-  const { title, body, tags, post, postError } = useSelector(
+  const { title, body, tags, titleImg, post, postError } = useSelector(
     ({ write }: RootState) => ({
       title: write.title,
+      titleImg: write.titleImg,
       body: write.body,
       tags: write.tags,
       post: write.post,
@@ -37,19 +38,21 @@ const PostActionButtonContainer = ({ history }: RouteComponentProps<any>) => {
         ? '제목을 입력해주세요.'
         : !body
         ? '본문을 입력해주세요.'
+        : !titleImg
+        ? '타이틀 사진이 필요합니다.'
         : postError
         ? '서버 에러'
         : null
     );
-  }, [title, body, history, post, postError]);
+  }, [title, body, history, titleImg, post, postError]);
 
   const onPublish = useCallback(
     (e?: MouseEvent<HTMLButtonElement>) => {
-      if (title && body) {
-        dispatch(writePost({ title, body, tags }));
+      if (title && body && titleImg) {
+        dispatch(writePost({ title, titleImg, body, tags }));
       }
     },
-    [dispatch, title, body, tags]
+    [dispatch, title, body, tags, titleImg]
   );
 
   const onCancel = useCallback(

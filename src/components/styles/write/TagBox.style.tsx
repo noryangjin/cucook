@@ -4,9 +4,9 @@ import palette from '../palette';
 export const TagBoxBlock = styled.div`
   padding: 0 5px;
   width: 100%;
-
+  margin-top: 2rem;
   h4 {
-    margin: 0.5rem 0;
+    margin-bottom: 0.5rem;
     letter-spacing: 2px;
   }
 `;
@@ -39,6 +39,10 @@ export const TagForm = styled.form`
     letter-spacing: 2px;
     width: 70px;
     height: 30px;
+    background: ${palette.gray[3]};
+    &:hover {
+      background: ${palette.gray[5]};
+    }
   }
 `;
 

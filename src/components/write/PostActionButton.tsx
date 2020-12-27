@@ -17,8 +17,10 @@ const PostActionButton = ({ onPublish, onCancel, error }: Props) => {
     <>
       <PostActionButtonBlock>
         <ErrorBlock>{error && error}</ErrorBlock>
-        <ActionButton onClick={onPublish}>포스트 등록</ActionButton>
-        <ActionButton onClick={onCancel}>취소</ActionButton>
+        <div>
+          <ActionButton onClick={onPublish}>포스트 등록</ActionButton>
+          <ActionButton onClick={onCancel}>취소</ActionButton>
+        </div>
       </PostActionButtonBlock>
       <Spacer />
     </>
