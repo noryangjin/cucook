@@ -1,4 +1,3 @@
-import { AxiosResponse } from 'axios';
 import { call, put } from 'redux-saga/effects';
 import { startLoading, finishLoading } from '../module/loading';
 
@@ -9,17 +8,7 @@ export const createRequestActionTypes = (type: string) => {
   return [type, SUCCESS, FAILURE];
 };
 
-export default function createRequestSaga(
-  type: string,
-  request: {
-    ({ username, password }: { username: string; password: string }): Promise<
-      AxiosResponse<any>
-    >;
-    ({ username, password }: { username: string; password: string }): Promise<
-      AxiosResponse<any>
-    >;
-  }
-) {
+export default function createRequestSaga(type: string, request: any) {
   const SUCCESS = `${type}_SUCCESS`;
   const FAILURE = `${type}_FAILURE`;
 

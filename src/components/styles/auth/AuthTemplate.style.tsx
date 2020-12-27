@@ -18,7 +18,8 @@ export const AuthForm = styled.div`
   background: white;
   border-radius: 4px;
   padding: 1rem 1rem;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.025);
+  border: 1px solid ${palette.gray[4]};
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.125);
   .logo {
     text-align: center;
     margin: 1rem 0;

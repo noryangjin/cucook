@@ -9,7 +9,7 @@ import { takeLatest } from 'redux-saga/effects';
 const [CHECK, CHECK_SUCCESS, CHECK_FAILURE] = createRequestActionTypes(
   'user/CHECK'
 );
-const LOGOUT = 'user/LOGOUT';
+const LOGOUT = 'user/LOGOUT' as const;
 // export const tempSetUser = createAction(TEMP_SET_USER, (user: object) => user);
 
 export const check = createAction(CHECK);

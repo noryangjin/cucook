@@ -4,6 +4,7 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import HomePage from './pages/HomePage';
 import WritePage from './pages/WritePage';
+import PostLeadPage from './pages/PostLeadPage';
 
 const App: FunctionComponent = () => {
   return (
@@ -12,6 +13,7 @@ const App: FunctionComponent = () => {
       <Route path="/login" component={LoginPage} />
       <Route path="/register" component={RegisterPage} />
       <Route path="/write" component={WritePage} />
+      <Route path="/@:username/:postId" component={PostLeadPage} />
       <Route
         render={({ location }) => (
           <div>

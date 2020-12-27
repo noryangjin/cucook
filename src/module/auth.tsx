@@ -15,29 +15,26 @@ const [REGISTER, REGISTER_SUCCESS, REGISTER_FAILURE] = createRequestActionTypes(
   'auth/REGISTER'
 );
 
-type typeChangeField = {
-  form: string;
+type type = {
+  form?: string;
   key?: string;
-  value: string | null;
-};
-
-type typeLoginRegister = {
-  username: string;
-  password: string;
+  value?: string | null;
+  username?: string;
+  password?: string;
 };
 
 export const changeField = createAction(
   CHANGE_FIELD,
-  ({ form, key, value }: typeChangeField) => ({ form, key, value })
+  ({ form, key, value }: type) => ({ form, key, value })
 );
 export const initialize = createAction(INITIALIZE, (form: string) => form);
-export const login = createAction(
-  LOGIN,
-  ({ username, password }: typeLoginRegister) => ({ username, password })
-);
+export const login = createAction(LOGIN, ({ username, password }: type) => ({
+  username,
+  password,
+}));
 export const register = createAction(
   REGISTER,
-  ({ username, password }: typeLoginRegister) => ({ username, password })
+  ({ username, password }: type) => ({ username, password })
 );
 
 type typeAction =

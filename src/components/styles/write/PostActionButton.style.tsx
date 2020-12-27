@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Button from '../../common/Button';
+import palette from '../palette';
 
 export const PostActionButtonBlock = styled.div`
   margin: 0 5px;
@@ -17,6 +18,11 @@ export const PostActionButtonBlock = styled.div`
 
 export const ActionButton = styled(Button)`
   width: 150px;
+`;
+
+export const ErrorBlock = styled.div`
+  margin-bottom: 5px;
+  color: ${palette.errorColor};
 `;
 
 export const Spacer = styled.div`
