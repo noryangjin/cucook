@@ -6,7 +6,7 @@ export const TagBoxBlock = styled.div`
   width: 100%;
   margin-top: 2rem;
   h4 {
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
     letter-spacing: 2px;
   }
 `;
@@ -19,7 +19,8 @@ export const TagBoxInput = styled.input`
   padding-left: 2px;
   font-size: 1rem;
   letter-spacing: 0.5px;
-  &:focus {
+  &:focus,
+  &:hover {
     background: ${palette.Header};
   }
 `;

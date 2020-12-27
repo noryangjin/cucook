@@ -7,7 +7,7 @@ export const Img = styled.img`
 `;
 
 export const TitleImgInput = styled.input`
-  margin-top: 0.5rem;
+  margin-top: 1rem;
 `;
 
 export const FormBlock = styled.form`
