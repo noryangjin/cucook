@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, ChangeEvent } from 'react';
+import React, { useRef, useEffect, ChangeEvent, useCallback } from 'react';
 import Quill from 'quill';
 import 'quill/dist/quill.snow.css';
 import {
@@ -39,9 +39,12 @@ const Editor = ({ title, body, onChange }: Props) => {
     });
   }, [onChange]);
 
-  const onChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
-    onChange({ key: 'title', value: e.target.value });
-  };
+  const onChangeTitle = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      onChange({ key: 'title', value: e.target.value });
+    },
+    [onChange]
+  );
 
   return (
     <EditorBlock>

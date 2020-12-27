@@ -26,7 +26,7 @@ export const TagBoxInput = styled.input`
 
 export const TagForm = styled.form`
   display: flex;
-  width: 250px;
+  width: 280px;
   border: 1px solid ${palette.gray[4]};
   &:hover {
     border: 1px solid ${palette.gray[5]};
@@ -37,6 +37,8 @@ export const TagForm = styled.form`
     outline: none;
     cursor: pointer;
     letter-spacing: 2px;
+    width: 70px;
+    height: 30px;
   }
 `;
 

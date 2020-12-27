@@ -97,4 +97,4 @@ const TagBox = ({ tags, onChangeTags }: Props) => {
   );
 };
 
-export default TagBox;
+export default React.memo(TagBox);

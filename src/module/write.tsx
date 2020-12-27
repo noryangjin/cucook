@@ -29,7 +29,7 @@ const initialState: typeInitialState = {
   tags: [],
 };
 
-const write = handleActions<any | typeAction>(
+const write = handleActions<(typeInitialState | any) | typeAction>(
   {
     [INITIALIZE]: () => initialState,
     [CHANGE_FIELD]: (state, { payload: { key, value } }) => ({

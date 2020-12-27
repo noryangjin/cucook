@@ -12,5 +12,6 @@ export const ResponsiveBlock = styled.div`
   }
   @media (max-width: 500px) {
     width: 360px;
+    padding: 0;
   }
 `;
