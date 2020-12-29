@@ -12,11 +12,17 @@ export const TitleInput = styled.input`
   background: ${palette.backgroundColor};
   margin: 2rem 0;
   font-size: 2rem;
+  &:hover {
+    background: ${palette.Header};
+    border-bottom: 1px solid ${palette.gray[5]};
+  }
 `;
 
 export const QuillWrapper = styled.div`
+  &:hover {
+    background: ${palette.Header};
+  }
   .ql-editor {
-    padding: 0;
     min-height: 320px;
     font-size: 1.125rem;
     line-height: 1.5;
