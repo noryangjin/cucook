@@ -1,14 +1,21 @@
 import IngredientBox from '../../components/write/IngredientBox';
-import { useCallback } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../module/index';
 import { changeField } from '../../module/write';
+import { onChange, onSubmit, onRemove } from './event/TagIngredientEvent';
 
 const IngredientContainer = () => {
+  const [input, setInput] = useState<string>('');
+  const [local, setLocal] = useState<Array<string>>([]);
   const dispatch = useDispatch();
   const { ingredients } = useSelector(
     (state: RootState) => state.write.ingredients
   );
+
+  useEffect(() => {
+    ingredients && setLocal(ingredients);
+  }, [ingredients]);
 
   const onChangeIngredient = useCallback(
     (ingredientValue) => {
@@ -17,10 +24,23 @@ const IngredientContainer = () => {
     [dispatch]
   );
 
+  const onChange_ = onChange(setInput);
+  const onSubmit_ = onSubmit(
+    local,
+    input,
+    setInput,
+    setLocal,
+    onChangeIngredient
+  );
+  const onRemove_ = onRemove(local, setLocal, onChangeIngredient);
+
   return (
     <IngredientBox
-      ingredients={ingredients}
-      onChangeIngredient={onChangeIngredient}
+      localIngredients={local}
+      onChange={onChange_}
+      onSubmit={onSubmit_}
+      onRemove={onRemove_}
+      input={input}
     />
   );
 };

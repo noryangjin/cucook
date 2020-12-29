@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import palette from '../palette';
 
-export const TagBoxBlock = styled.div`
+export const BoxBlock = styled.div`
   padding: 0 5px;
   width: 100%;
   margin-top: 2rem;
@@ -11,7 +11,7 @@ export const TagBoxBlock = styled.div`
   }
 `;
 
-export const TagBoxInput = styled.input`
+export const BoxInput = styled.input`
   outline: none;
   border: none;
   flex: 1;
@@ -25,7 +25,7 @@ export const TagBoxInput = styled.input`
   }
 `;
 
-export const TagForm = styled.form`
+export const Form = styled.form`
   display: flex;
   width: 280px;
   border: 1px solid ${palette.gray[4]};
@@ -47,7 +47,7 @@ export const TagForm = styled.form`
   }
 `;
 
-export const TagListBlock = styled.div`
+export const ListBlock = styled.div`
   display: flex;
   margin-top: 4px;
   flex-wrap: wrap;
@@ -56,7 +56,7 @@ export const TagListBlock = styled.div`
   }
 `;
 
-export const Tag = styled.div`
+export const Value = styled.div`
   margin-right: 0.5rem;
   color: ${palette.gray[6]};
   font-size: 1.125rem;

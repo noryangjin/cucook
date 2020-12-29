@@ -1,111 +1,69 @@
-import React, {
-  ChangeEvent,
-  useCallback,
-  useState,
-  FormEvent,
-  MouseEvent,
-  useEffect,
-} from 'react';
+import React, { ChangeEvent, FormEvent } from 'react';
 import {
-  IngredientBlock,
-  IngredientInput,
-  IngredientForm,
-  IngredientListBlock,
-  Ingredient,
-} from '../styles/write/IngredientBox.style';
+  BoxBlock,
+  BoxInput,
+  Form,
+  ListBlock,
+  Value,
+} from '../styles/write/TagIngredient.style';
 
 type Props = {
   ingredients?: Array<string>;
   ingredient?: string;
-  onRemove?: (ingredient: string, e?: MouseEvent<HTMLElement>) => void;
-  onChangeIngredient?: (ingredientValue: Array<string>) => void;
+  onRemove?: (ingredient: string) => void;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  onSubmit?: (e: FormEvent<HTMLFormElement>) => void;
+  localIngredients?: Array<string>;
+  input?: string;
 };
 
 const IngredientItem = React.memo(({ ingredient, onRemove }: Props) => {
   return (
-    <Ingredient
+    <Value
       onClick={() => {
         return onRemove && ingredient && onRemove(ingredient);
       }}
     >
       #{ingredient}
-    </Ingredient>
+    </Value>
   );
 });
 
 const IngredientList = React.memo(({ ingredients, onRemove }: Props) => {
   return (
-    <IngredientListBlock>
+    <ListBlock>
       {ingredients &&
         ingredients.map((ingredient) => (
-          <IngredientItem ingredient={ingredient} onRemove={onRemove} />
+          <IngredientItem
+            key={ingredient}
+            ingredient={ingredient}
+            onRemove={onRemove}
+          />
         ))}
-    </IngredientListBlock>
+    </ListBlock>
   );
 });
 
-const IngredientBox = ({ ingredients, onChangeIngredient }: Props) => {
-  const [input, setInput] = useState<string>('');
-  const [localIngredients, setLocalIngredients] = useState<Array<string>>([]);
-
-  useEffect(() => {
-    ingredients && setLocalIngredients(ingredients);
-  }, [ingredients]);
-
-  const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    setInput(value);
-  }, []);
-
-  const onSubmit = useCallback(
-    (e: FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      const checkIncludesInput = localIngredients.includes(input);
-      const trimInput = input.trim();
-
-      if (checkIncludesInput || !trimInput) {
-        return setInput('');
-      }
-      if (!checkIncludesInput && trimInput) {
-        const setIngredients = [...localIngredients, input.replace(/\s/g, '')];
-
-        return [
-          setLocalIngredients(setIngredients),
-          onChangeIngredient && onChangeIngredient(setIngredients),
-          setInput(''),
-        ];
-      }
-    },
-    [localIngredients, input, onChangeIngredient]
-  );
-
-  const onRemove = useCallback(
-    (ingredient, e?: MouseEvent<HTMLElement>) => {
-      const setIngredients = [
-        ...localIngredients.filter((local) => local !== ingredient),
-      ];
-
-      return [
-        setLocalIngredients(setIngredients),
-        onChangeIngredient && onChangeIngredient(setIngredients),
-      ];
-    },
-    [localIngredients, onChangeIngredient]
-  );
-
+const IngredientBox = ({
+  localIngredients,
+  input,
+  onChange,
+  onSubmit,
+  onRemove,
+}: Props) => {
   return (
-    <IngredientBlock>
+    <BoxBlock>
       <h4>재료</h4>
-      <IngredientForm onSubmit={onSubmit}>
-        <IngredientInput
+      <Form onSubmit={onSubmit}>
+        <BoxInput
           onChange={onChange}
           value={input}
           placeholder="재료를 입력하세요"
         />
         <button>추가</button>
-      </IngredientForm>
+      </Form>
       <IngredientList ingredients={localIngredients} onRemove={onRemove} />
-    </IngredientBlock>
+    </BoxBlock>
   );
 };
 
