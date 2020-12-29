@@ -4,7 +4,6 @@ const HomePage = () => {
   return (
     <>
       <HeaderContainer />
-      <div>홈</div>
     </>
   );
 };
