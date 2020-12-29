@@ -14,9 +14,11 @@ const [WRITE, WRITE_SUCCESS, WRITE_FAILURE] = createRequestActionTypes(
 type type = {
   key?: string;
   value?: any;
+  category?: string;
   title?: string;
   titleImg?: any;
   body?: string | any;
+  ingredient?: Array<string>;
   tags?: Array<string>;
 };
 
@@ -27,10 +29,12 @@ export const changeField = createAction(
 );
 export const writePost = createAction(
   WRITE,
-  ({ title, titleImg, body, tags }: type) => ({
+  ({ category, title, titleImg, body, ingredient, tags }: type) => ({
+    category,
     title,
     titleImg,
     body,
+    ingredient,
     tags,
   })
 );
@@ -46,18 +50,22 @@ export function* writeSaga() {
 }
 
 type typeInitialState = {
+  category: string;
   title: string;
   titleImg: any;
   body: string | any;
+  ingredient: Array<string>;
   tags: Array<string>;
   post: any;
   postError: any;
 };
 
 const initialState: typeInitialState = {
+  category: '',
   title: '',
   titleImg: null,
   body: '',
+  ingredient: [],
   tags: [],
   post: null,
   postError: null,

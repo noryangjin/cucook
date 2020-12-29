@@ -8,16 +8,25 @@ import { RootState } from '../../module/index';
 const PostActionButtonContainer = ({ history }: RouteComponentProps<any>) => {
   const [error, setError] = useState<null | string>(null);
   const dispatch = useDispatch();
-  const { title, body, tags, titleImg, post, postError } = useSelector(
-    ({ write }: RootState) => ({
-      title: write.title,
-      titleImg: write.titleImg,
-      body: write.body,
-      tags: write.tags,
-      post: write.post,
-      postError: write.postError,
-    })
-  );
+  const {
+    category,
+    title,
+    body,
+    ingredient,
+    tags,
+    titleImg,
+    post,
+    postError,
+  } = useSelector(({ write }: RootState) => ({
+    category: write.category,
+    title: write.title,
+    titleImg: write.titleImg,
+    body: write.body,
+    ingredient: write.ingredient,
+    tags: write.tags,
+    post: write.post,
+    postError: write.postError,
+  }));
 
   useEffect(() => {
     if (post) {
@@ -34,7 +43,9 @@ const PostActionButtonContainer = ({ history }: RouteComponentProps<any>) => {
       }
     }
     setError(
-      !title.trim()
+      !category
+        ? '카테고리를 입력해주세요'
+        : !title.trim()
         ? '제목을 입력해주세요.'
         : !body
         ? '본문을 입력해주세요.'
@@ -44,15 +55,17 @@ const PostActionButtonContainer = ({ history }: RouteComponentProps<any>) => {
         ? '서버 에러'
         : null
     );
-  }, [title, body, history, titleImg, post, postError]);
+  }, [category, title, body, history, titleImg, post, postError]);
 
   const onPublish = useCallback(
     (e?: MouseEvent<HTMLButtonElement>) => {
-      if (title && body && titleImg) {
-        dispatch(writePost({ title, titleImg, body, tags }));
+      if (title && body && titleImg && category) {
+        dispatch(
+          writePost({ category, title, titleImg, body, ingredient, tags })
+        );
       }
     },
-    [dispatch, title, body, tags, titleImg]
+    [dispatch, category, title, body, ingredient, tags, titleImg]
   );
 
   const onCancel = useCallback(
