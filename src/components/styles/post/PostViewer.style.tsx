@@ -64,7 +64,7 @@ export const TitleImg = styled.img`
 
 export const SpacerTop = styled.div`
   border-top: 1px solid ${palette.gray[5]};
-  width: 632px;
+  width: 100%;
   margin: 1rem 0;
   @media (max-width: 750px) {
     width: 0;
@@ -73,6 +73,7 @@ export const SpacerTop = styled.div`
 `;
 
 export const Tag = styled.div`
+  width: 100%;
   .ingredient,
   .tag {
     overflow: auto;
@@ -96,6 +97,14 @@ export const PostContent = styled.div`
   img {
     display: block;
     margin: 5px 0;
+  }
+  @media (max-width: 750px) {
+    img {
+      width: 350px;
+      height: 400px;
+      margin: 0 auto;
+      margin-top: 5px;
+    }
   }
 `;
 
