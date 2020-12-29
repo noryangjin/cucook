@@ -26,3 +26,7 @@ export const writePost = ({
     titleImg,
   });
 };
+
+export const ReadPost = (id: string) => {
+  return client.get(`/api/post/${id}`);
+};

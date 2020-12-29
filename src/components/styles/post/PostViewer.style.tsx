@@ -98,3 +98,11 @@ export const PostContent = styled.div`
     margin: 5px 0;
   }
 `;
+
+export const Height = styled.div`
+  height: 1.5rem;
+`;
+
+export const Error = styled.div`
+  color: ${palette.errorColor};
+`;
