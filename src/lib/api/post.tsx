@@ -5,7 +5,7 @@ type insert = {
   title: string;
   titleImg: any;
   body: string | any;
-  ingredient: Array<string>;
+  ingredients: Array<string>;
   tags: Array<string>;
 };
 
@@ -13,7 +13,7 @@ export const writePost = ({
   category,
   title,
   body,
-  ingredient,
+  ingredients,
   tags,
   titleImg,
 }: insert) => {
@@ -21,7 +21,7 @@ export const writePost = ({
     category,
     title,
     body,
-    ingredient,
+    ingredients,
     tags,
     titleImg,
   });
