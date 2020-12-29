@@ -25,6 +25,7 @@ const PostViewer = ({ post, error, loading }: any) => {
     tags,
     title,
     titleImg,
+    views,
     writer: { username },
   } = post;
   return (
@@ -34,10 +35,12 @@ const PostViewer = ({ post, error, loading }: any) => {
       ) : (
         <>
           <PostViewerBlock>
+            <span className="views">조회수 : {views}</span>
             <div className="titleUser">
               <h2>
                 {title}({category})
               </h2>
+
               <UserDateBlock>
                 <span>{username}</span>
                 <span>

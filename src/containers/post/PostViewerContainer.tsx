@@ -4,6 +4,7 @@ import { readPost, unloadPost } from '../../module/post';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { RootState } from '../../module/index';
+import axios from 'axios';
 
 const PostViewerContainer = ({ match }: RouteComponentProps<any>) => {
   const { postId } = match.params;
@@ -28,7 +29,10 @@ const PostViewerContainer = ({ match }: RouteComponentProps<any>) => {
 
   useEffect(() => {
     dispatch(readPost(postId));
-
+    axios(`/api/post/view/${postId}`, {
+      baseURL: 'http://localhost:4000',
+      method: 'POST',
+    });
     return () => {
       dispatch(unloadPost());
     };

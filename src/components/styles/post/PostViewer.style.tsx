@@ -5,12 +5,15 @@ export const PostViewerBlock = styled.div`
   width: 100%;
   h2 {
     font-size: 2rem;
-    margin-bottom: 1rem;
+    margin: 1rem 0;
   }
   .titleUser {
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+  .views {
+    display: in;
   }
 `;
 
