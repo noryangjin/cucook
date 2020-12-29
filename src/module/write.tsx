@@ -18,7 +18,7 @@ type type = {
   title?: string;
   titleImg?: any;
   body?: string | any;
-  ingredient?: Array<string>;
+  ingredients?: Array<string>;
   tags?: Array<string>;
 };
 
@@ -29,12 +29,12 @@ export const changeField = createAction(
 );
 export const writePost = createAction(
   WRITE,
-  ({ category, title, titleImg, body, ingredient, tags }: type) => ({
+  ({ category, title, titleImg, body, ingredients, tags }: type) => ({
     category,
     title,
     titleImg,
     body,
-    ingredient,
+    ingredients,
     tags,
   })
 );
@@ -54,7 +54,7 @@ type typeInitialState = {
   title: string;
   titleImg: any;
   body: string | any;
-  ingredient: Array<string>;
+  ingredients: Array<string>;
   tags: Array<string>;
   post: any;
   postError: any;
@@ -65,7 +65,7 @@ const initialState: typeInitialState = {
   title: '',
   titleImg: null,
   body: '',
-  ingredient: [],
+  ingredients: [],
   tags: [],
   post: null,
   postError: null,

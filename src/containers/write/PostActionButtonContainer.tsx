@@ -12,7 +12,7 @@ const PostActionButtonContainer = ({ history }: RouteComponentProps<any>) => {
     category,
     title,
     body,
-    ingredient,
+    ingredients,
     tags,
     titleImg,
     post,
@@ -22,7 +22,7 @@ const PostActionButtonContainer = ({ history }: RouteComponentProps<any>) => {
     title: write.title,
     titleImg: write.titleImg,
     body: write.body,
-    ingredient: write.ingredient,
+    ingredients: write.ingredients,
     tags: write.tags,
     post: write.post,
     postError: write.postError,
@@ -61,11 +61,11 @@ const PostActionButtonContainer = ({ history }: RouteComponentProps<any>) => {
     (e?: MouseEvent<HTMLButtonElement>) => {
       if (title && body && titleImg && category) {
         dispatch(
-          writePost({ category, title, titleImg, body, ingredient, tags })
+          writePost({ category, title, titleImg, body, ingredients, tags })
         );
       }
     },
-    [dispatch, category, title, body, ingredient, tags, titleImg]
+    [dispatch, category, title, body, ingredients, tags, titleImg]
   );
 
   const onCancel = useCallback(
