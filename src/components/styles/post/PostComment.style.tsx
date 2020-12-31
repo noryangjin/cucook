@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Button from '../../common/Button';
 import palette from '../palette';
 
@@ -86,4 +86,59 @@ export const ComListBlock = styled.div`
       width: 100%;
     }
   }
+`;
+
+type Props = {
+  messageStyle: string;
+};
+
+export const Message: any = styled.div<Props>`
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1;
+  background: ${palette.cyan[3]};
+  height: 4rem;
+  text-align: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  @keyframes okAnimation {
+    0% {
+      opacity: 25%;
+      transform: translateY(-30px);
+    }
+    30% {
+      transform: translateY(0);
+      opacity: 100%;
+    }
+    70% {
+      transform: translateY(0);
+      opacity: 100%;
+    }
+    80% {
+      transform: translateY(-15px);
+      opacity: 50%;
+    }
+    90% {
+      transform: translateY(-30px);
+      opacity: 25%;
+    }
+    100% {
+      transform: translateY(-40px);
+      opacity: 0%;
+    }
+  }
+  animation: okAnimation 3.5s linear forwards;
+  .text {
+    font-weight: bold;
+    letter-spacing: 2px;
+  }
+  ${(props) =>
+    props.messageStyle &&
+    props.messageStyle.includes('로그인이 필요합니다.') &&
+    css`
+      background: ${palette.errorColor};
+    `}
 `;

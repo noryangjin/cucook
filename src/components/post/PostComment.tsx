@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent, FormEvent } from 'react';
 import {
   PostCommentBlock,
   CommentForm,
@@ -8,16 +8,40 @@ import {
   Spacer,
   ComBlock,
   ComListBlock,
+  Message,
 } from '../styles/post/PostComment.style';
+import FlashMessage from 'react-flash-message';
 
-const PostComment = ({ comments, loading, input, onChange, onSubmit }: any) => {
+type Props = {
+  comments: any;
+  loading: boolean;
+  input: string;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onSubmit: (e: FormEvent<HTMLFormElement>) => void;
+  message: string | null;
+};
+
+const PostComment = ({
+  comments,
+  loading,
+  input,
+  onChange,
+  onSubmit,
+  message,
+}: Props) => {
   if (!loading && !comments) {
     return null;
   }
-  const { comments: comment } = comments;
 
   return (
     <>
+      {message && (
+        <FlashMessage duration={3500}>
+          <Message messageStyle={message}>
+            <div className="text">{message}</div>
+          </Message>
+        </FlashMessage>
+      )}
       <Spacer />
       <PostCommentBlock>
         <CommentForm onSubmit={onSubmit}>
@@ -30,9 +54,9 @@ const PostComment = ({ comments, loading, input, onChange, onSubmit }: any) => {
         </CommentForm>
       </PostCommentBlock>
       <ComListBlock>
-        <div className="listIcon">댓글목록({comment && comment.length})</div>
-        {comment ? (
-          comment.map((com: any) => (
+        <div className="listIcon">댓글목록({comments && comments.length})</div>
+        {comments.length > 0 ? (
+          comments.map((com: any) => (
             <ComBlock key={com._id}>
               <div className="writer">{com.commentWriter.username}</div>
               <div className="comment">{com.text}</div>
