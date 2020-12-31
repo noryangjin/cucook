@@ -11,6 +11,9 @@ import {
   Message,
 } from '../styles/post/PostComment.style';
 import FlashMessage from 'react-flash-message';
+import { MdCancel } from 'react-icons/md';
+import { AiFillDelete } from 'react-icons/ai';
+import { IoMdOptions } from 'react-icons/io';
 
 type Props = {
   comments: any;
@@ -18,6 +21,11 @@ type Props = {
   input: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
+  onRemove: any;
+  user: any;
+  option: boolean;
+  onClick: any;
+  onCancel: any;
   message: string | null;
 };
 
@@ -25,9 +33,14 @@ const PostComment = ({
   comments,
   loading,
   input,
+  option,
+  onCancel,
   onChange,
   onSubmit,
+  onClick,
   message,
+  user,
+  onRemove,
 }: Props) => {
   if (!loading && !comments) {
     return null;
@@ -54,7 +67,14 @@ const PostComment = ({
         </CommentForm>
       </PostCommentBlock>
       <ComListBlock>
-        <div className="listIcon">댓글목록({comments && comments.length})</div>
+        <div className="listIcon">
+          댓글목록({comments && comments.length})
+          {option ? (
+            <MdCancel onClick={onCancel} />
+          ) : (
+            <IoMdOptions onClick={onClick} />
+          )}
+        </div>
         {comments.length > 0 ? (
           comments.map((com: any) => (
             <ComBlock key={com._id}>
@@ -63,6 +83,11 @@ const PostComment = ({
               <div className="commentDate">
                 {new Date(com.publishedDate).toLocaleDateString()}
               </div>
+              {option && user && com.commentWriter._id === user._id && (
+                <button value={com._id} onClick={onRemove}>
+                  <AiFillDelete />
+                </button>
+              )}
             </ComBlock>
           ))
         ) : (

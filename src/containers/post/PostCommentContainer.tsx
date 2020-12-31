@@ -10,17 +10,19 @@ import {
   useEffect,
 } from 'react';
 import { unLoadComment, readComment } from '../../module/comment';
-import { writeComment } from '../../lib/api/comment';
+import { writeComment, deleteComment } from '../../lib/api/comment';
 
 const PostCommentContainer = ({ match }: RouteComponentProps<any>) => {
   const [input, setInput] = useState<string>('');
   const [message, setMessage] = useState<null | string>(null);
+  const [option, setOption] = useState<boolean>(false);
 
   const dispatch = useDispatch();
   const { postId } = match.params;
-  const { comments, loading } = useSelector(
-    ({ comment, loading }: RootState) => ({
+  const { user, comments, loading } = useSelector(
+    ({ comment, loading, user }: RootState) => ({
       comments: comment.comments,
+      user: user.user,
       loading: loading['post/POST_READ'],
     })
   );
@@ -35,6 +37,13 @@ const PostCommentContainer = ({ match }: RouteComponentProps<any>) => {
   const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setInput(value);
+  }, []);
+
+  const onClick = useCallback(() => {
+    setOption(true);
+  }, []);
+  const onCancel = useCallback(() => {
+    setOption(false);
   }, []);
 
   const onSubmit = useCallback(
@@ -59,14 +68,37 @@ const PostCommentContainer = ({ match }: RouteComponentProps<any>) => {
     [postId, input, dispatch]
   );
 
+  const onRemove = useCallback(
+    async (e: any) => {
+      const { value } = e.target;
+      console.log(typeof value);
+      await deleteComment(value)
+        .then(() => {
+          dispatch(readComment(postId));
+          setMessage('댓글 삭제 완료');
+          setTimeout(() => setMessage(''), 3500);
+        })
+        .catch((e) => {
+          e.response.status === 403 && setMessage('로그인이 필요합니다.');
+          setTimeout(() => setMessage(''), 3500);
+        });
+    },
+    [postId, dispatch]
+  );
+
   return (
     <PostComment
+      onCancel={onCancel}
+      option={option}
+      onClick={onClick}
       comments={comments}
       loading={loading}
       input={input}
       onChange={onChange}
       onSubmit={onSubmit}
       message={message}
+      user={user}
+      onRemove={onRemove}
     />
   );
 };

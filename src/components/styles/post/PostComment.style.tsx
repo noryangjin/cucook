@@ -71,6 +71,15 @@ export const ComBlock = styled.div`
       font-size: 12px;
     }
   }
+  button {
+    outline: none;
+    border: none;
+    background: ${palette.Header};
+    cursor: pointer;
+    &:hover {
+      background: ${palette.errorColor};
+    }
+  }
   @media (max-width: 750px) {
     width: 100%;
   }
@@ -82,6 +91,16 @@ export const ComListBlock = styled.div`
     margin: 0 auto;
     margin-bottom: 1rem;
     color: ${palette.errorColor};
+    display: flex;
+    align-items: center;
+    svg {
+      cursor: pointer;
+      color: black;
+      margin-left: 1rem;
+      &:hover {
+        background: ${palette.gray[5]};
+      }
+    }
     @media (max-width: 750px) {
       width: 100%;
     }
