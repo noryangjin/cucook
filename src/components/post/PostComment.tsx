@@ -12,7 +12,6 @@ import {
 } from '../styles/post/PostComment.style';
 import FlashMessage from 'react-flash-message';
 import { MdCancel } from 'react-icons/md';
-import { AiFillDelete } from 'react-icons/ai';
 import { IoMdOptions } from 'react-icons/io';
 
 type Props = {
@@ -84,9 +83,11 @@ const PostComment = ({
                 {new Date(com.publishedDate).toLocaleDateString()}
               </div>
               {option && user && com.commentWriter._id === user._id && (
-                <button value={com._id} onClick={onRemove}>
-                  <AiFillDelete />
-                </button>
+                <div style={{ fontSize: '10px', fontWeight: 'bold' }}>
+                  <button value={com._id} key={com._id} onClick={onRemove}>
+                    ❌
+                  </button>
+                </div>
               )}
             </ComBlock>
           ))

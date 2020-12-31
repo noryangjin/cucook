@@ -23,7 +23,7 @@ const Editor = ({ title, body, onChange }: Props) => {
       placeholder: '요리 방법을 설명해주세요^^',
       modules: {
         toolbar: [
-          ['bold', 'italic', 'underline', 'strike'], // toggled buttons
+          ['bold', 'italic', 'underline', 'strike', 'image', 'link'], // toggled buttons
           ['blockquote', 'code-block'],
 
           [{ header: 1 }, { header: 2 }], // custom button values

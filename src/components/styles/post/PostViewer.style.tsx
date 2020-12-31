@@ -97,6 +97,12 @@ export const Tag = styled.div`
 
 export const PostContent = styled.div`
   line-height: 1.5;
+  .ql-align-center {
+    text-align: center;
+    img {
+      margin: 0 auto;
+    }
+  }
   img {
     display: block;
     margin: 5px 0;

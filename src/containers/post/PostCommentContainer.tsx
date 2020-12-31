@@ -70,9 +70,9 @@ const PostCommentContainer = ({ match }: RouteComponentProps<any>) => {
 
   const onRemove = useCallback(
     async (e: any) => {
-      const { value } = e.target;
-      console.log(typeof value);
-      await deleteComment(value)
+      const { value } = await e.target;
+      console.log('ss', value);
+      deleteComment(value)
         .then(() => {
           dispatch(readComment(postId));
           setMessage('댓글 삭제 완료');
