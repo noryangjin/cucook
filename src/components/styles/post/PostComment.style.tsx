@@ -50,6 +50,7 @@ export const ComBlock = styled.div`
   background: ${palette.Header};
   width: 700px;
   margin: 0 auto;
+  margin-top: 1rem;
   align-items: center;
   display: flex;
   .comment {

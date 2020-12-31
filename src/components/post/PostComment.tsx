@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   PostCommentBlock,
   CommentForm,
@@ -9,7 +10,7 @@ import {
   ComListBlock,
 } from '../styles/post/PostComment.style';
 
-const PostComment = ({ comments, loading }: any) => {
+const PostComment = ({ comments, loading, input, onChange, onSubmit }: any) => {
   if (!loading && !comments) {
     return null;
   }
@@ -19,8 +20,12 @@ const PostComment = ({ comments, loading }: any) => {
     <>
       <Spacer />
       <PostCommentBlock>
-        <CommentForm>
-          <CommentInput placeholder="댓글을 입력하세요." />
+        <CommentForm onSubmit={onSubmit}>
+          <CommentInput
+            placeholder="댓글을 입력하세요."
+            value={input}
+            onChange={onChange}
+          />
           <CommentButton>입력</CommentButton>
         </CommentForm>
       </PostCommentBlock>
@@ -28,16 +33,13 @@ const PostComment = ({ comments, loading }: any) => {
         <div className="listIcon">댓글목록({comment && comment.length})</div>
         {comment ? (
           comment.map((com: any) => (
-            <>
-              <ComBlock key={com._id}>
-                <div className="writer">{com.commentWriter.username}</div>
-                <div className="comment">{com.text}</div>
-                <div className="commentDate">
-                  {new Date(com.publishedDate).toLocaleDateString()}
-                </div>
-              </ComBlock>
-              <div style={{ marginTop: '1rem' }}></div>
-            </>
+            <ComBlock key={com._id}>
+              <div className="writer">{com.commentWriter.username}</div>
+              <div className="comment">{com.text}</div>
+              <div className="commentDate">
+                {new Date(com.publishedDate).toLocaleDateString()}
+              </div>
+            </ComBlock>
           ))
         ) : (
           <div style={{ textAlign: 'center' }}>댓글이 없습니다.</div>
@@ -48,4 +50,4 @@ const PostComment = ({ comments, loading }: any) => {
   );
 };
 
-export default PostComment;
+export default React.memo(PostComment);
