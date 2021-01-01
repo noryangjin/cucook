@@ -5,10 +5,10 @@ export const ResponsiveBlock = styled.div`
   margin: 0 auto;
   padding: 0 5px;
   @media (max-width: 1024px) {
-    width: 768px;
+    width: 700px;
   }
-  @media (max-width: 768px) {
-    width: 500px;
+  @media (max-width: 700px) {
+    width: 550px;
   }
   @media (max-width: 500px) {
     width: 360px;
