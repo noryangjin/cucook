@@ -1,7 +1,10 @@
 import { PostItemBlock } from '../styles/home/PostItem.style';
 import { Link } from 'react-router-dom';
 
-const PostItem = ({ item, style }: any) => {
+const PostItem = ({ item, style, index }: any) => {
+  if (!item) {
+    return null;
+  }
   const {
     writer: { username },
     _id,
@@ -15,7 +18,7 @@ const PostItem = ({ item, style }: any) => {
   } = item;
 
   return (
-    <PostItemBlock style={style}>
+    <PostItemBlock style={style} index={index}>
       <span className="nameDate">
         <span className="name">
           <Link to={`/?username=${username}`}>{username}</Link>
@@ -36,7 +39,10 @@ const PostItem = ({ item, style }: any) => {
         <div style={{ display: 'flex' }}>
           {ingredients &&
             ingredients.map((ingre: string) => (
-              <span key={ingre} style={{ marginBottom: '10px' }}>
+              <span
+                key={ingre}
+                style={{ marginBottom: '8px', marginLeft: '10px' }}
+              >
                 <Link to={`/?ingredient=${ingre}`}>#{ingre}</Link>
               </span>
             ))}
@@ -45,7 +51,7 @@ const PostItem = ({ item, style }: any) => {
         <div style={{ display: 'flex' }}>
           {tags &&
             tags.map((tag: string) => (
-              <span key={tag}>
+              <span key={tag} style={{ marginLeft: '10px' }}>
                 <Link to={`/?tag=${tag}`}>#{tag}</Link>
               </span>
             ))}

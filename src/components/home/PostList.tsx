@@ -15,7 +15,7 @@ const PostList = ({ posts, loading }: Props) => {
       }
       const item = posts[index];
 
-      return <PostItem key={key} item={item} style={style} />;
+      return <PostItem key={key} index={index} item={item} style={style} />;
     },
     [posts, loading]
   );
@@ -28,7 +28,7 @@ const PostList = ({ posts, loading }: Props) => {
             <div className="block">
               <ListBlock
                 className="PostList"
-                rowCount={posts.length}
+                rowCount={posts.length + 1}
                 rowHeight={730}
                 rowRenderer={rowRenderer}
                 list={posts}

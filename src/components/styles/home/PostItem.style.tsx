@@ -1,10 +1,18 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import palette from '../palette';
 
-export const PostItemBlock = styled.div`
+export const PostItemBlock = styled.div<any>`
   display: flex;
   flex-direction: column;
-  border-bottom: 2px solid ${palette.gray[5]};
+  border: 1px solid ${palette.gray[4]};
+  padding: 5px;
+
+  ${(props) =>
+    props.index &&
+    css`
+      margin-top: ${props.index * 2}rem;
+    `}
+
   a {
     &:hover {
       color: ${palette.cyan[4]};
@@ -39,6 +47,7 @@ export const PostItemBlock = styled.div`
   &:nth-child(even) {
     background: ${palette.Header};
   }
+
   .tagIngre {
     margin-bottom: 1rem;
     overflow: auto;
