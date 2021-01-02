@@ -63,6 +63,7 @@ export const TagImgBlock = styled.div`
 export const TitleImg = styled.img`
   height: 400px;
   width: 350px;
+  object-fit: fill;
 `;
 
 export const SpacerTop = styled.div`

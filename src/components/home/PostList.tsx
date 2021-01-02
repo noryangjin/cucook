@@ -2,31 +2,44 @@ import React, { useCallback } from 'react';
 import PostItem from './PostItem';
 import { AutoSizerBlock, ListBlock } from '../styles/home/PostList.style';
 
-const PostList = () => {
-  const rowRenderer = useCallback(({ index, key, style }) => {
-    const item = list[index];
+type Props = {
+  posts: any;
+  loading: boolean;
+};
 
-    return <PostItem key={key} item={item} style={style} />;
-  }, []);
+const PostList = ({ posts, loading }: Props) => {
+  const rowRenderer = useCallback(
+    ({ index, key, style }) => {
+      if (!loading && !posts) {
+        return <h2>로딩 중...</h2>;
+      }
+      const item = posts[index];
+
+      return <PostItem key={key} item={item} style={style} />;
+    },
+    [posts, loading]
+  );
 
   return (
     <>
       <AutoSizerBlock disableHeight>
-        {({ width }: any) => (
-          <div className="block">
-            <ListBlock
-              className="PostList"
-              rowCount={list.length}
-              rowHeight={700}
-              rowRenderer={rowRenderer}
-              list={list}
-              height={700}
-              width={width}
-              style={{ outline: 'none' }}
-            />
-            <div className="chat">채팅 공간</div>
-          </div>
-        )}
+        {({ width }: any) =>
+          posts && (
+            <div className="block">
+              <ListBlock
+                className="PostList"
+                rowCount={posts.length}
+                rowHeight={730}
+                rowRenderer={rowRenderer}
+                list={posts}
+                height={730}
+                width={width}
+                style={{ outline: 'none' }}
+              />
+              <div className="chat">채팅 공간</div>
+            </div>
+          )
+        }
       </AutoSizerBlock>
     </>
   );

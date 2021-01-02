@@ -1,27 +1,54 @@
 import { PostItemBlock } from '../styles/home/PostItem.style';
+import { Link } from 'react-router-dom';
 
 const PostItem = ({ item, style }: any) => {
-  const { username, title, titleImg, tags, ingredient, date } = item;
+  const {
+    writer: { username },
+    _id,
+    category,
+    views,
+    title,
+    titleImg,
+    tags,
+    ingredients,
+    publishedDate,
+  } = item;
 
   return (
     <PostItemBlock style={style}>
       <span className="nameDate">
-        <span className="name">{username}</span>
+        <span className="name">
+          <Link to={`/?username=${username}`}>{username}</Link>
+        </span>
         <span className="date">
-          {date} / 조회수:{'3'}
+          {new Date(publishedDate).toLocaleDateString()} / 조회수:{views}
         </span>
       </span>
-      <h3>{title && title.length > 55 ? `${title.slice(0, 55)}...` : title}</h3>
-      <img src={titleImg} alt="" />
+      <h3>
+        <Link to={`/?category=${category}`}>({category}) - </Link>
+        {title && title.length > 55 ? `${title.slice(0, 55)}...` : title}
+      </h3>
+      <Link to={`/@${username}/${_id}`} className="linkImg">
+        <img src={titleImg} alt="" />
+      </Link>
       <span className="tagIngre">
-        &lt;재료&gt;
+        <span style={{ fontWeight: 'bold' }}>&lt;재료&gt;</span>
         <div style={{ display: 'flex' }}>
-          {ingredient &&
-            ingredient.map((ingre: string) => <span key={ingre}>{ingre}</span>)}
+          {ingredients &&
+            ingredients.map((ingre: string) => (
+              <span key={ingre} style={{ marginBottom: '10px' }}>
+                <Link to={`/?ingredient=${ingre}`}>#{ingre}</Link>
+              </span>
+            ))}
         </div>
-        &lt;태그&gt;
+        <span style={{ fontWeight: 'bold' }}>&lt;태그&gt;</span>
         <div style={{ display: 'flex' }}>
-          {tags && tags.map((tag: string) => <span key={tag}>{tag}</span>)}
+          {tags &&
+            tags.map((tag: string) => (
+              <span key={tag}>
+                <Link to={`/?tag=${tag}`}>#{tag}</Link>
+              </span>
+            ))}
         </div>
       </span>
     </PostItemBlock>
