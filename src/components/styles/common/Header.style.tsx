@@ -15,7 +15,7 @@ export const Wrapper = styled(Responsive)`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 4rem;
+  height: 3rem;
 
   .logo {
     letter-spacing: 2px;
@@ -31,16 +31,19 @@ export const Wrapper = styled(Responsive)`
   }
   .right {
     display: flex;
+    height: 30px;
   }
 `;
 
 export const UserInfo = styled.div`
   font-size: 1.125rem;
   margin-right: 5px;
+  display: flex;
+  align-items: center;
 `;
 
 export const Spacer = styled.div`
-  height: 4.5rem;
+  height: 3.1rem;
 `;
 
 export const Message = styled.div`
@@ -48,7 +51,7 @@ export const Message = styled.div`
   position: fixed;
   background: ${palette.cyan[3]};
   width: 100%;
-  height: 4rem;
+  height: 3rem;
   display: flex;
   justify-content: center;
   align-items: center;

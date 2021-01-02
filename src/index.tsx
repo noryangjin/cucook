@@ -21,7 +21,7 @@ const check_ = () => {
   try {
     store.dispatch(check());
   } catch (e) {
-    console.log(e);
+    console.error(e);
   }
 };
 

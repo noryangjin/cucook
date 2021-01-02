@@ -12,6 +12,9 @@ type Props = {
 };
 
 const StyledButton: any = css<Props>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 4px;
   border: none;
   cursor: pointer;

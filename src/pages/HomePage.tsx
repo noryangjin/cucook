@@ -1,5 +1,6 @@
 import HeaderContainer from '../containers/common/HeaderContainer';
 import PostListContainer from '../containers/home/PostListContainer';
+import HomeActionButtonContainer from '../containers/home/HomeActionButtonContainer';
 import Responsive from '../components/common/Responsive';
 
 const HomePage = () => {
@@ -7,6 +8,7 @@ const HomePage = () => {
     <>
       <HeaderContainer />
       <Responsive>
+        <HomeActionButtonContainer />
         <PostListContainer />
       </Responsive>
     </>

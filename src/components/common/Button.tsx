@@ -10,7 +10,11 @@ type Props = {
 };
 
 const Button = (props: Props) => {
-  return props.to ? <LinkStyled {...props} /> : <ButtonStyled {...props} />;
+  return props.to ? (
+    <LinkStyled {...props} cyan={props.cyan ? 1 : 0} />
+  ) : (
+    <ButtonStyled {...props} />
+  );
 };
 
 export default React.memo(Button);
