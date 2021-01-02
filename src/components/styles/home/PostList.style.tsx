@@ -1,5 +1,6 @@
 import { AutoSizer, List } from 'react-virtualized';
 import styled from 'styled-components';
+import palette from '../palette';
 
 export const AutoSizerBlock = styled(AutoSizer)`
   .block {
@@ -18,4 +19,8 @@ export const AutoSizerBlock = styled(AutoSizer)`
   }
 `;
 
-export const ListBlock = styled(List)``;
+export const ListBlock = styled(List)`
+  a {
+    color: ${palette.cyan[4]};
+  }
+`;
