@@ -12,6 +12,7 @@ const PostListContainer = ({ location }: RouteComponentProps) => {
     posts: posts.posts,
     loading: loading['posts/LIST_POSTS'],
   }));
+
   useEffect(() => {
     const { tag, ingredient, username, category } = qs.parse(location.search, {
       ignoreQueryPrefix: true,
