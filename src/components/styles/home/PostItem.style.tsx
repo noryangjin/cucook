@@ -13,23 +13,15 @@ export const PostItemBlock = styled.div<any>`
       margin-top: ${props.index * 2}rem;
     `}
 
-  a {
-    &:hover {
-      color: ${palette.cyan[4]};
-    }
-  }
   .nameDate {
     padding-top: 1rem;
-    span + span::before {
-      content: '\\B7';
-      margin: 0 0.25rem;
-    }
-    .name {
-      font-weight: bold;
-    }
-    .date {
-      color: ${palette.gray[6]};
-    }
+  }
+  .name {
+    font-weight: bold;
+    font-size: 1.17em;
+  }
+  .date {
+    color: ${palette.gray[6]};
   }
   h3 {
     margin: 1rem 0;
@@ -39,10 +31,16 @@ export const PostItemBlock = styled.div<any>`
   img {
     margin: 0 auto;
     display: block;
-    height: 500px;
-    max-width: 450px;
+    height: 400px;
+    max-width: 550px;
     object-fit: fill;
     margin-bottom: 1rem;
+    @media (max-width: 1020px) {
+      max-width: 430px;
+    }
+    @media (max-width: 500px) {
+      max-width: 360px;
+    }
   }
   &:nth-child(even) {
     background: ${palette.Header};
