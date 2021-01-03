@@ -15,6 +15,9 @@ export const HomeActionButtonBlock = styled.div`
     border-radius: 70%;
     object-fit: cover;
   }
+  @media (max-width: 500px) {
+    justify-content: space-between;
+  }
 `;
 
 export const WriteButton = styled(Button)`
@@ -37,6 +40,10 @@ export const SortCategory = styled.div`
     &:hover,
     &:focus {
       background: ${palette.Header};
+    }
+
+    @media (max-width: 500px) {
+      width: 80px;
     }
   }
 `;
@@ -63,6 +70,11 @@ export const CategoryImgBlock = styled.span<Props>`
     justify-content: center;
     border: 1px solid ${palette.gray[4]};
     border-radius: 70%;
+
+    @media (max-width: 500px) {
+      margin-right: 1rem;
+      min-width: 40px;
+    }
   }
 
   a + a {
@@ -119,6 +131,10 @@ export const CategoryImgBlock = styled.span<Props>`
         }
       `}
   }
+  @media (max-width: 500px) {
+    overflow: auto;
+    width: 160px;
+  }
 `;
 
 export const Spacer = styled.span`
@@ -127,4 +143,7 @@ export const Spacer = styled.span`
   margin: 0 1rem;
   background: ${palette.Header};
   width: 4px;
+  @media (max-width: 500px) {
+    display: none;
+  }
 `;
