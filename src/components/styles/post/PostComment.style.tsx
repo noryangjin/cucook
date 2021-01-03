@@ -118,7 +118,7 @@ export const Message: any = styled.div<Props>`
   left: 0;
   z-index: 1;
   background: ${palette.cyan[3]};
-  height: 4rem;
+  height: 3rem;
   text-align: center;
   align-items: center;
   display: flex;

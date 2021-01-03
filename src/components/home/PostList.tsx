@@ -28,11 +28,11 @@ const PostList = ({ posts, loading }: Props) => {
             <div className="block">
               <ListBlock
                 className="PostList"
-                rowCount={posts.length + 1}
-                rowHeight={730}
+                rowCount={posts.length}
+                rowHeight={700}
                 rowRenderer={rowRenderer}
                 list={posts}
-                height={730}
+                height={600}
                 width={width}
                 style={{ outline: 'none' }}
               />

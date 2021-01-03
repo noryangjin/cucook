@@ -1,20 +1,19 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import palette from '../palette';
 
 export const PostItemBlock = styled.div<any>`
   display: flex;
   flex-direction: column;
-  border: 1px solid ${palette.gray[4]};
   padding: 5px;
+  border-bottom: 2px solid ${palette.gray[4]};
+  background: ${palette.Header};
 
-  ${(props) =>
-    props.index &&
-    css`
-      margin-top: ${props.index * 2}rem;
-    `}
-
-  .nameDate {
-    padding-top: 1rem;
+  .Block {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    margin-bottom: 0;
+    max-height: 700px;
+    background: white;
   }
   .name {
     font-weight: bold;
@@ -26,28 +25,19 @@ export const PostItemBlock = styled.div<any>`
   h3 {
     margin: 1rem 0;
   }
-  .linkImg {
+  .tagIngre {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    height: 100%;
+    background: white;
+    margin: 10px;
+    overflow: auto;
   }
   img {
     margin: 0 auto;
     display: block;
     height: 400px;
-    max-width: 550px;
+    width: 100%;
     object-fit: fill;
     margin-bottom: 1rem;
-    @media (max-width: 1020px) {
-      max-width: 430px;
-    }
-    @media (max-width: 500px) {
-      max-width: 360px;
-    }
-  }
-  &:nth-child(even) {
-    background: ${palette.Header};
-  }
-
-  .tagIngre {
-    margin-bottom: 1rem;
-    overflow: auto;
   }
 `;
