@@ -32,12 +32,19 @@ export const ReadPost = (id: string) => {
   return client.get(`/api/post/${id}`);
 };
 
-export const listPosts = ({ username, tag, ingredient, category }: any) => {
+export const listPosts = ({
+  username,
+  tag,
+  ingredient,
+  category,
+  sort,
+}: any) => {
   const queryString = qs.stringify({
     username,
     tag,
     ingredient,
     category,
+    sort,
   });
   return client.get(`/api/post?${queryString}`);
 };

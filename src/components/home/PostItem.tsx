@@ -2,7 +2,7 @@ import React from 'react';
 import { PostItemBlock } from '../styles/home/PostItem.style';
 import { Link } from 'react-router-dom';
 
-const PostItem = ({ item, style }: any) => {
+const PostItem = ({ item, style, qs_ }: any) => {
   if (!item) {
     return null;
   }
@@ -18,12 +18,18 @@ const PostItem = ({ item, style }: any) => {
     publishedDate,
   } = item;
 
+  const val =
+    qs_.filter((k: string) => k === 'sort')[0] ||
+    qs_.filter((k: string) => k === '?sort')[0]
+      ? '&sort=views'
+      : '';
+
   return (
     <>
       <PostItemBlock style={style}>
         <span className="Block">
           <span className="nameDate">
-            <Link to={`/?username=${username}`} className="name">
+            <Link to={`/?username=${username}${val}`} className="name">
               {username}
             </Link>
             <div className="date">
@@ -31,7 +37,7 @@ const PostItem = ({ item, style }: any) => {
             </div>
           </span>
           <h3>
-            <Link to={`/?category=${category}`}>({category}) </Link>
+            <Link to={`/?category=${category}${val}`}>({category}) </Link>
             {title && title.length > 55 ? `${title.slice(0, 55)}...` : title}
           </h3>
           <Link to={`/@${username}/${_id}`} className="linkImg">
@@ -47,7 +53,7 @@ const PostItem = ({ item, style }: any) => {
                   key={ingre}
                   style={{ marginBottom: '8px', marginLeft: '10px' }}
                 >
-                  <Link to={`/?ingredient=${ingre}`}>#{ingre}</Link>
+                  <Link to={`/?ingredient=${ingre}${val}`}>#{ingre}</Link>
                 </span>
               ))}
           </div>
@@ -56,7 +62,7 @@ const PostItem = ({ item, style }: any) => {
             {tags &&
               tags.map((tag: string) => (
                 <span key={tag} style={{ marginLeft: '10px' }}>
-                  <Link to={`/?tag=${tag}`}>#{tag}</Link>
+                  <Link to={`/?tag=${tag}${val}`}>#{tag}</Link>
                 </span>
               ))}
           </div>

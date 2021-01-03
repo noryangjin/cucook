@@ -12,15 +12,20 @@ const PostListContainer = ({ location }: RouteComponentProps) => {
     posts: posts.posts,
     loading: loading['posts/LIST_POSTS'],
   }));
+  const query = qs.parse(location.search);
+  const qs_ = Object.keys(query);
 
   useEffect(() => {
-    const { tag, ingredient, username, category } = qs.parse(location.search, {
-      ignoreQueryPrefix: true,
-    });
-    dispatch(listPosts({ tag, username, ingredient, category }));
+    const { tag, ingredient, username, category, sort } = qs.parse(
+      location.search,
+      {
+        ignoreQueryPrefix: true,
+      }
+    );
+    dispatch(listPosts({ tag, username, ingredient, category, sort }));
   }, [dispatch, location]);
 
-  return <PostList posts={posts} loading={loading} />;
+  return <PostList posts={posts} loading={loading} qs_={qs_} />;
 };
 
 export default withRouter(PostListContainer);

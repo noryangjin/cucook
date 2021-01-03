@@ -5,9 +5,10 @@ import { AutoSizerBlock, ListBlock } from '../styles/home/PostList.style';
 type Props = {
   posts: any;
   loading: boolean;
+  qs_: any;
 };
 
-const PostList = ({ posts, loading }: Props) => {
+const PostList = ({ posts, loading, qs_ }: Props) => {
   const rowRenderer = useCallback(
     ({ index, key, style }) => {
       if (!loading && !posts) {
@@ -15,9 +16,11 @@ const PostList = ({ posts, loading }: Props) => {
       }
       const item = posts[index];
 
-      return <PostItem key={key} index={index} item={item} style={style} />;
+      return (
+        <PostItem key={key} index={index} item={item} style={style} qs_={qs_} />
+      );
     },
-    [posts, loading]
+    [posts, loading, qs_]
   );
 
   return (

@@ -13,11 +13,12 @@ const [
 
 export const listPosts = createAction(
   LIST_POSTS,
-  ({ tag, username, ingredient, category }: any) => ({
+  ({ tag, username, ingredient, category, sort }: any) => ({
     tag,
     username,
     ingredient,
     category,
+    sort,
   })
 );
 
