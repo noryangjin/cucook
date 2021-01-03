@@ -1,23 +1,17 @@
 import HeaderContainer from '../containers/common/HeaderContainer';
-import EditorContainer from '../containers/write/EditorContainer';
-import TagBoxContainer from '../containers/write/TagBoxContainer';
-import PostActionButtonContainer from '../containers/write/PostActionButtonContainer';
-import TitleImgContainer from '../containers/write/TitleImgContainer';
-import CategoryContainer from '../containers/write/CategoryContainer';
-import IngredientContainer from '../containers/write/IngredientContainer';
 import Responsive from '../components/common/Responsive';
+import loadable from '@loadable/component';
+
+const Split = loadable(() => import('./Split/WritePage.split'), {
+  fallback: <h3>로딩 중...</h3>,
+});
 
 const WritePage = () => {
   return (
     <>
       <HeaderContainer />
       <Responsive>
-        <CategoryContainer />
-        <EditorContainer />
-        <TitleImgContainer />
-        <IngredientContainer />
-        <TagBoxContainer />
-        <PostActionButtonContainer />
+        <Split />
       </Responsive>
     </>
   );

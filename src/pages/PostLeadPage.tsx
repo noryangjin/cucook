@@ -1,10 +1,11 @@
 import { useRef } from 'react';
 import HeaderContainer from '../containers/common/HeaderContainer';
 import Responsive from '../components/common/Responsive';
-import PostViewerContainer from '../containers/post/PostViewerContainer';
-import PostCommentContainer from '../containers/post/PostCommentContainer';
 import { ScrollButton } from '../components/styles/common/ScrollToTop.style';
 import { BiArrowToTop } from 'react-icons/bi';
+import loadable from '@loadable/component';
+
+const Split = loadable(() => import('./Split/PostLeadPage.split'));
 
 const scrollToRef = (ref: any) => window.scrollTo(0, ref.current.offsetTop);
 
@@ -17,8 +18,7 @@ const PostLeadPage = () => {
       <p ref={myRef} style={{ margin: '0' }}></p>
       <HeaderContainer />
       <Responsive>
-        <PostViewerContainer />
-        <PostCommentContainer />
+        <Split />
       </Responsive>
       <ScrollButton onClick={executeScroll}>
         <BiArrowToTop size="30" />
