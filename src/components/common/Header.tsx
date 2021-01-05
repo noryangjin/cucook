@@ -13,10 +13,12 @@ import {
 type typeProps = {
   user: any;
   onLogout: (e: MouseEvent<HTMLButtonElement>) => void;
+
+  linkTo: string;
   welcomeMessage: string;
 };
 
-const Header = ({ user, onLogout, welcomeMessage }: typeProps) => {
+const Header = ({ user, onLogout, welcomeMessage, linkTo }: typeProps) => {
   return (
     <>
       {welcomeMessage && (
@@ -29,7 +31,7 @@ const Header = ({ user, onLogout, welcomeMessage }: typeProps) => {
       <HeaderBlock>
         <Wrapper>
           <div className="logo">
-            <Link to="/">cucook</Link>
+            <Link to={linkTo}>cucook</Link>
           </div>
           <div className="right">
             {user ? (
@@ -48,4 +50,4 @@ const Header = ({ user, onLogout, welcomeMessage }: typeProps) => {
   );
 };
 
-export default Header;
+export default React.memo(Header);

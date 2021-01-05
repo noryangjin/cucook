@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 import React, { useCallback } from 'react';
 import PostItem from './PostItem';
 import { AutoSizerBlock, ListBlock } from '../styles/home/PostList.style';
@@ -6,9 +7,10 @@ type Props = {
   posts: any;
   loading: boolean;
   qs_: any;
+  onScroll: any;
 };
 
-const PostList = ({ posts, loading, qs_ }: Props) => {
+const PostList = ({ posts, loading, qs_, onScroll }: Props) => {
   const rowRenderer = useCallback(
     ({ index, key, style }) => {
       if (!loading && !posts) {
@@ -30,6 +32,7 @@ const PostList = ({ posts, loading, qs_ }: Props) => {
           posts && (
             <div className="block">
               <ListBlock
+                onScroll={onScroll}
                 className="PostList"
                 rowCount={posts.length}
                 rowHeight={700}

@@ -19,9 +19,12 @@ const HomeActionButtonContainer = ({
 
   const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const { value } = e.target;
+    const k = key_[0];
 
-    if (key_[0] && key_[0].includes('?') && key_[0] !== '?sort') {
-      return history.push(`${key_[0]}=${val_[0]}&${value.slice(0)}`);
+    if (k && k.includes('?') && k !== '?sort') {
+      return history.push(
+        `${location.search.split('&sort')[0]}&${value.slice(0)}`
+      );
     }
     history.push(`?${value}`);
   };

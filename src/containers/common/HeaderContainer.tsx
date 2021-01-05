@@ -3,9 +3,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import Header from '../../components/common/Header';
 import { RootState } from '../../module/index';
 import { logout } from '../../module/user';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
+import qs from 'qs';
 
-const HeaderContainer = () => {
+const HeaderContainer = ({ location }: RouteComponentProps) => {
   const [welcomeMessage, setWelcomeMessage] = useState<string>('');
+  const [linkTo, setLinkTo] = useState<string>('/');
+
   const dispatch = useDispatch();
   const { user, authLogin } = useSelector(({ user, auth }: RootState) => ({
     user: user.user,
@@ -23,9 +27,24 @@ const HeaderContainer = () => {
     window.location.reload();
   };
 
+  useEffect(() => {
+    const qs_ = qs.parse(location.search, {
+      ignoreQueryPrefix: true,
+    });
+    if (location.search.includes('sort')) {
+      return setLinkTo(`?sort=${qs_.sort}`);
+    }
+    setLinkTo('/');
+  }, [location]);
+
   return (
-    <Header user={user} onLogout={onLogout} welcomeMessage={welcomeMessage} />
+    <Header
+      user={user}
+      onLogout={onLogout}
+      welcomeMessage={welcomeMessage}
+      linkTo={linkTo}
+    />
   );
 };
 
-export default HeaderContainer;
+export default withRouter(HeaderContainer);

@@ -38,6 +38,7 @@ export const listPosts = ({
   ingredient,
   category,
   sort,
+  page,
 }: any) => {
   const queryString = qs.stringify({
     username,
@@ -45,6 +46,7 @@ export const listPosts = ({
     ingredient,
     category,
     sort,
+    page,
   });
   return client.get(`/api/post?${queryString}`);
 };
