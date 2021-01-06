@@ -2,6 +2,8 @@ import HeaderContainer from '../containers/common/HeaderContainer';
 import PostListContainer from '../containers/home/PostListContainer';
 import HomeActionButtonContainer from '../containers/home/HomeActionButtonContainer';
 import Responsive from '../components/common/Responsive';
+import ChatContainer from '../containers/home/ChatContainer';
+import { Block } from './style/Home.style';
 
 const HomePage = () => {
   return (
@@ -9,7 +11,12 @@ const HomePage = () => {
       <HeaderContainer />
       <Responsive>
         <HomeActionButtonContainer />
-        <PostListContainer />
+        <Block>
+          <PostListContainer />
+          <div className="chat">
+            <ChatContainer />
+          </div>
+        </Block>
       </Responsive>
     </>
   );

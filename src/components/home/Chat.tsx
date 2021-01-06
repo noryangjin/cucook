@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent, FormEvent } from 'react';
 import {
   ChatBlock,
   Header,
@@ -16,13 +16,23 @@ const ChatRoom = () => {
   );
 };
 
-const Chat = () => {
+type Props = {
+  onSubmit: (e: FormEvent<HTMLFormElement>) => void;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  input_: string;
+};
+
+const Chat = ({ onSubmit, onChange, input_ }: Props) => {
   return (
     <ChatBlock>
       <Header>
         <h4>채팅 목록</h4>
         <h4 className="plus">채팅 생성</h4>
       </Header>
+      <form onSubmit={onSubmit}>
+        <input type="text" onChange={onChange} value={input_} />
+        <button type="submit">전송</button>
+      </form>
       <Block>
         <ChatRoom />
         <ChatRoom />
@@ -33,4 +43,4 @@ const Chat = () => {
   );
 };
 
-export default Chat;
+export default React.memo(Chat);
