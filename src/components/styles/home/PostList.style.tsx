@@ -4,10 +4,14 @@ import palette from '../palette';
 
 export const AutoSizerBlock = styled(AutoSizer)`
   .block {
+    max-width: 1014px;
     display: inline-flex;
+    @media (max-width: 1024px) {
+      max-width: 690px;
+    }
     .chat {
-      border: 1px solid red;
-
+      border: 1px solid ${palette.cyan[3]};
+      background: ${palette.Header};
       width: 60%;
       height: 500px;
     }

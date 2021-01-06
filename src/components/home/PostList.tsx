@@ -1,6 +1,7 @@
 /* eslint-disable no-restricted-globals */
 import React, { useCallback } from 'react';
 import PostItem from './PostItem';
+import ChatContainer from '../../containers/home/ChatContainer';
 import { AutoSizerBlock, ListBlock } from '../styles/home/PostList.style';
 
 type Props = {
@@ -42,7 +43,9 @@ const PostList = ({ posts, loading, qs_, onScroll }: Props) => {
                 width={width}
                 style={{ outline: 'none' }}
               />
-              <div className="chat">채팅 공간</div>
+              <div className="chat">
+                <ChatContainer />
+              </div>
             </div>
           )
         }
