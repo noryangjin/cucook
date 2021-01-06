@@ -2,7 +2,11 @@
 import React, { useCallback } from 'react';
 import PostItem from './PostItem';
 import ChatContainer from '../../containers/home/ChatContainer';
-import { AutoSizerBlock, ListBlock } from '../styles/home/PostList.style';
+import {
+  AutoSizerBlock,
+  ListBlock,
+  Block,
+} from '../styles/home/PostList.style';
 
 type Props = {
   posts: any;
@@ -28,10 +32,10 @@ const PostList = ({ posts, loading, qs_, onScroll }: Props) => {
 
   return (
     <>
-      <AutoSizerBlock disableHeight>
-        {({ width }: any) =>
-          posts && (
-            <div className="block">
+      <Block>
+        <AutoSizerBlock disableHeight>
+          {({ width }: any) =>
+            posts && (
               <ListBlock
                 onScroll={onScroll}
                 className="PostList"
@@ -43,13 +47,13 @@ const PostList = ({ posts, loading, qs_, onScroll }: Props) => {
                 width={width}
                 style={{ outline: 'none' }}
               />
-              <div className="chat">
-                <ChatContainer />
-              </div>
-            </div>
-          )
-        }
-      </AutoSizerBlock>
+            )
+          }
+        </AutoSizerBlock>
+        <div className="chat">
+          <ChatContainer />
+        </div>
+      </Block>
     </>
   );
 };
