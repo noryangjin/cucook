@@ -22,9 +22,7 @@ const HomeActionButtonContainer = ({
     const k = key_[0];
 
     if (k && k.includes('?') && k !== '?sort') {
-      return history.push(
-        `${location.search.split('&sort')[0]}&${value.slice(0)}`
-      );
+      return history.push(`${location.search.split('&sort')[0]}&${value}`);
     }
     history.push(`?${value}`);
   };

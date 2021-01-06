@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   HomeActionButtonBlock,
   WriteButton,
@@ -70,4 +71,4 @@ const HomeActionButton = ({ user, onChange, key_, val_ }: any) => {
   );
 };
 
-export default HomeActionButton;
+export default React.memo(HomeActionButton);

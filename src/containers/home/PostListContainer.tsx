@@ -1,4 +1,3 @@
-/* eslint-disable no-restricted-globals */
 import { useEffect } from 'react';
 import qs from 'qs';
 import { RouteComponentProps, withRouter } from 'react-router-dom';

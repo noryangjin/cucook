@@ -7,7 +7,8 @@ import loadable from '@loadable/component';
 
 const Split = loadable(() => import('./Split/PostLeadPage.split'));
 
-const scrollToRef = (ref: any) => window.scrollTo(0, ref.current.offsetTop);
+const scrollToRef = (ref: any) =>
+  window.scrollTo({ left: 0, top: ref.current.offsetTop, behavior: 'smooth' });
 
 const PostLeadPage = () => {
   const myRef = useRef<any>(null);
