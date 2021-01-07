@@ -2,7 +2,7 @@ import HeaderContainer from '../containers/common/HeaderContainer';
 import PostListContainer from '../containers/home/PostListContainer';
 import HomeActionButtonContainer from '../containers/home/HomeActionButtonContainer';
 import Responsive from '../components/common/Responsive';
-import ChatContainer from '../containers/home/ChatContainer';
+import ChatRoomContainer from '../containers/home/ChatRoomContainer';
 import { Block } from './style/Home.style';
 
 const HomePage = () => {
@@ -14,7 +14,7 @@ const HomePage = () => {
         <Block>
           <PostListContainer />
           <div className="chat">
-            <ChatContainer />
+            <ChatRoomContainer />
           </div>
         </Block>
       </Responsive>

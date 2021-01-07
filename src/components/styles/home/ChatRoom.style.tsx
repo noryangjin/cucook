@@ -7,6 +7,7 @@ export const ChatBlock = styled.div`
 `;
 
 export const Block = styled.div`
+  position: relative;
   border: 1px solid ${palette.cyan[4]};
   border-radius: 4px;
   overflow: auto;

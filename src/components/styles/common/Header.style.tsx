@@ -4,7 +4,7 @@ import palette from '../palette';
 
 export const HeaderBlock = styled.div`
   background: ${palette.Header};
-  z-index: 1;
+  z-index: 40;
   width: 100%;
   position: fixed;
   border-bottom: 1px solid ${palette.gray[3]};

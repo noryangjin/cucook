@@ -7,8 +7,10 @@ import write, { writeSaga } from './write';
 import post, { postSaga } from './post';
 import comment, { commentSaga } from './comment';
 import posts, { postsSaga } from './posts';
+import chatRoom, { chatRoomSaga } from './chatRoom';
 
 const rootReducer = combineReducers({
+  chatRoom,
   posts,
   comment,
   post,
@@ -20,6 +22,7 @@ const rootReducer = combineReducers({
 
 export function* rootSaga() {
   yield all([
+    chatRoomSaga(),
     postsSaga(),
     commentSaga(),
     postSaga(),
