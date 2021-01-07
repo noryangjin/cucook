@@ -15,6 +15,8 @@ const [
   ROOM_LIST_SUCCESS,
   ROOM_LIST_FAILURE,
 ] = createRequestActionTypes('chatRoom/ROOM_LIST');
+const ROOM_OPTION = 'chatRoom/ROOM_OPTION';
+const ROOM_OPTION_INITIALIZE = 'chatRoom/ROOM_OPTION_INITIALIZE';
 
 type insert = {
   title: string;
@@ -26,11 +28,18 @@ export const createRoom = createAction(
   ROOM_CREATE,
   ({ title, max, password }: insert) => ({ title, max, password })
 );
+export const roomOption = createAction(ROOM_OPTION, ({ key, value }: any) => ({
+  key,
+  value,
+}));
 export const readRoomList = createAction(ROOM_LIST);
+export const roomOpionInitialize = createAction(ROOM_OPTION_INITIALIZE);
 
 type typeAction =
   | ReturnType<typeof createRoom>
-  | ReturnType<typeof readRoomList>;
+  | ReturnType<typeof roomOption>
+  | ReturnType<typeof readRoomList>
+  | ReturnType<typeof roomOpionInitialize>;
 
 const createRoomSaga = createRequestSaga(
   ROOM_CREATE,
@@ -55,11 +64,9 @@ const initialState = {
 
 const chatRoom = handleActions<any | typeAction>(
   {
-    [ROOM_CREATE]: (state, { payload: { title, max, password } }) => ({
+    [ROOM_OPTION]: (state, { payload: { key, value } }) => ({
       ...state,
-      title,
-      max,
-      password,
+      [key]: value,
     }),
     [ROOM_CREATE_SUCCESS]: (state, { payload: chatRoom }) => ({
       ...state,
@@ -68,7 +75,7 @@ const chatRoom = handleActions<any | typeAction>(
       password: '',
       chatRoom,
     }),
-    [ROOM_LIST_FAILURE]: (state, { payload: chatRoomError }) => ({
+    [ROOM_CREATE_FAILURE]: (state, { payload: chatRoomError }) => ({
       ...state,
       title: '',
       max: 0,
@@ -80,11 +87,12 @@ const chatRoom = handleActions<any | typeAction>(
       ...state,
       roomList,
     }),
-    [ROOM_CREATE_FAILURE]: (state, { payload: roomListError }) => ({
+    [ROOM_LIST_FAILURE]: (state, { payload: roomListError }) => ({
       ...state,
       roomList: null,
       roomListError,
     }),
+    [ROOM_OPTION_INITIALIZE]: () => initialState,
   },
   initialState
 );

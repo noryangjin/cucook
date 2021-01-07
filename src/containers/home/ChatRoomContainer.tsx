@@ -22,7 +22,7 @@ const ChatContainer = () => {
     setPlus(true);
   };
 
-  return <ChatRoom onPlusClick={onPlusClick} plus={plus} />;
+  return <ChatRoom onPlusClick={onPlusClick} plus={plus} setPlus={setPlus} />;
 };
 
 export default ChatContainer;

@@ -42,10 +42,9 @@ export const Block = styled.div`
 
   .inputBox {
     display: flex;
-    width: 100%;
-    height: 200px;
+    width: 210px;
+    height: 180px;
     flex-direction: column;
-    padding: 0 1rem;
   }
   .buttonBox {
     width: 100%;
@@ -55,5 +54,14 @@ export const Block = styled.div`
     button + button {
       margin-left: 1rem;
     }
+    button {
+      width: 100%;
+    }
   }
+`;
+
+export const Error = styled.div`
+  color: ${palette.errorColor};
+  margin-top: 10px;
+  text-align: center;
 `;

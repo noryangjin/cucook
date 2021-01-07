@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../module/index';
 import HomeActionButton from '../../components/home/HomeActionButton';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useCallback } from 'react';
 import qs from 'qs';
 
 const HomeActionButtonContainer = ({
@@ -17,15 +17,18 @@ const HomeActionButtonContainer = ({
   const key_ = Object.keys(query);
   const val_ = Object.values(query);
 
-  const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    const { value } = e.target;
-    const k = key_[0];
+  const onChange = useCallback(
+    (e: ChangeEvent<HTMLSelectElement>) => {
+      const { value } = e.target;
+      const k = key_[0];
 
-    if (k && k.includes('?') && k !== '?sort') {
-      return history.push(`${location.search.split('&sort')[0]}&${value}`);
-    }
-    history.push(`?${value}`);
-  };
+      if (k && k.includes('?') && k !== '?sort') {
+        return history.push(`${location.search.split('&sort')[0]}&${value}`);
+      }
+      history.push(`?${value}`);
+    },
+    [history, location.search, key_]
+  );
 
   return (
     <HomeActionButton user={user} onChange={onChange} key_={key_} val_={val_} />

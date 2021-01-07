@@ -1,9 +1,10 @@
-import React, { ChangeEvent, FormEvent } from 'react';
+import React from 'react';
 import {
   ChatBlock,
   Header,
   Block,
   ChatRoomBlock,
+  CreateChatButton,
 } from '../styles/home/ChatRoom.style';
 import CreateRoomModalContainer from '../../containers/home/modal/CreateRoomModalContainer';
 
@@ -20,17 +21,20 @@ const ChatRooms = () => {
 type Props = {
   onPlusClick: () => void;
   plus: null | boolean;
+  setPlus: any;
 };
 
-const ChatRoom = ({ onPlusClick, plus }: Props) => {
+const ChatRoom = ({ onPlusClick, plus, setPlus }: Props) => {
   return (
     <ChatBlock>
       <Header>
         <h4>채팅 목록</h4>
-        <button onClick={onPlusClick}>➕</button>
+        <CreateChatButton cyan onClick={onPlusClick}>
+          방 생성
+        </CreateChatButton>
       </Header>
       <Block>
-        {plus && <CreateRoomModalContainer />}
+        {plus && <CreateRoomModalContainer setPlus={setPlus} />}
         <ChatRooms />
       </Block>
     </ChatBlock>

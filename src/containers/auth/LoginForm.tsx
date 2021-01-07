@@ -60,15 +60,18 @@ const LoginForm = ({ history }: RouteComponentProps<any>) => {
     [dispatch]
   );
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const { username, password } = form;
-    if ([username, password].includes('')) {
-      setError('빈 칸을 모두 입력하세요');
-      return;
-    }
-    dispatch(login({ username, password }));
-  };
+  const onSubmit = useCallback(
+    (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      const { username, password } = form;
+      if ([username, password].includes('')) {
+        setError('빈 칸을 모두 입력하세요');
+        return;
+      }
+      dispatch(login({ username, password }));
+    },
+    [dispatch, form]
+  );
 
   return (
     <AuthForm

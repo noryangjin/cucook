@@ -1,4 +1,4 @@
-import React, { MouseEvent, useState, useEffect } from 'react';
+import React, { MouseEvent, useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Header from '../../components/common/Header';
 import { RootState } from '../../module/index';
@@ -22,10 +22,13 @@ const HeaderContainer = ({ location }: RouteComponentProps) => {
     }
   }, [authLogin]);
 
-  const onLogout = (e: MouseEvent<HTMLButtonElement>) => {
-    dispatch(logout());
-    window.location.reload();
-  };
+  const onLogout = useCallback(
+    (e: MouseEvent<HTMLButtonElement>) => {
+      dispatch(logout());
+      window.location.reload();
+    },
+    [dispatch]
+  );
 
   useEffect(() => {
     const qs_ = qs.parse(location.search, {

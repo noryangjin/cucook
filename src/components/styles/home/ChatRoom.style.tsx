@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import palette from '../palette';
+import Button from '../../common/Button';
 
 export const ChatBlock = styled.div`
   margin-left: 1rem;
@@ -25,7 +26,14 @@ export const Header = styled.div`
   height: 45px;
   h4 {
     margin: 0;
+    margin-left: 5px;
   }
+`;
+
+export const CreateChatButton = styled(Button)`
+  width: 100px;
+  height: 30px;
+  margin-right: 5px;
 `;
 
 export const ChatRoomBlock = styled.div`
