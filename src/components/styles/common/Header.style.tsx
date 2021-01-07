@@ -47,7 +47,7 @@ export const Spacer = styled.div`
 `;
 
 export const Message = styled.div`
-  z-index: 2;
+  z-index: 50;
   position: fixed;
   background: ${palette.cyan[3]};
   width: 100%;

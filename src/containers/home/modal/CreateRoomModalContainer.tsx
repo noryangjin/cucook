@@ -13,12 +13,9 @@ import {
   createRoom,
   roomOpionInitialize,
 } from '../../../module/chatRoom';
+import { withRouter } from 'react-router-dom';
 
-type Props = {
-  setPlus: any;
-};
-
-const CreateRoomModalContainer = ({ setPlus }: Props) => {
+const CreateRoomModalContainer = ({ history, setPlus }: any) => {
   const [passwordButton, setPasswordButton] = useState<boolean | null>(null);
   const [error, setError] = useState<string>('');
   const dispatch = useDispatch();
@@ -72,14 +69,13 @@ const CreateRoomModalContainer = ({ setPlus }: Props) => {
 
   useEffect(() => {
     if (chatRoom) {
-      alert('방 생성 완료');
       setPlus(false);
-      dispatch(roomOpionInitialize());
+      history.push(`/${chatRoom}`);
     }
     if (chatRoomError && chatRoomError.response.status === 403) {
       setError('로그인 하셔야 합니다.');
     }
-  }, [dispatch, setPlus, chatRoomError, chatRoom]);
+  }, [dispatch, setPlus, chatRoomError, chatRoom, history]);
 
   return (
     <CreateRoomModal
@@ -96,4 +92,4 @@ const CreateRoomModalContainer = ({ setPlus }: Props) => {
   );
 };
 
-export default React.memo(CreateRoomModalContainer);
+export default React.memo(withRouter(CreateRoomModalContainer));
