@@ -23,6 +23,5 @@ export const Block2 = css`
   width: 300px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 `;

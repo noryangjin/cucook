@@ -15,7 +15,7 @@ import {
 } from '../../../module/chatRoom';
 import { withRouter } from 'react-router-dom';
 
-const CreateRoomModalContainer = ({ history, setPlus }: any) => {
+const CreateRoomModalContainer = ({ history, location, setPlus }: any) => {
   const [passwordButton, setPasswordButton] = useState<boolean | null>(null);
   const [error, setError] = useState<string>('');
   const dispatch = useDispatch();
@@ -70,12 +70,12 @@ const CreateRoomModalContainer = ({ history, setPlus }: any) => {
   useEffect(() => {
     if (chatRoom) {
       setPlus(false);
-      history.push(`/${chatRoom}`);
+      history.push(`/${chatRoom}${location.search}`);
     }
     if (chatRoomError && chatRoomError.response.status === 403) {
       setError('로그인 하셔야 합니다.');
     }
-  }, [dispatch, setPlus, chatRoomError, chatRoom, history]);
+  }, [dispatch, setPlus, chatRoomError, location, chatRoom, history]);
 
   return (
     <CreateRoomModal

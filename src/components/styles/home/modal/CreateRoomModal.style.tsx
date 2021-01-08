@@ -8,6 +8,7 @@ export const CreateRoomModalBlock = styled.div`
 
 export const Block = styled.div`
   ${Block2}
+  justify-content: center;
   height: 300px;
   h4 {
     margin-top: 0;
