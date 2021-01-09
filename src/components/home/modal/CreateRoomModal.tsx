@@ -53,7 +53,9 @@ const CreateRoomModal = ({
                 max="10"
               />
             </label>
-            <label style={{ display: 'flex', alignItems: 'center' }}>
+            <label
+              style={{ display: 'flex', alignItems: 'center', height: '22px' }}
+            >
               비밀번호
               <input
                 style={{ marginLeft: '5px' }}

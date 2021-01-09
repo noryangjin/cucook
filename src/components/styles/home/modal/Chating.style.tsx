@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Button from '../../../../components/common/Button';
+import palette from '../../palette';
 import { Block1, Block2 } from './Refactoring.style';
 
 export const ChatingBlock = styled.div`
@@ -11,6 +12,26 @@ export const Block = styled.div`
   position:relative;
   height: 370px;
   padding: 5px;
+
+  form {
+    display: flex;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+  }
+  input {
+    border: none;
+    outline: none;
+    width: 100%;
+  }
+  button {
+    margin-right: 0;
+  }
+  .pass_cancel {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    cursor: pointer;
+  }
 `;
 
 export const Title = styled.div`
@@ -82,3 +103,8 @@ export const SendButton = styled(Button)`
 `;
 
 export const Content = styled.div``;
+
+export const Error = styled.div`
+  margin-top: 22px;
+  color: ${palette.errorColor};
+`;

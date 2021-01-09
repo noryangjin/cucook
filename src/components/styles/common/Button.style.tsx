@@ -35,9 +35,9 @@ const StyledButton: any = css<Props>`
   ${(props) =>
     props.cyan &&
     css`
-      background: ${palette.cyan[3]};
+      background: ${palette.cyan[2]};
       &:hover {
-        background: ${palette.cyan[6]};
+        background: ${palette.cyan[5]};
       }
     `}
 `;

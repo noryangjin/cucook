@@ -20,7 +20,6 @@ const palette: Object = {
     '#868e96',
   ],
   cyan: [
-    '',
     '#e3fafc',
     '#c5f6fa',
     '#99e9f2',

@@ -38,15 +38,19 @@ export const CreateChatButton = styled(Button)`
 
 export const ChatRoomBlock = styled.div`
   border-bottom: 1px solid black;
+
   display: flex;
-  height: 45px;
+  height: 50px;
   background: white;
-  .num {
+  .num,
+  .but {
     width: 50px;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    margin: auto 0;
+    padding: 10px;
+  }
+  .but {
+    text-align: right;
+    cursor: pointer;
   }
   .title {
     width: 300px;
@@ -56,10 +60,8 @@ export const ChatRoomBlock = styled.div`
     align-items: center;
     justify-content: center;
   }
-`;
-
-export const JoinButton = styled(Button)`
-  background: white;
-  height: 30px;
-  margin: auto 0;
+  .lock {
+    margin: auto 0;
+    width: 16px;
+  }
 `;

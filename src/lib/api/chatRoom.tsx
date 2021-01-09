@@ -1,9 +1,10 @@
 import client from './client';
 
 type insert = {
-  title: string;
-  max: number;
+  title?: string;
+  max?: number;
   password: string;
+  roomId?: string;
 };
 
 export const createChatRoom = ({ title, max, password }: insert) => {
@@ -22,6 +23,6 @@ export const leaveRoom_API = (roomId: string) => {
   return client.get(`/api/chatRoom/out/${roomId}`);
 };
 
-export const readRoom = (roomId: string) => {
-  return client.get(`/api/chatRoom/${roomId}`);
+export const readRoom = ({ roomId, password }: insert) => {
+  return client.post(`/api/chatRoom/${roomId}`, { password });
 };

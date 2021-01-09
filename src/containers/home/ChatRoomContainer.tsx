@@ -7,6 +7,7 @@ import { readRoomList } from '../../module/chatRoom';
 import socketIOClient from 'socket.io-client';
 import { connectSocket } from '../../module/socket';
 import { joinRoom_API } from '../../lib/api/chatRoom';
+import { readRoom } from '../../module/chatReadRoom';
 
 const ChatRoomContainer = ({
   match,
@@ -16,17 +17,20 @@ const ChatRoomContainer = ({
   const [plus, setPlus] = useState<boolean | null>(null);
   const { chatRoomId } = match.params;
   const dispatch = useDispatch();
-  const { user, roomList } = useSelector(({ user, chatRoom }: RootState) => ({
-    user: user.user,
-    roomList: chatRoom.roomList,
-  }));
+  const { user, roomList, socket } = useSelector(
+    ({ socket, user, chatRoom }: RootState) => ({
+      user: user.user,
+      roomList: chatRoom.roomList,
+      socket: socket.socket,
+    })
+  );
 
   useEffect(() => {
     dispatch(readRoomList());
   }, [dispatch]);
 
   const joinRoom = useCallback(
-    async ({ id, max, participants }) => {
+    async ({ id, max, participants, password }) => {
       if (!user) {
         alert('로그인이 필요합니다.');
         return;
@@ -39,26 +43,33 @@ const ChatRoomContainer = ({
       }
       history.push(`/chat/${id}/${location.search}`);
 
-      const socket_ = socketIOClient('http://localhost:4000/chat', {
-        path: '/socket.io',
-      });
+      if (!password && !socket) {
+        const socket_ = socketIOClient('http://localhost:4000/chat', {
+          path: '/socket.io',
+        });
 
-      dispatch(connectSocket(socket_));
+        dispatch(connectSocket(socket_));
+        dispatch(readRoom({ roomId: id, password: '' }));
 
-      await joinRoom_API(id).then(() => {
-        dispatch(readRoomList());
-        socket_.emit('con', { roomId: id, user });
-        socket_.on('join', (data: any) => console.log(data));
-      });
+        await joinRoom_API(id)
+          .then(() => {
+            dispatch(readRoomList());
+          })
+          .then(() => {
+            socket_.emit('con', { roomId: id, user });
+            socket_.on('join', (data: any) => console.log(data));
+          });
+      }
     },
-    [history, location, user, dispatch]
+    [history, location, user, dispatch, socket]
   );
 
   const joinRoom_ING = useCallback(
     (id: string) => {
       history.push(`/chat/${id}/${location.search}`);
+      dispatch(readRoom({ roomId: id, password: '' }));
     },
-    [history, location]
+    [history, location, dispatch]
   );
 
   const onPlusClick = useCallback(() => {

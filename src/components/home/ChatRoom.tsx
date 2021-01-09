@@ -5,11 +5,11 @@ import {
   Block,
   ChatRoomBlock,
   CreateChatButton,
-  JoinButton,
 } from '../styles/home/ChatRoom.style';
 import CreateRoomModalContainer from '../../containers/home/modal/CreateRoomModalContainer';
 import ChatingContainer from '../../containers/home/modal/ChatingContainer';
 import { RouteComponentProps } from 'react-router-dom';
+import { BsLockFill } from 'react-icons/bs';
 
 const ChatRoomList = ({ roomList, joinRoom, user, joinRoom_ING }: any) => {
   return (
@@ -21,22 +21,31 @@ const ChatRoomList = ({ roomList, joinRoom, user, joinRoom_ING }: any) => {
               {room.participants.length}/{room.max}
             </div>
             <div className="title">{room.title}</div>
+            <div className="lock">{room.password && <BsLockFill />}</div>
             {user &&
             room.participants.filter((a: string) => a === user._id).length >
               0 ? (
-              <JoinButton onClick={() => joinRoom_ING(room._id)}>🟡</JoinButton>
+              <div className="but" onClick={() => joinRoom_ING(room._id)}>
+                🟡
+              </div>
             ) : room.participants.length >= room.max ? (
-              <JoinButton
+              <div
+                className="but"
                 onClick={() =>
                   joinRoom({ max: room.max, participants: room.participants })
                 }
               >
                 🔴
-              </JoinButton>
+              </div>
             ) : (
-              <JoinButton onClick={() => joinRoom({ id: room._id })}>
+              <div
+                className="but"
+                onClick={() =>
+                  joinRoom({ id: room._id, password: room.password })
+                }
+              >
                 🟢
-              </JoinButton>
+              </div>
             )}
           </ChatRoomBlock>
         ))}
