@@ -26,14 +26,16 @@ const ChatRoomContainer = ({
   }, [dispatch]);
 
   const joinRoom = useCallback(
-    async (id, max, participants) => {
+    async ({ id, max, participants }) => {
       if (!user) {
         alert('로그인이 필요합니다.');
         return;
       }
-      if (participants.length >= max) {
-        alert('인원 초과');
-        return;
+      if (max && participants) {
+        if (participants.length >= max) {
+          alert('인원 초과');
+          return;
+        }
       }
       history.push(`/chat/${id}/${location.search}`);
 

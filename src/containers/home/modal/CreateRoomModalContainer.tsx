@@ -75,12 +75,13 @@ const CreateRoomModalContainer = ({ history, location, setPlus }: any) => {
     if (user && chatRoom) {
       setPlus(false);
       dispatch(readRoomList());
-      history.push(`/chat/${chatRoom}${location.search}`);
       const socket_ = socketIOClient('http://localhost:4000/chat', {
         path: '/socket.io',
       });
       dispatch(connectSocket(socket_));
       socket_.emit('con', { roomId: chatRoom, user });
+      socket_.on('create', (data: any) => console.log(data));
+      history.push(`/chat/${chatRoom}${location.search}`);
     }
     if (chatRoomError && chatRoomError.response.status === 403) {
       setError('로그인 하셔야 합니다.');

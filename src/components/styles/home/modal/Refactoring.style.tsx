@@ -20,8 +20,11 @@ export const Block2 = css`
   border: 2px solid ${palette.gray[4]};
   border-radius: 4px;
   background: ${palette.Header};
-  width: 300px;
+  width: 330px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
 `;

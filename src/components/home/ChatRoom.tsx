@@ -5,6 +5,7 @@ import {
   Block,
   ChatRoomBlock,
   CreateChatButton,
+  JoinButton,
 } from '../styles/home/ChatRoom.style';
 import CreateRoomModalContainer from '../../containers/home/modal/CreateRoomModalContainer';
 import ChatingContainer from '../../containers/home/modal/ChatingContainer';
@@ -23,16 +24,19 @@ const ChatRoomList = ({ roomList, joinRoom, user, joinRoom_ING }: any) => {
             {user &&
             room.participants.filter((a: string) => a === user._id).length >
               0 ? (
-              <div className="but" onClick={() => joinRoom_ING(room._id)}>
-                참여 중
-              </div>
-            ) : (
-              <div
-                className="but"
-                onClick={() => joinRoom(room._id, room.max, room.participants)}
+              <JoinButton onClick={() => joinRoom_ING(room._id)}>🟡</JoinButton>
+            ) : room.participants.length >= room.max ? (
+              <JoinButton
+                onClick={() =>
+                  joinRoom({ max: room.max, participants: room.participants })
+                }
               >
-                참여
-              </div>
+                🔴
+              </JoinButton>
+            ) : (
+              <JoinButton onClick={() => joinRoom({ id: room._id })}>
+                🟢
+              </JoinButton>
             )}
           </ChatRoomBlock>
         ))}

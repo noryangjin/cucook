@@ -5,10 +5,10 @@ import Button from '../../common/Button';
 export const ChatBlock = styled.div`
   margin-left: 1rem;
   margin-right: 1rem;
+  position: relative;
 `;
 
 export const Block = styled.div`
-  position: relative;
   border: 1px solid ${palette.cyan[4]};
   border-radius: 4px;
   overflow: auto;
@@ -41,8 +41,7 @@ export const ChatRoomBlock = styled.div`
   display: flex;
   height: 45px;
   background: white;
-  .num,
-  .but {
+  .num {
     width: 50px;
     text-align: center;
     display: flex;
@@ -57,4 +56,10 @@ export const ChatRoomBlock = styled.div`
     align-items: center;
     justify-content: center;
   }
+`;
+
+export const JoinButton = styled(Button)`
+  background: white;
+  height: 30px;
+  margin: auto 0;
 `;

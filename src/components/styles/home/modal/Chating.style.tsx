@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import palette from '../../palette';
 import Button from '../../../../components/common/Button';
 import { Block1, Block2 } from './Refactoring.style';
 
