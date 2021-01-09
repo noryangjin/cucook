@@ -1,13 +1,13 @@
 import React, { ChangeEvent, FormEvent } from 'react';
 import {
-  ChatingBlock,
+  ChattingBlock,
   Block,
   Send,
   SendButton,
   Title,
   Content,
   Error,
-} from '../../styles/home/modal/Chating.style';
+} from '../../styles/home/modal/Chatting.style';
 import { IoMdOptions } from 'react-icons/io';
 
 type Props = {
@@ -20,13 +20,19 @@ type Props = {
   password: string;
   onSubmitPass: (e: FormEvent<HTMLFormElement>) => void;
   onChangePass: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChangeChat: (e: ChangeEvent<HTMLTextAreaElement>) => void;
+  onSubmitChat: (e: FormEvent<HTMLFormElement>) => void;
+  chatContent: string;
   room: any;
   error: string;
 };
 
-const Chating = ({
+const Chatting = ({
+  onSubmitChat,
   room,
   error,
+  onChangeChat,
+  chatContent,
   onSubmitPass,
   onCancel,
   onClickOption,
@@ -38,7 +44,7 @@ const Chating = ({
   password,
 }: Props) => {
   return (
-    <ChatingBlock>
+    <ChattingBlock>
       <Block>
         {checkPass &&
         checkPass.filter((id) => id === chatRoomId).length > 0 &&
@@ -80,15 +86,19 @@ const Chating = ({
               </div>
             </Title>
             <Content></Content>
-            <Send>
-              <textarea placeholder="내용을 입력하세요" />
+            <Send onSubmit={onSubmitChat}>
+              <textarea
+                placeholder="내용을 입력하세요"
+                value={chatContent}
+                onChange={onChangeChat}
+              />
               <SendButton cyan>전송</SendButton>
             </Send>
           </>
         )}
       </Block>
-    </ChatingBlock>
+    </ChattingBlock>
   );
 };
 
-export default React.memo(Chating);
+export default React.memo(Chatting);

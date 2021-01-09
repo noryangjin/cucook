@@ -7,7 +7,7 @@ import {
   CreateChatButton,
 } from '../styles/home/ChatRoom.style';
 import CreateRoomModalContainer from '../../containers/home/modal/CreateRoomModalContainer';
-import ChatingContainer from '../../containers/home/modal/ChatingContainer';
+import ChattingContainer from '../../containers/home/modal/ChattingContainer';
 import { RouteComponentProps } from 'react-router-dom';
 import { BsLockFill } from 'react-icons/bs';
 
@@ -86,7 +86,7 @@ const ChatRoom = ({
       </Header>
       <Block>
         {plus && <CreateRoomModalContainer setPlus={setPlus} />}
-        {user && chatRoomId && <ChatingContainer />}
+        {user && chatRoomId && <ChattingContainer />}
         <ChatRoomList
           roomList={roomList}
           joinRoom={joinRoom}

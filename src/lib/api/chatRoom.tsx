@@ -3,7 +3,7 @@ import client from './client';
 type insert = {
   title?: string;
   max?: number;
-  password: string;
+  password?: string;
   roomId?: string;
 };
 

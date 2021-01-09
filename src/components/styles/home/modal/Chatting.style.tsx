@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import Button from '../../../../components/common/Button';
+import Button from '../../../common/Button';
 import palette from '../../palette';
 import { Block1, Block2 } from './Refactoring.style';
 
-export const ChatingBlock = styled.div`
+export const ChattingBlock = styled.div`
   ${Block1}
 `;
 

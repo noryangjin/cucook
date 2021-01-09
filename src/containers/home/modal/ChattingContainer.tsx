@@ -1,4 +1,4 @@
-import Chating from '../../../components/home/modal/Chating';
+import Chatting from '../../../components/home/modal/Chatting';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import {
   ChangeEvent,
@@ -9,13 +9,14 @@ import {
 } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../module/index';
-import { readRoomList } from '../../../module/chatRoom';
+import chatRoom, { readRoomList } from '../../../module/chatRoom';
 import { leaveRoom_API, joinRoom_API } from '../../../lib/api/chatRoom';
 import { readRoom, initializeRoom } from '../../../module/chatReadRoom';
 import socketIOClient from 'socket.io-client';
 import { connectSocket, socketUnload } from '../../../module/socket';
+import { chatting_API } from '../../../lib/api/chatting';
 
-const ChatingContainer = ({
+const ChattingContainer = ({
   history,
   location,
   match,
@@ -24,6 +25,7 @@ const ChatingContainer = ({
   const [checkPass, setCheckPass] = useState<Array<string>>([]);
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string>('');
+  const [chatContent, setChatContent] = useState<string>('');
   const { chatRoomId } = match.params;
   const dispatch = useDispatch();
   const { socket, roomList, room, roomError, user } = useSelector(
@@ -92,7 +94,7 @@ const ChatingContainer = ({
   useEffect(() => {
     if (roomError) {
       if (roomError.response.status === 401) {
-        setError('일치하지 않는 비밀번호입니다.');
+        setError('비밀번호를 확인해 주세요');
       }
       if (roomError.response.status === 403) {
         setError('로그인 하셔야 합니다.');
@@ -113,8 +115,26 @@ const ChatingContainer = ({
     }
   }, [roomError, room, user, chatRoomId, dispatch, soc]);
 
+  const onChangeChat = useCallback((e: ChangeEvent<HTMLTextAreaElement>) => {
+    const { value } = e.target;
+    setChatContent(value);
+  }, []);
+
+  const onSubmitChat = useCallback(
+    async (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      await chatting_API({ roomId: chatRoomId, chatContent }).then(() => {
+        socket && socket.on('chat', (data: any) => console.log(data));
+      });
+    },
+    [chatRoomId, socket, chatContent]
+  );
+
   return (
-    <Chating
+    <Chatting
+      onSubmitChat={onSubmitChat}
+      onChangeChat={onChangeChat}
+      chatContent={chatContent}
       onSubmitPass={onSubmitPass}
       onChangePass={onChangePass}
       password={password}
@@ -130,4 +150,4 @@ const ChatingContainer = ({
   );
 };
 
-export default withRouter(ChatingContainer);
+export default withRouter(ChattingContainer);

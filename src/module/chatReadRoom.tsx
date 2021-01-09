@@ -14,7 +14,7 @@ const INITIALIZEROOM = 'chatReadRoom/INITIALIZEROOM';
 
 type insert = {
   roomId: string;
-  password: string;
+  password?: string;
 };
 
 export const readRoom = createAction(
