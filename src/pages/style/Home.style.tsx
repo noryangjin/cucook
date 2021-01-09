@@ -8,6 +8,7 @@ export const Block = styled.div`
     border: 2px solid ${palette.gray[4]};
     background: ${palette.Header};
     max-width: 400px;
+    width: 100%;
     height: 500px;
 
     @media (max-width: 1024px) {

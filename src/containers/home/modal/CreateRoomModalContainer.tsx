@@ -14,13 +14,17 @@ import {
   roomOpionInitialize,
 } from '../../../module/chatRoom';
 import { withRouter } from 'react-router-dom';
+import { readRoomList } from '../../../module/chatRoom';
+import socketIOClient from 'socket.io-client';
+import { connectSocket } from '../../../module/socket';
 
 const CreateRoomModalContainer = ({ history, location, setPlus }: any) => {
   const [passwordButton, setPasswordButton] = useState<boolean | null>(null);
   const [error, setError] = useState<string>('');
   const dispatch = useDispatch();
-  const { title, max, password, chatRoomError, chatRoom } = useSelector(
-    ({ chatRoom }: RootState) => ({
+  const { title, max, password, chatRoomError, chatRoom, user } = useSelector(
+    ({ chatRoom, user }: RootState) => ({
+      user: user.user,
       title: chatRoom.title,
       max: chatRoom.max,
       password: chatRoom.password,
@@ -68,14 +72,20 @@ const CreateRoomModalContainer = ({ history, location, setPlus }: any) => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (chatRoom) {
+    if (user && chatRoom) {
       setPlus(false);
-      history.push(`/${chatRoom}${location.search}`);
+      dispatch(readRoomList());
+      history.push(`/chat/${chatRoom}${location.search}`);
+      const socket_ = socketIOClient('http://localhost:4000/chat', {
+        path: '/socket.io',
+      });
+      dispatch(connectSocket(socket_));
+      socket_.emit('con', { roomId: chatRoom, user });
     }
     if (chatRoomError && chatRoomError.response.status === 403) {
       setError('로그인 하셔야 합니다.');
     }
-  }, [dispatch, setPlus, chatRoomError, location, chatRoom, history]);
+  }, [dispatch, user, setPlus, chatRoomError, location, chatRoom, history]);
 
   return (
     <CreateRoomModal

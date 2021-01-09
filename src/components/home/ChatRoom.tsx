@@ -10,13 +10,33 @@ import CreateRoomModalContainer from '../../containers/home/modal/CreateRoomModa
 import ChatingContainer from '../../containers/home/modal/ChatingContainer';
 import { RouteComponentProps } from 'react-router-dom';
 
-const ChatRooms = () => {
+const ChatRoomList = ({ roomList, joinRoom, user, joinRoom_ING }: any) => {
   return (
-    <ChatRoomBlock>
-      <div className="num">3명</div>
-      <div className="title">오늘 점심 이거 먹을까?</div>
-      <div className="but">참여</div>
-    </ChatRoomBlock>
+    <>
+      {roomList &&
+        roomList.map((room: any) => (
+          <ChatRoomBlock key={room._id}>
+            <div className="num">
+              {room.participants.length}/{room.max}
+            </div>
+            <div className="title">{room.title}</div>
+            {user &&
+            room.participants.filter((a: string) => a === user._id).length >
+              0 ? (
+              <div className="but" onClick={() => joinRoom_ING(room._id)}>
+                참여 중
+              </div>
+            ) : (
+              <div
+                className="but"
+                onClick={() => joinRoom(room._id, room.max, room.participants)}
+              >
+                참여
+              </div>
+            )}
+          </ChatRoomBlock>
+        ))}
+    </>
   );
 };
 
@@ -24,10 +44,23 @@ type Props = {
   onPlusClick: () => void;
   plus: null | boolean;
   setPlus: any;
+  user: any;
+  roomList: any;
   chatRoomId: RouteComponentProps<any>;
+  joinRoom: (id: string, max: number, participants: any) => void;
+  joinRoom_ING: (id: string) => void;
 };
 
-const ChatRoom = ({ onPlusClick, plus, setPlus, chatRoomId }: Props) => {
+const ChatRoom = ({
+  joinRoom_ING,
+  user,
+  onPlusClick,
+  plus,
+  setPlus,
+  roomList,
+  chatRoomId,
+  joinRoom,
+}: Props) => {
   return (
     <ChatBlock>
       <Header>
@@ -40,8 +73,13 @@ const ChatRoom = ({ onPlusClick, plus, setPlus, chatRoomId }: Props) => {
       </Header>
       <Block>
         {plus && <CreateRoomModalContainer setPlus={setPlus} />}
-        {chatRoomId && <ChatingContainer />}
-        <ChatRooms />
+        {user && chatRoomId && <ChatingContainer />}
+        <ChatRoomList
+          roomList={roomList}
+          joinRoom={joinRoom}
+          joinRoom_ING={joinRoom_ING}
+          user={user}
+        />
       </Block>
     </ChatBlock>
   );

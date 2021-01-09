@@ -29,10 +29,12 @@ export const Title = styled.div`
     padding-top: 10px;
   }
   .option {
+    width: 70px;
     .button {
       display: flex;
       width: 55px;
       justify-content: flex-end;
+      width: 70px;
     }
     .setting {
       margin-top: 4px;
@@ -44,6 +46,10 @@ export const Title = styled.div`
     }
     .delete {
       margin-top: 3px;
+      border: none;
+      outline: none;
+      border-radius: 5px;
+      cursor: pointer;
     }
   }
 `;

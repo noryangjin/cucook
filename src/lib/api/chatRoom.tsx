@@ -13,3 +13,15 @@ export const createChatRoom = ({ title, max, password }: insert) => {
 export const readRoomList = () => {
   return client.get(`/api/chatRoom/`);
 };
+
+export const joinRoom_API = (roomId: string) => {
+  return client.get(`/api/chatRoom/join/${roomId}`);
+};
+
+export const leaveRoom_API = (roomId: string) => {
+  return client.get(`/api/chatRoom/out/${roomId}`);
+};
+
+export const readRoom = (roomId: string) => {
+  return client.get(`/api/chatRoom/${roomId}`);
+};

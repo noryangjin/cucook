@@ -9,7 +9,7 @@ import PostLeadPage from './pages/PostLeadPage';
 const App: FunctionComponent = () => {
   return (
     <Switch>
-      <Route path={['/', '/:chatRoomId']} component={HomePage} exact />
+      <Route path={['/', '/chat/:chatRoomId']} component={HomePage} exact />
       <Route path="/login" component={LoginPage} />
       <Route path="/register" component={RegisterPage} />
       <Route path="/write" component={WritePage} />

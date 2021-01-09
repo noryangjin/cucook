@@ -13,9 +13,10 @@ type Props = {
   onCancel: () => void;
   onClickOption: () => void;
   option: boolean | null;
+  onLeaveRoom: () => void;
 };
 
-const Chating = ({ onCancel, onClickOption, option }: Props) => {
+const Chating = ({ onCancel, onClickOption, option, onLeaveRoom }: Props) => {
   return (
     <ChatingBlock>
       <Block>
@@ -28,7 +29,11 @@ const Chating = ({ onCancel, onClickOption, option }: Props) => {
                 ❌
               </div>
             </div>
-            {option && <div className="delete">방 삭제</div>}
+            {option && (
+              <button className="delete" onClick={onLeaveRoom}>
+                방 나가기
+              </button>
+            )}
           </div>
         </Title>
         <Content></Content>

@@ -32,6 +32,7 @@ export const roomOption = createAction(ROOM_OPTION, ({ key, value }: any) => ({
   key,
   value,
 }));
+
 export const readRoomList = createAction(ROOM_LIST);
 export const roomOpionInitialize = createAction(ROOM_OPTION_INITIALIZE);
 
@@ -92,7 +93,14 @@ const chatRoom = handleActions<any | typeAction>(
       roomList: null,
       roomListError,
     }),
-    [ROOM_OPTION_INITIALIZE]: () => initialState,
+    [ROOM_OPTION_INITIALIZE]: (state) => ({
+      ...state,
+      title: '',
+      max: 0,
+      password: '',
+      chatRoom: null,
+      chatRoomError: null,
+    }),
   },
   initialState
 );
