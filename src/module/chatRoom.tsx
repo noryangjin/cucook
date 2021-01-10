@@ -71,9 +71,6 @@ const chatRoom = handleActions<any | typeAction>(
     }),
     [ROOM_CREATE_SUCCESS]: (state, { payload: chatRoom }) => ({
       ...state,
-      title: '',
-      max: 0,
-      password: '',
       chatRoom,
     }),
     [ROOM_CREATE_FAILURE]: (state, { payload: chatRoomError }) => ({

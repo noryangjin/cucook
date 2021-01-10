@@ -48,6 +48,7 @@ const Chatting = ({
   user,
 }: Props) => {
   const messagesRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     messagesRef.current!.scrollTop = messagesRef.current!.scrollHeight;
   }, [chats]);
@@ -59,7 +60,7 @@ const Chatting = ({
         checkPass.filter((id) => id === chatRoomId).length > 0 &&
         !room ? (
           <>
-            <h4>비밀 번호</h4>
+            <h4 ref={messagesRef}>비밀 번호</h4>
             <div className="button">
               <div className="pass_cancel" onClick={onCancel}>
                 ❌

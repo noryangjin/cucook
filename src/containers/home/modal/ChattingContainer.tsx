@@ -27,7 +27,6 @@ const ChattingContainer = ({
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string>('');
   const [chatContent, setChatContent] = useState<string>('');
-  const [users, setUsers] = useState<string>('');
   const { chatRoomId } = match.params;
   const dispatch = useDispatch();
   const { roomList, room, roomError, user } = useSelector(
@@ -104,8 +103,9 @@ const ChattingContainer = ({
     if (
       room &&
       room.password &&
-      room.participants.filter((u: string) => u === user._id).length === 0
+      room.participants.filter((u: any) => u.user === user._id).length === 0
     ) {
+      setPassword('');
       soc();
     }
   }, [roomError, room, user, chatRoomId, dispatch, soc]);
@@ -131,11 +131,6 @@ const ChattingContainer = ({
     sock &&
       sock.on('message', (data: string) => {
         setChat((chats: any) => [...chats, data]);
-      });
-
-    sock &&
-      sock.on('roomData', (data: any) => {
-        setUsers(data);
       });
   }, [sock]);
 
