@@ -9,11 +9,10 @@ import {
 } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../module/index';
-import chatRoom, { readRoomList } from '../../../module/chatRoom';
+import { readRoomList } from '../../../module/chatRoom';
 import { leaveRoom_API, joinRoom_API } from '../../../lib/api/chatRoom';
 import { readRoom, initializeRoom } from '../../../module/chatReadRoom';
 import socketIOClient from 'socket.io-client';
-import { connectSocket, socketUnload } from '../../../module/socket';
 import { chatting_API } from '../../../lib/api/chatting';
 
 const ChattingContainer = ({
@@ -21,16 +20,18 @@ const ChattingContainer = ({
   location,
   match,
 }: RouteComponentProps<any>) => {
+  const [sock, setSock] = useState<any>(null);
+  const [chats, setChat] = useState<Array<null>>([]);
   const [option, setOption] = useState<boolean | null>(null);
   const [checkPass, setCheckPass] = useState<Array<string>>([]);
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string>('');
   const [chatContent, setChatContent] = useState<string>('');
+  const [users, setUsers] = useState<string>('');
   const { chatRoomId } = match.params;
   const dispatch = useDispatch();
-  const { socket, roomList, room, roomError, user } = useSelector(
-    ({ socket, chatRoom, chatReadRoom, user }: RootState) => ({
-      socket: socket.socket,
+  const { roomList, room, roomError, user } = useSelector(
+    ({ chatRoom, chatReadRoom, user }: RootState) => ({
       user: user.user,
       roomList: chatRoom.roomList,
       room: chatReadRoom.room,
@@ -54,23 +55,23 @@ const ChattingContainer = ({
     history.push(`/${location.search}`);
     setOption(false);
     dispatch(readRoomList());
+    sock && sock.disconnect();
     dispatch(initializeRoom());
-  }, [location, history, dispatch]);
+  }, [location, history, dispatch, sock]);
 
   const onLeaveRoom = useCallback(async () => {
     dispatch(initializeRoom());
     setCheckPass([]);
     await leaveRoom_API(chatRoomId)
       .then(() => {
-        socket && socket.disconnect();
-        dispatch(socketUnload());
+        sock && sock.disconnect();
         setOption(false);
       })
       .then(() => {
         history.push(`/${location.search}`);
         dispatch(readRoomList());
       });
-  }, [dispatch, socket, chatRoomId, location, history]);
+  }, [dispatch, sock, chatRoomId, location, history]);
 
   const onChangePass = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -105,12 +106,6 @@ const ChattingContainer = ({
       room.password &&
       room.participants.filter((u: string) => u === user._id).length === 0
     ) {
-      const socket_ = socketIOClient('http://localhost:4000/chat', {
-        path: '/socket.io',
-      });
-      dispatch(connectSocket(socket_));
-      socket_.emit('con', { roomId: chatRoomId, user });
-      socket_.on('join', (data: any) => console.log(data));
       soc();
     }
   }, [roomError, room, user, chatRoomId, dispatch, soc]);
@@ -120,18 +115,45 @@ const ChattingContainer = ({
     setChatContent(value);
   }, []);
 
+  useEffect(() => {
+    const socket_ = socketIOClient('http://localhost:4000/chat', {
+      path: '/socket.io',
+    });
+    socket_.emit('join', { roomId: chatRoomId, user }, (error: any) => {
+      if (error) {
+        alert(error);
+      }
+    });
+    setSock(socket_);
+  }, [user, chatRoomId]);
+
+  useEffect(() => {
+    sock &&
+      sock.on('message', (data: string) => {
+        setChat((chats: any) => [...chats, data]);
+      });
+
+    sock &&
+      sock.on('roomData', (data: any) => {
+        setUsers(data);
+      });
+  }, [sock]);
+
   const onSubmitChat = useCallback(
     async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      await chatting_API({ roomId: chatRoomId, chatContent }).then(() => {
-        socket && socket.on('chat', (data: any) => console.log(data));
-      });
+      if (chatContent) {
+        sock && sock.emit('sendMessage', chatContent, () => setChatContent(''));
+      }
+
+      await chatting_API({ roomId: chatRoomId, chatContent }).then(() => {});
     },
-    [chatRoomId, socket, chatContent]
+    [chatRoomId, chatContent, sock]
   );
 
   return (
     <Chatting
+      chats={chats}
       onSubmitChat={onSubmitChat}
       onChangeChat={onChangeChat}
       chatContent={chatContent}

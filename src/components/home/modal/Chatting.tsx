@@ -25,9 +25,11 @@ type Props = {
   chatContent: string;
   room: any;
   error: string;
+  chats: any;
 };
 
 const Chatting = ({
+  chats,
   onSubmitChat,
   room,
   error,
@@ -85,7 +87,19 @@ const Chatting = ({
                 )}
               </div>
             </Title>
-            <Content></Content>
+            <Content>
+              {chats &&
+                chats.map((ch: any, index: number) =>
+                  ch.chat ? (
+                    <div key={index}>{ch.chat}</div>
+                  ) : (
+                    <div key={index}>
+                      {ch.user}
+                      {ch.text}
+                    </div>
+                  )
+                )}
+            </Content>
             <Send onSubmit={onSubmitChat}>
               <textarea
                 placeholder="내용을 입력하세요"

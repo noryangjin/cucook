@@ -15,8 +15,6 @@ import {
 } from '../../../module/chatRoom';
 import { withRouter } from 'react-router-dom';
 import { readRoomList } from '../../../module/chatRoom';
-import socketIOClient from 'socket.io-client';
-import { connectSocket } from '../../../module/socket';
 
 const CreateRoomModalContainer = ({ history, location, setPlus }: any) => {
   const [passwordButton, setPasswordButton] = useState<boolean | null>(null);
@@ -75,12 +73,7 @@ const CreateRoomModalContainer = ({ history, location, setPlus }: any) => {
     if (user && chatRoom) {
       setPlus(false);
       dispatch(readRoomList());
-      const socket_ = socketIOClient('http://localhost:4000/chat', {
-        path: '/socket.io',
-      });
-      dispatch(connectSocket(socket_));
-      socket_.emit('con', { roomId: chatRoom, user });
-      socket_.on('create', (data: any) => console.log(data));
+
       history.push(`/chat/${chatRoom}${location.search}`);
     }
     if (chatRoomError && chatRoomError.response.status === 403) {
