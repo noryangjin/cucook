@@ -13,6 +13,7 @@ export const Block = styled.div`
   border-radius: 4px;
   overflow: auto;
   height: 400px;
+  padding: 5px 1rem;
 `;
 
 export const Header = styled.div`
@@ -37,8 +38,11 @@ export const CreateChatButton = styled(Button)`
 `;
 
 export const ChatRoomBlock = styled.div`
-  border-bottom: 1px solid black;
-
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  & + & {
+    margin-top: 5px;
+  }
   display: flex;
   height: 50px;
   background: white;

@@ -153,6 +153,7 @@ const ChattingContainer = ({
 
   return (
     <Chatting
+      user={user.username}
       chats={chats}
       onSubmitChat={onSubmitChat}
       onChangeChat={onChangeChat}

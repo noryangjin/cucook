@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent } from 'react';
+import React, { ChangeEvent, FormEvent, useRef, useEffect } from 'react';
 import {
   ChattingBlock,
   Block,
@@ -26,6 +26,7 @@ type Props = {
   room: any;
   error: string;
   chats: any;
+  user: string;
 };
 
 const Chatting = ({
@@ -44,7 +45,13 @@ const Chatting = ({
   chatRoomId,
   onChangePass,
   password,
+  user,
 }: Props) => {
+  const messagesRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    messagesRef.current!.scrollTop = messagesRef.current!.scrollHeight;
+  }, [chats]);
+
   return (
     <ChattingBlock>
       <Block>
@@ -72,7 +79,7 @@ const Chatting = ({
         ) : (
           <>
             <Title>
-              <h4>sss</h4>
+              <h4>{room && room.title}</h4>
               <div className="option">
                 <div className="button">
                   <IoMdOptions className="setting" onClick={onClickOption} />
@@ -87,15 +94,26 @@ const Chatting = ({
                 )}
               </div>
             </Title>
-            <Content>
+            <Content ref={messagesRef}>
               {chats &&
                 chats.map((ch: any, index: number) =>
                   ch.chat ? (
-                    <div key={index}>{ch.chat}</div>
+                    <div className="welcome" key={index}>
+                      {ch.chat}
+                    </div>
+                  ) : ch.user === user ? (
+                    <div className="my-content" key={index}>
+                      <div className="block">
+                        <div className="name">{ch.user}</div>
+                        <div className="text">{ch.text}</div>
+                      </div>
+                    </div>
                   ) : (
-                    <div key={index}>
-                      {ch.user}
-                      {ch.text}
+                    <div className="other-content" key={index}>
+                      <div className="block">
+                        <div className="name">{ch.user}</div>
+                        <div className="text">{ch.text}</div>
+                      </div>
                     </div>
                   )
                 )}
@@ -105,6 +123,9 @@ const Chatting = ({
                 placeholder="내용을 입력하세요"
                 value={chatContent}
                 onChange={onChangeChat}
+                onKeyPress={(e: any) => {
+                  return e.charCode === 13 && onSubmitChat(e);
+                }}
               />
               <SendButton cyan>전송</SendButton>
             </Send>

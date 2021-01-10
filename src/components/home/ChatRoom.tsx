@@ -23,8 +23,8 @@ const ChatRoomList = ({ roomList, joinRoom, user, joinRoom_ING }: any) => {
             <div className="title">{room.title}</div>
             <div className="lock">{room.password && <BsLockFill />}</div>
             {user &&
-            room.participants.filter((a: string) => a === user._id).length >
-              0 ? (
+            room.participants.filter((a: any) => (a.user || a) === user._id)
+              .length > 0 ? (
               <div className="but" onClick={() => joinRoom_ING(room._id)}>
                 🟡
               </div>

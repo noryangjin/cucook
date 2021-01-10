@@ -102,7 +102,53 @@ export const SendButton = styled(Button)`
   margin-right: 5px;
 `;
 
-export const Content = styled.div``;
+export const Content = styled.div`
+  width: 100%;
+  height: 250px;
+  overflow-y: auto;
+  padding: 0 5px;
+  padding-bottom: 5px;
+  .welcome {
+    color: ${palette.gray[6]};
+    text-align: center;
+    margin: 5px 0;
+  }
+
+  .my-content {
+    display: flex;
+    justify-content: flex-end;
+    .block {
+      margin-top: 5px;
+      .name {
+        text-align: right;
+      }
+      .text {
+        box-shadow: 1.2px 2px 2px ${palette.gray[6]};
+        background: yellow;
+        padding: 5px;
+        border-radius: 10px;
+        text-align: right;
+      }
+    }
+  }
+
+  .other-content {
+    display: flex;
+
+    .block {
+      margin-top: 5px;
+      .name {
+      }
+      .text {
+        box-shadow: 1.2px 2px 2px ${palette.gray[6]};
+        background: white;
+        padding: 5px;
+        border-radius: 10px;
+        text-align: right;
+      }
+    }
+  }
+`;
 
 export const Error = styled.div`
   margin-top: 22px;

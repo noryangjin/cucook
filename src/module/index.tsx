@@ -9,7 +9,6 @@ import comment, { commentSaga } from './comment';
 import posts, { postsSaga } from './posts';
 import chatRoom, { chatRoomSaga } from './chatRoom';
 import chatReadRoom, { chatReadRoomSaga } from './chatReadRoom';
-import socket from './socket';
 
 const rootReducer = combineReducers({
   chatRoom,
@@ -21,7 +20,6 @@ const rootReducer = combineReducers({
   user,
   loading,
   write,
-  socket,
 });
 
 export function* rootSaga() {
