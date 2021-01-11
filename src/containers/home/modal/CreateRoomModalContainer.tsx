@@ -74,7 +74,9 @@ const CreateRoomModalContainer = ({ history, location, setPlus }: any) => {
     if (user && chatRoom) {
       setPlus(false);
       dispatch(readRoomList());
-
+      if (!password) {
+        dispatch(readRoom({ roomId: chatRoom, password: '' }));
+      }
       history.push(`/chat/${chatRoom}${location.search}`);
     }
     if (chatRoomError && chatRoomError.response.status === 403) {

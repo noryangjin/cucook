@@ -20,10 +20,11 @@ const ChattingContainer = ({
   location,
   match,
 }: RouteComponentProps<any>) => {
-  const [sock, setSock] = useState<any>(null);
   const [chats, setChat] = useState<Array<null>>([]);
-  const [option, setOption] = useState<boolean | null>(null);
   const [checkPass, setCheckPass] = useState<Array<string>>([]);
+  const [sock, setSock] = useState<any>(null);
+  const [option, setOption] = useState<boolean | null>(null);
+  const [checkMem, setCheckMem] = useState<boolean | null>(null);
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string>('');
   const [chatContent, setChatContent] = useState<string>('');
@@ -43,8 +44,19 @@ const ChattingContainer = ({
       setCheckPass(roomList.map((room: any) => room.password && room._id));
   }, [roomList]);
 
+  useEffect(() => {
+    if (
+      !room &&
+      chatRoomId &&
+      checkPass.filter((room) => room === chatRoomId).length === 0
+    ) {
+      dispatch(readRoom({ roomId: chatRoomId, password: '' }));
+    }
+  }, [room, chatRoomId, checkPass, dispatch]);
+
   const onClickOption = useCallback(() => {
     setOption(true);
+    setCheckMem(false);
     if (option) {
       setOption(false);
     }
@@ -53,6 +65,7 @@ const ChattingContainer = ({
   const onCancel = useCallback(() => {
     history.push(`/${location.search}`);
     setOption(false);
+    setCheckMem(false);
     dispatch(readRoomList());
     sock && sock.disconnect();
     dispatch(initializeRoom());
@@ -85,6 +98,14 @@ const ChattingContainer = ({
     [dispatch, chatRoomId, password]
   );
 
+  const onClickMem = useCallback(() => {
+    setCheckMem(true);
+    setOption(false);
+    if (checkMem) {
+      setCheckMem(false);
+    }
+  }, [checkMem]);
+
   const soc = useCallback(async () => {
     await joinRoom_API(chatRoomId).then(() => {
       dispatch(readRoomList());
@@ -103,7 +124,7 @@ const ChattingContainer = ({
     if (
       room &&
       room.password &&
-      room.participants.filter((u: any) => u.user === user._id).length === 0
+      room.participants.filter((u: any) => u.user._id === user._id).length === 0
     ) {
       setPassword('');
       soc();
@@ -140,7 +161,8 @@ const ChattingContainer = ({
       if (chatContent) {
         sock && sock.emit('sendMessage', chatContent, () => setChatContent(''));
       }
-
+      setCheckMem(false);
+      setOption(false);
       await chatting_API({ roomId: chatRoomId, chatContent }).then(() => {});
     },
     [chatRoomId, chatContent, sock]
@@ -148,6 +170,8 @@ const ChattingContainer = ({
 
   return (
     <Chatting
+      checkMem={checkMem}
+      onClickMem={onClickMem}
       user={user.username}
       chats={chats}
       onSubmitChat={onSubmitChat}

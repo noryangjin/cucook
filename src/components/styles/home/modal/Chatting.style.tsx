@@ -10,7 +10,7 @@ export const ChattingBlock = styled.div`
 export const Block = styled.div`
   ${Block2}
   position:relative;
-  height: 370px;
+  height: 430px;
   padding: 5px;
 
   form {
@@ -40,13 +40,15 @@ export const Title = styled.div`
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
   h4 {
     width: 200px;
-    height: 100%;
-    margin: 0;
-
+    max-height: 50px;
+    margin: auto 0;
     overflow: auto;
-    padding-top: 10px;
+    @media (max-width: 1024px) {
+      width: 150px;
+    }
   }
   .option {
     width: 70px;
@@ -56,21 +58,47 @@ export const Title = styled.div`
       justify-content: flex-end;
       width: 70px;
     }
-    .setting {
-      margin-top: 4px;
-      margin-right: 10px;
-      cursor: pointer;
+    .setting_box {
+      display: flex;
+      align-items: center;
+      div {
+        margin-top: 3px;
+        margin-right: 10px;
+        cursor: pointer;
+      }
+      .member {
+        position: relative;
+        .mem_list {
+          overflow-y: auto;
+          word-break: break-all;
+          border: 1px solid rgba(0, 0, 0, 0.1);
+          border-radius: 5px;
+          width: 150px;
+          height: 200px;
+          text-align: center;
+          background: white;
+          position: absolute;
+          cursor: text;
+          left: -75px;
+          top: 19px;
+          .mem {
+            margin-right: 0;
+            margin: 0 5px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+          }
+        }
+      }
     }
-    .cancel {
-      cursor: pointer;
-    }
-    .delete {
-      margin-top: 3px;
-      border: none;
-      outline: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
+  }
+  .cancel {
+    cursor: pointer;
+  }
+  .delete {
+    margin-top: 3px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    cursor: pointer;
   }
 `;
 
@@ -104,7 +132,7 @@ export const SendButton = styled(Button)`
 
 export const Content = styled.div`
   width: 100%;
-  height: 250px;
+  height: 315px;
   overflow-y: auto;
   padding: 0 5px;
   padding-bottom: 5px;

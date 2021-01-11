@@ -9,6 +9,8 @@ import {
   Error,
 } from '../../styles/home/modal/Chatting.style';
 import { IoMdOptions } from 'react-icons/io';
+import { BsLockFill } from 'react-icons/bs';
+import { BsPeopleFill } from 'react-icons/bs';
 
 type Props = {
   onCancel: () => void;
@@ -27,9 +29,13 @@ type Props = {
   error: string;
   chats: any;
   user: string;
+  checkMem: boolean | null;
+  onClickMem: () => void;
 };
 
 const Chatting = ({
+  checkMem,
+  onClickMem,
   chats,
   onSubmitChat,
   room,
@@ -83,7 +89,29 @@ const Chatting = ({
               <h4>{room && room.title}</h4>
               <div className="option">
                 <div className="button">
-                  <IoMdOptions className="setting" onClick={onClickOption} />
+                  <div className="setting_box">
+                    {room && room.password && (
+                      <div>
+                        <BsLockFill />
+                      </div>
+                    )}
+                    <div onClick={onClickMem} className="member">
+                      <BsPeopleFill />
+                      {checkMem && room && (
+                        <div className="mem_list">
+                          &lt;참여 인원&gt;
+                          {room.participants.map((ro: any) => (
+                            <div key={ro._id} className="mem">
+                              {ro.user.username}
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                    <div>
+                      <IoMdOptions onClick={onClickOption} />
+                    </div>
+                  </div>
                   <div className="cancel" onClick={onCancel}>
                     ❌
                   </div>
