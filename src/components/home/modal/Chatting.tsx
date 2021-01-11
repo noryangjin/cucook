@@ -28,12 +28,14 @@ type Props = {
   room: any;
   error: string;
   chats: any;
-  user: string;
+  user: any;
   checkMem: boolean | null;
   onClickMem: () => void;
+  readRoomLoading: boolean;
 };
 
 const Chatting = ({
+  readRoomLoading,
   checkMem,
   onClickMem,
   chats,
@@ -56,8 +58,10 @@ const Chatting = ({
   const messagesRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    messagesRef.current!.scrollTop = messagesRef.current!.scrollHeight;
-  }, [chats]);
+    if (messagesRef.current) {
+      messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
+    }
+  }, [chats, room]);
 
   return (
     <ChattingBlock>
@@ -124,13 +128,26 @@ const Chatting = ({
               </div>
             </Title>
             <Content ref={messagesRef}>
+              <div ref={messagesRef}>
+                {room &&
+                  room.chat.map((ch: any) =>
+                    room.participants.map((ro: any) => {
+                      return (
+                        ch.user === ro.user._id &&
+                        ro.createAt <= ch.createAt && (
+                          <div key={ch._id}>{ch.chat}</div>
+                        )
+                      );
+                    })
+                  )}
+              </div>
               {chats &&
                 chats.map((ch: any, index: number) =>
                   ch.chat ? (
                     <div className="welcome" key={index}>
                       {ch.chat}
                     </div>
-                  ) : ch.user === user ? (
+                  ) : ch.user === user.username ? (
                     <div className="my-content" key={index}>
                       <div className="block">
                         <div className="name">{ch.user}</div>

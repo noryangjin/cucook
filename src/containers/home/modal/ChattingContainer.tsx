@@ -15,6 +15,8 @@ import { readRoom, initializeRoom } from '../../../module/chatReadRoom';
 import socketIOClient from 'socket.io-client';
 import { chatting_API } from '../../../lib/api/chatting';
 
+let socket_: any;
+
 const ChattingContainer = ({
   history,
   location,
@@ -22,7 +24,6 @@ const ChattingContainer = ({
 }: RouteComponentProps<any>) => {
   const [chats, setChat] = useState<Array<null>>([]);
   const [checkPass, setCheckPass] = useState<Array<string>>([]);
-  const [sock, setSock] = useState<any>(null);
   const [option, setOption] = useState<boolean | null>(null);
   const [checkMem, setCheckMem] = useState<boolean | null>(null);
   const [password, setPassword] = useState<string>('');
@@ -30,12 +31,13 @@ const ChattingContainer = ({
   const [chatContent, setChatContent] = useState<string>('');
   const { chatRoomId } = match.params;
   const dispatch = useDispatch();
-  const { roomList, room, roomError, user } = useSelector(
-    ({ chatRoom, chatReadRoom, user }: RootState) => ({
+  const { roomList, room, roomError, user, readRoomLoading } = useSelector(
+    ({ chatRoom, chatReadRoom, user, loading }: RootState) => ({
       user: user.user,
       roomList: chatRoom.roomList,
       room: chatReadRoom.room,
       roomError: chatReadRoom.roomError,
+      readRoomLoading: loading['chatReadRoom/READ_ROOM'],
     })
   );
 
@@ -67,23 +69,23 @@ const ChattingContainer = ({
     setOption(false);
     setCheckMem(false);
     dispatch(readRoomList());
-    sock && sock.disconnect();
+    socket_ && socket_.disconnect();
     dispatch(initializeRoom());
-  }, [location, history, dispatch, sock]);
+  }, [location, history, dispatch]);
 
   const onLeaveRoom = useCallback(async () => {
     dispatch(initializeRoom());
     setCheckPass([]);
     await leaveRoom_API(chatRoomId)
       .then(() => {
-        sock && sock.disconnect();
+        socket_ && socket_.disconnect();
         setOption(false);
       })
       .then(() => {
         history.push(`/${location.search}`);
         dispatch(readRoomList());
       });
-  }, [dispatch, sock, chatRoomId, location, history]);
+  }, [dispatch, chatRoomId, location, history]);
 
   const onChangePass = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -115,6 +117,7 @@ const ChattingContainer = ({
   useEffect(() => {
     if (roomError) {
       if (roomError.response.status === 401) {
+        setPassword('');
         setError('비밀번호를 확인해 주세요');
       }
       if (roomError.response.status === 403) {
@@ -126,7 +129,6 @@ const ChattingContainer = ({
       room.password &&
       room.participants.filter((u: any) => u.user._id === user._id).length === 0
     ) {
-      setPassword('');
       soc();
     }
   }, [roomError, room, user, chatRoomId, dispatch, soc]);
@@ -137,7 +139,7 @@ const ChattingContainer = ({
   }, []);
 
   useEffect(() => {
-    const socket_ = socketIOClient('http://localhost:4000/chat', {
+    socket_ = socketIOClient('http://localhost:4000/chat', {
       path: '/socket.io',
     });
     socket_.emit('join', { roomId: chatRoomId, user }, (error: any) => {
@@ -145,34 +147,35 @@ const ChattingContainer = ({
         alert(error);
       }
     });
-    setSock(socket_);
   }, [user, chatRoomId]);
 
   useEffect(() => {
-    sock &&
-      sock.on('message', (data: string) => {
+    socket_ &&
+      socket_.on('message', (data: string) => {
         setChat((chats: any) => [...chats, data]);
       });
-  }, [sock]);
+  }, []);
 
   const onSubmitChat = useCallback(
     async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       if (chatContent) {
-        sock && sock.emit('sendMessage', chatContent, () => setChatContent(''));
+        socket_ &&
+          socket_.emit('sendMessage', chatContent, () => setChatContent(''));
       }
       setCheckMem(false);
       setOption(false);
       await chatting_API({ roomId: chatRoomId, chatContent }).then(() => {});
     },
-    [chatRoomId, chatContent, sock]
+    [chatRoomId, chatContent]
   );
 
   return (
     <Chatting
+      readRoomLoading={readRoomLoading}
       checkMem={checkMem}
       onClickMem={onClickMem}
-      user={user.username}
+      user={user}
       chats={chats}
       onSubmitChat={onSubmitChat}
       onChangeChat={onChangeChat}
