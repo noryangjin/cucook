@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Button from '../../../common/Button';
 import palette from '../../palette';
 import { Block1, Block2 } from './Refactoring.style';
@@ -102,6 +102,14 @@ export const Title = styled.div`
   }
 `;
 
+const text_ = css`
+  box-shadow: 1.2px 2px 2px ${palette.gray[6]};
+  padding: 5px;
+  border-radius: 10px;
+  text-align: right;
+  word-break: break-all;
+`;
+
 export const Send = styled.form`
   display: flex;
   background: white;
@@ -151,11 +159,8 @@ export const Content = styled.div`
         text-align: right;
       }
       .text {
-        box-shadow: 1.2px 2px 2px ${palette.gray[6]};
         background: yellow;
-        padding: 5px;
-        border-radius: 10px;
-        text-align: right;
+        ${text_}
       }
     }
   }
@@ -165,14 +170,9 @@ export const Content = styled.div`
 
     .block {
       margin-top: 5px;
-      .name {
-      }
       .text {
-        box-shadow: 1.2px 2px 2px ${palette.gray[6]};
         background: white;
-        padding: 5px;
-        border-radius: 10px;
-        text-align: right;
+        ${text_}
       }
     }
   }

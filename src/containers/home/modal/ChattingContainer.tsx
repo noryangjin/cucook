@@ -31,13 +31,12 @@ const ChattingContainer = ({
   const [chatContent, setChatContent] = useState<string>('');
   const { chatRoomId } = match.params;
   const dispatch = useDispatch();
-  const { roomList, room, roomError, user, readRoomLoading } = useSelector(
-    ({ chatRoom, chatReadRoom, user, loading }: RootState) => ({
+  const { roomList, room, roomError, user } = useSelector(
+    ({ chatRoom, chatReadRoom, user }: RootState) => ({
       user: user.user,
       roomList: chatRoom.roomList,
       room: chatReadRoom.room,
       roomError: chatReadRoom.roomError,
-      readRoomLoading: loading['chatReadRoom/READ_ROOM'],
     })
   );
 
@@ -172,7 +171,6 @@ const ChattingContainer = ({
 
   return (
     <Chatting
-      readRoomLoading={readRoomLoading}
       checkMem={checkMem}
       onClickMem={onClickMem}
       user={user}

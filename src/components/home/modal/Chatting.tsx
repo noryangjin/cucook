@@ -31,11 +31,9 @@ type Props = {
   user: any;
   checkMem: boolean | null;
   onClickMem: () => void;
-  readRoomLoading: boolean;
 };
 
 const Chatting = ({
-  readRoomLoading,
   checkMem,
   onClickMem,
   chats,
@@ -132,38 +130,41 @@ const Chatting = ({
                 {room &&
                   room.chat.map((ch: any) =>
                     room.participants.map((ro: any) => {
-                      return (
-                        ch.user._id === ro.user._id &&
-                        ro.createAt <= ch.createAt && (
-                          <div key={ch._id}>
-                            {ch.user._id === user._id ? (
-                              <div className="my-content" key={ch._id}>
-                                <div className="block">
-                                  <div className="name">{ch.user.username}</div>
-                                  <div
-                                    className="text"
-                                    style={{ background: '#dee2e6' }}
-                                  >
-                                    {ch.chat}
+                      return ro.createAt <= ch.createAt
+                        ? ro.user._id === user._id && (
+                            <div key={ch._id}>
+                              {ch.user._id === user._id ? (
+                                <div className="my-content" key={ch._id}>
+                                  <div className="block">
+                                    <div className="name">
+                                      {ch.user.username}
+                                    </div>
+                                    <div
+                                      className="text"
+                                      style={{ background: '#dee2e6' }}
+                                    >
+                                      {ch.chat}
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                            ) : (
-                              <div className="other-content" key={ch._id}>
-                                <div className="block">
-                                  <div className="name">{ch.user.username}</div>
-                                  <div
-                                    className="text"
-                                    style={{ background: '#dee2e6' }}
-                                  >
-                                    {ch.chat}
+                              ) : (
+                                <div className="other-content" key={ch._id}>
+                                  <div className="block">
+                                    <div className="name">
+                                      {ch.user.username}
+                                    </div>
+                                    <div
+                                      className="text"
+                                      style={{ background: '#dee2e6' }}
+                                    >
+                                      {ch.chat}
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                            )}
-                          </div>
-                        )
-                      );
+                              )}
+                            </div>
+                          )
+                        : null;
                     })
                   )}
               </div>
