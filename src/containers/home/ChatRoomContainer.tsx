@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, ChangeEvent } from 'react';
 import ChatRoom from '../../components/home/ChatRoom';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../module/index';
@@ -12,7 +12,9 @@ const ChatRoomContainer = ({
   location,
   history,
 }: RouteComponentProps<any>) => {
+  const { username, postId } = match.params;
   const [plus, setPlus] = useState<boolean | null>(null);
+  const [searchRoom, setSearchRoom] = useState<string>('');
   const { chatRoomId } = match.params;
   const dispatch = useDispatch();
   const { user, roomList } = useSelector(({ user, chatRoom }: RootState) => ({
@@ -22,7 +24,8 @@ const ChatRoomContainer = ({
 
   useEffect(() => {
     dispatch(readRoomList());
-  }, [dispatch]);
+    setSearchRoom('');
+  }, [dispatch, history]);
 
   const joinRoom = useCallback(
     async ({ id, max, participants, password }) => {
@@ -36,7 +39,11 @@ const ChatRoomContainer = ({
           return;
         }
       }
-      history.push(`/chat/${id}/${location.search}`);
+      if (username && postId) {
+        history.push(`/@${username}/${postId}/chat/${id}/${location.search}`);
+      } else {
+        history.push(`/chat/${id}/${location.search}`);
+      }
 
       if (!password) {
         dispatch(readRoom({ roomId: id, password: '' }));
@@ -46,23 +53,34 @@ const ChatRoomContainer = ({
         });
       }
     },
-    [history, location, user, dispatch]
+    [history, location, user, dispatch, username, postId]
   );
 
   const joinRoom_ING = useCallback(
     (id: string) => {
-      history.push(`/chat/${id}/${location.search}`);
+      if (username && postId) {
+        history.push(`/@${username}/${postId}/chat/${id}/${location.search}`);
+      } else {
+        history.push(`/chat/${id}/${location.search}`);
+      }
       dispatch(readRoom({ roomId: id, password: '' }));
     },
-    [history, location, dispatch]
+    [history, location, dispatch, username, postId]
   );
 
   const onPlusClick = useCallback(() => {
     setPlus(true);
   }, []);
 
+  const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setSearchRoom(value);
+  }, []);
+
   return (
     <ChatRoom
+      searchRoom={searchRoom}
+      onChange={onChange}
       joinRoom_ING={joinRoom_ING}
       onPlusClick={onPlusClick}
       plus={plus}

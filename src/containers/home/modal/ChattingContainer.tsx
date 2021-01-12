@@ -29,7 +29,7 @@ const ChattingContainer = ({
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string>('');
   const [chatContent, setChatContent] = useState<string>('');
-  const { chatRoomId } = match.params;
+  const { chatRoomId, username, postId } = match.params;
   const dispatch = useDispatch();
   const { roomList, room, roomError, user } = useSelector(
     ({ chatRoom, chatReadRoom, user }: RootState) => ({
@@ -41,6 +41,7 @@ const ChattingContainer = ({
   );
 
   useEffect(() => {
+    socket_ && socket_.disconnect();
     roomList &&
       setCheckPass(roomList.map((room: any) => room.password && room._id));
   }, [roomList]);
@@ -64,13 +65,17 @@ const ChattingContainer = ({
   }, [option]);
 
   const onCancel = useCallback(() => {
-    history.push(`/${location.search}`);
+    if (username && postId) {
+      history.push(`/@${username}/${postId}`);
+    } else {
+      history.push(`/${location.search}`);
+    }
     setOption(false);
     setCheckMem(false);
     dispatch(readRoomList());
     socket_ && socket_.disconnect();
     dispatch(initializeRoom());
-  }, [location, history, dispatch]);
+  }, [location, history, dispatch, username, postId]);
 
   const onLeaveRoom = useCallback(async () => {
     dispatch(initializeRoom());
@@ -81,10 +86,14 @@ const ChattingContainer = ({
         setOption(false);
       })
       .then(() => {
-        history.push(`/${location.search}`);
+        if (username && postId) {
+          history.push(`/@${username}/${postId}`);
+        } else {
+          history.push(`/${location.search}`);
+        }
         dispatch(readRoomList());
       });
-  }, [dispatch, chatRoomId, location, history]);
+  }, [dispatch, chatRoomId, location, history, username, postId]);
 
   const onChangePass = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;

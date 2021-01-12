@@ -17,9 +17,15 @@ import { withRouter } from 'react-router-dom';
 import { readRoomList } from '../../../module/chatRoom';
 import { readRoom } from '../../../module/chatReadRoom';
 
-const CreateRoomModalContainer = ({ history, location, setPlus }: any) => {
+const CreateRoomModalContainer = ({
+  match,
+  history,
+  location,
+  setPlus,
+}: any) => {
   const [passwordButton, setPasswordButton] = useState<boolean | null>(null);
   const [error, setError] = useState<string>('');
+  const { username, postId } = match.params;
   const dispatch = useDispatch();
   const { title, max, password, chatRoomError, chatRoom, user } = useSelector(
     ({ chatRoom, user }: RootState) => ({
@@ -77,12 +83,18 @@ const CreateRoomModalContainer = ({ history, location, setPlus }: any) => {
       if (!password) {
         dispatch(readRoom({ roomId: chatRoom, password: '' }));
       }
-      history.push(`/chat/${chatRoom}${location.search}`);
+      if (username && postId) {
+        history.push(`/@${username}/${postId}/chat/${chatRoom}`);
+      } else {
+        history.push(`/chat/${chatRoom}${location.search}`);
+      }
     }
     if (chatRoomError && chatRoomError.response.status === 403) {
       setError('로그인 하셔야 합니다.');
     }
   }, [
+    username,
+    postId,
     dispatch,
     user,
     setPlus,

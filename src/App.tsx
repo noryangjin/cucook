@@ -13,7 +13,10 @@ const App: FunctionComponent = () => {
       <Route path="/login" component={LoginPage} />
       <Route path="/register" component={RegisterPage} />
       <Route path="/write" component={WritePage} />
-      <Route path="/@:username/:postId" component={PostLeadPage} />
+      <Route
+        path={['/@:username/:postId/chat/:chatRoomId', '/@:username/:postId']}
+        component={PostLeadPage}
+      />
       <Route
         render={({ location }) => (
           <div>

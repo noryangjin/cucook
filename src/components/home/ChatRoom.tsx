@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import {
   ChatBlock,
   Header,
@@ -12,7 +12,19 @@ import ChattingContainer from '../../containers/home/modal/ChattingContainer';
 import { RouteComponentProps } from 'react-router-dom';
 import { BsLockFill } from 'react-icons/bs';
 
-const ChatRoomList = ({ roomList, joinRoom, user, joinRoom_ING }: any) => {
+const ChatRoomList = ({
+  roomList,
+  joinRoom,
+  user,
+  joinRoom_ING,
+  searchRoom,
+}: any) => {
+  if (searchRoom) {
+    roomList = roomList.filter(
+      (room: any) => room.title.indexOf(searchRoom) >= 0
+    );
+  }
+
   return (
     <>
       {roomList &&
@@ -61,11 +73,15 @@ type Props = {
   user: any;
   roomList: any;
   chatRoomId: RouteComponentProps<any>;
+  searchRoom: string;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   joinRoom: (id: string, max: number, participants: any) => void;
   joinRoom_ING: (id: string) => void;
 };
 
 const ChatRoom = ({
+  searchRoom,
+  onChange,
   joinRoom_ING,
   user,
   onPlusClick,
@@ -86,7 +102,11 @@ const ChatRoom = ({
         )}
       </Header>
       <Search>
-        <input placeholder="채팅방 검색" />
+        <input
+          value={searchRoom}
+          onChange={onChange}
+          placeholder="채팅방 검색"
+        />
       </Search>
       <Block>
         {plus && <CreateRoomModalContainer setPlus={setPlus} />}
@@ -96,6 +116,7 @@ const ChatRoom = ({
           joinRoom={joinRoom}
           joinRoom_ING={joinRoom_ING}
           user={user}
+          searchRoom={searchRoom}
         />
       </Block>
     </ChatBlock>
