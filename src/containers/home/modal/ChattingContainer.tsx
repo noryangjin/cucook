@@ -41,10 +41,9 @@ const ChattingContainer = ({
   );
 
   useEffect(() => {
-    socket_ && socket_.disconnect();
     roomList &&
       setCheckPass(roomList.map((room: any) => room.password && room._id));
-  }, [roomList]);
+  }, [roomList, chatRoomId]);
 
   useEffect(() => {
     if (
@@ -130,7 +129,6 @@ const ChattingContainer = ({
       }
       if (roomError.response.status === 403) {
         alert('로그인 하셔야 합니다.');
-        history.push('/login');
       }
     }
     if (
@@ -153,7 +151,7 @@ const ChattingContainer = ({
     });
     socket_.emit('join', { roomId: chatRoomId, user }, (error: any) => {
       if (error) {
-        alert(error);
+        window.location.reload();
       }
     });
   }, [user, chatRoomId]);

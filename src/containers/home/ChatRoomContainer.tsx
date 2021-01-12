@@ -25,7 +25,7 @@ const ChatRoomContainer = ({
   useEffect(() => {
     dispatch(readRoomList());
     setSearchRoom('');
-  }, [dispatch, history]);
+  }, [dispatch]);
 
   const joinRoom = useCallback(
     async ({ id, max, participants, password }) => {
