@@ -133,9 +133,35 @@ const Chatting = ({
                   room.chat.map((ch: any) =>
                     room.participants.map((ro: any) => {
                       return (
-                        ch.user === ro.user._id &&
+                        ch.user._id === ro.user._id &&
                         ro.createAt <= ch.createAt && (
-                          <div key={ch._id}>{ch.chat}</div>
+                          <div key={ch._id}>
+                            {ch.user._id === user._id ? (
+                              <div className="my-content" key={ch._id}>
+                                <div className="block">
+                                  <div className="name">{ch.user.username}</div>
+                                  <div
+                                    className="text"
+                                    style={{ background: '#dee2e6' }}
+                                  >
+                                    {ch.chat}
+                                  </div>
+                                </div>
+                              </div>
+                            ) : (
+                              <div className="other-content" key={ch._id}>
+                                <div className="block">
+                                  <div className="name">{ch.user.username}</div>
+                                  <div
+                                    className="text"
+                                    style={{ background: '#dee2e6' }}
+                                  >
+                                    {ch.chat}
+                                  </div>
+                                </div>
+                              </div>
+                            )}
+                          </div>
                         )
                       );
                     })
