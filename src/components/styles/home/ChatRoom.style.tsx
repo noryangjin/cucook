@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import palette from '../palette';
 import Button from '../../common/Button';
 
 export const ChatBlock = styled.div`
@@ -9,20 +8,20 @@ export const ChatBlock = styled.div`
 `;
 
 export const Block = styled.div`
-  border: 1px solid ${palette.cyan[4]};
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   overflow: auto;
-  height: 400px;
-  padding: 5px 1rem;
+  height: 375px;
+  padding: 5px;
 `;
 
 export const Header = styled.div`
-  margin: 1rem 0;
+  margin-top: 1rem;
   background: white;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border: 1px solid ${palette.cyan[4]};
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   height: 45px;
   h4 {
@@ -67,5 +66,19 @@ export const ChatRoomBlock = styled.div`
   .lock {
     margin: auto 0;
     width: 16px;
+  }
+`;
+
+export const Search = styled.div`
+  margin: 10px 0;
+  input {
+    outline: none;
+    width: 100%;
+    border: none;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 0 5px;
+    border-radius: 4px;
+    height: 23px;
+    font-size: 1rem;
   }
 `;

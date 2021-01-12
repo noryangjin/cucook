@@ -120,7 +120,8 @@ const ChattingContainer = ({
         setError('비밀번호를 확인해 주세요');
       }
       if (roomError.response.status === 403) {
-        setError('로그인 하셔야 합니다.');
+        alert('로그인 하셔야 합니다.');
+        history.push('/login');
       }
     }
     if (
@@ -130,7 +131,7 @@ const ChattingContainer = ({
     ) {
       soc();
     }
-  }, [roomError, room, user, chatRoomId, dispatch, soc]);
+  }, [roomError, room, user, chatRoomId, dispatch, soc, history]);
 
   const onChangeChat = useCallback((e: ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = e.target;

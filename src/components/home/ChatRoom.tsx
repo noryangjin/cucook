@@ -5,6 +5,7 @@ import {
   Block,
   ChatRoomBlock,
   CreateChatButton,
+  Search,
 } from '../styles/home/ChatRoom.style';
 import CreateRoomModalContainer from '../../containers/home/modal/CreateRoomModalContainer';
 import ChattingContainer from '../../containers/home/modal/ChattingContainer';
@@ -84,6 +85,9 @@ const ChatRoom = ({
           </CreateChatButton>
         )}
       </Header>
+      <Search>
+        <input placeholder="채팅방 검색" />
+      </Search>
       <Block>
         {plus && <CreateRoomModalContainer setPlus={setPlus} />}
         {user && chatRoomId && <ChattingContainer />}
