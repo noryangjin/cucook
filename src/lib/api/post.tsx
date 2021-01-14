@@ -50,3 +50,8 @@ export const listPosts = ({
   });
   return client.get(`/api/post?${queryString}`);
 };
+
+export const searchPost = ({ search }: string) => {
+  console.log(search);
+  return client.get(`api/post/search/?term=${search}`);
+};

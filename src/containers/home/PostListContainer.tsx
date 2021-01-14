@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { listPosts } from '../../module/posts';
 import PostList from '../../components/home/PostList';
 import { RootState } from '../../module/index';
+import { searchInitialstate } from '../../module/searchPost';
 
 const PostListContainer = ({ location, history }: RouteComponentProps) => {
   const dispatch = useDispatch();
@@ -14,6 +15,10 @@ const PostListContainer = ({ location, history }: RouteComponentProps) => {
   }));
   const query = qs.parse(location.search);
   const qs_ = Object.keys(query);
+
+  useEffect(() => {
+    dispatch(searchInitialstate());
+  }, [dispatch]);
 
   const onScroll = useCallback(
     (e: any) => {

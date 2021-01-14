@@ -9,6 +9,7 @@ import comment, { commentSaga } from './comment';
 import posts, { postsSaga } from './posts';
 import chatRoom, { chatRoomSaga } from './chatRoom';
 import chatReadRoom, { chatReadRoomSaga } from './chatReadRoom';
+import searchPost, { searchPostSaga } from './searchPost';
 
 const rootReducer = combineReducers({
   chatRoom,
@@ -20,10 +21,12 @@ const rootReducer = combineReducers({
   user,
   loading,
   write,
+  searchPost,
 });
 
 export function* rootSaga() {
   yield all([
+    searchPostSaga(),
     chatReadRoomSaga(),
     chatRoomSaga(),
     postsSaga(),

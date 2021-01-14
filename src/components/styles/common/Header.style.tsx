@@ -88,3 +88,33 @@ export const Message = styled.div`
     letter-spacing: 2px;
   }
 `;
+
+export const Form = styled.form`
+  display: flex;
+  width: 500px;
+  height: 25px;
+  border-bottom: 1px solid ${palette.gray[4]};
+
+  input {
+    width: 100%;
+    outline: none;
+    border: none;
+    background: none;
+    height: 25px;
+    &:focus {
+      border-bottom: 1px solid black;
+    }
+  }
+  button {
+    width: 50px;
+    padding-right: 0;
+    padding-left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+  }
+`;

@@ -1,4 +1,4 @@
-import React, { MouseEvent } from 'react';
+import React, { ChangeEvent, FormEvent, MouseEvent } from 'react';
 import Button from './Button';
 import { Link } from 'react-router-dom';
 import FlashMessage from 'react-flash-message';
@@ -8,17 +8,29 @@ import {
   UserInfo,
   Spacer,
   Message,
+  Form,
 } from '../styles/common/Header.style';
+import { GrSearch } from 'react-icons/gr';
 
 type typeProps = {
   user: any;
   onLogout: (e: MouseEvent<HTMLButtonElement>) => void;
-
   linkTo: string;
   welcomeMessage: string;
+  term: string;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onSubmit: (e: FormEvent<HTMLFormElement>) => void;
 };
 
-const Header = ({ user, onLogout, welcomeMessage, linkTo }: typeProps) => {
+const Header = ({
+  user,
+  onSubmit,
+  onLogout,
+  welcomeMessage,
+  linkTo,
+  term,
+  onChange,
+}: typeProps) => {
   return (
     <>
       {welcomeMessage && (
@@ -33,6 +45,13 @@ const Header = ({ user, onLogout, welcomeMessage, linkTo }: typeProps) => {
           <div className="logo">
             <Link to={linkTo}>cucook</Link>
           </div>
+          <Form onSubmit={onSubmit}>
+            <input value={term} onChange={onChange} placeholder="search.." />
+
+            <button>
+              <GrSearch />
+            </button>
+          </Form>
           <div className="right">
             {user ? (
               <>
