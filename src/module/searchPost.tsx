@@ -50,11 +50,7 @@ const searchPost = handleActions<any | typeAction>(
       searchPost: null,
       searchPostError,
     }),
-    [SEARCH_INITIALSTATE]: (state) => ({
-      ...state,
-      searchPost: null,
-      searchPostError: null,
-    }),
+    [SEARCH_INITIALSTATE]: () => initialState,
   },
   initialState
 );

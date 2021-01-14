@@ -117,4 +117,14 @@ export const Form = styled.form`
     background: none;
     cursor: pointer;
   }
+
+  @media (max-width: 1024px) {
+    width: 350px;
+  }
+  @media (max-width: 700px) {
+    width: 200px;
+  }
+  @media (max-width: 500px) {
+    display: none;
+  }
 `;
