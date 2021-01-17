@@ -15,7 +15,6 @@ import { GrSearch } from 'react-icons/gr';
 type typeProps = {
   user: any;
   onLogout: (e: MouseEvent<HTMLButtonElement>) => void;
-  linkTo: string;
   welcomeMessage: string;
   term: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -27,7 +26,6 @@ const Header = ({
   onSubmit,
   onLogout,
   welcomeMessage,
-  linkTo,
   term,
   onChange,
 }: typeProps) => {
@@ -43,7 +41,7 @@ const Header = ({
       <HeaderBlock>
         <Wrapper>
           <div className="logo">
-            <Link to={linkTo}>cucook</Link>
+            <Link to="/">cucook</Link>
           </div>
           <Form onSubmit={onSubmit}>
             <input value={term} onChange={onChange} placeholder="search.." />

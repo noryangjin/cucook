@@ -1,15 +1,15 @@
 import HeaderContainer from '../containers/common/HeaderContainer';
-import HomeActionButtonContainer from '../containers/home/HomeActionButtonContainer';
 import Responsive from '../components/common/Responsive';
-import SearchListContainer from '../containers/search/SearchListContainer';
+import loadable from '@loadable/component';
+
+const Split = loadable(() => import('./Split/SearchPage.split'));
 
 const SearchPage = () => {
   return (
     <>
       <HeaderContainer />
       <Responsive>
-        <HomeActionButtonContainer />
-        <SearchListContainer />
+        <Split />
       </Responsive>
     </>
   );

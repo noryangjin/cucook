@@ -2,7 +2,7 @@ import { SearchItemBlock, Content } from '../styles/search/SearchItem.style';
 
 const SearchItem = ({ item, style }: any) => {
   return (
-    <SearchItemBlock style={style} to={`/@${item.writer.usernmae}/${item._id}`}>
+    <SearchItemBlock style={style} to={`/@${item.writer.username}/${item._id}`}>
       <div className="titleImg">
         <img src={item.titleImg} alt="" />
       </div>
@@ -14,6 +14,7 @@ const SearchItem = ({ item, style }: any) => {
           <span className="nameDate">
             <span>{item.writer.username}</span>
             <span>{new Date(item.publishedDate).toLocaleDateString()}</span>
+            <span>조회수 : {item.views}</span>
           </span>
         </div>
         <div className="ingredients">

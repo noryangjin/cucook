@@ -12,11 +12,9 @@ import { RootState } from '../../module/index';
 import { logout } from '../../module/user';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { search_Post, searchValue } from '../../module/searchPost';
-import qs from 'qs';
 
-const HeaderContainer = ({ location, history }: RouteComponentProps) => {
+const HeaderContainer = ({ history }: RouteComponentProps) => {
   const [welcomeMessage, setWelcomeMessage] = useState<string>('');
-  const [linkTo, setLinkTo] = useState<string>('/');
 
   const dispatch = useDispatch();
   const { user, authLogin, term } = useSelector(
@@ -63,16 +61,6 @@ const HeaderContainer = ({ location, history }: RouteComponentProps) => {
     [dispatch, term, history]
   );
 
-  useEffect(() => {
-    const qs_ = qs.parse(location.search, {
-      ignoreQueryPrefix: true,
-    });
-    if (location.search.includes('sort')) {
-      return setLinkTo(`?sort=${qs_.sort}`);
-    }
-    setLinkTo('/');
-  }, [location]);
-
   return (
     <Header
       onSubmit={onSubmit}
@@ -81,7 +69,6 @@ const HeaderContainer = ({ location, history }: RouteComponentProps) => {
       user={user}
       onLogout={onLogout}
       welcomeMessage={welcomeMessage}
-      linkTo={linkTo}
     />
   );
 };
