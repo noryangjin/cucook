@@ -4,9 +4,10 @@ import SearchItem from './SearchItem';
 
 type Props = {
   searchPost: any;
+  loading: boolean;
 };
 
-const SearchList = ({ searchPost }: Props) => {
+const SearchList = ({ searchPost, loading }: Props) => {
   const rowRenderer = useCallback(
     ({ index, key, style }) => {
       const item = searchPost[index];
@@ -16,21 +17,27 @@ const SearchList = ({ searchPost }: Props) => {
     [searchPost]
   );
   return (
-    <AutoSizerBlock disableHeight>
-      {({ width }: any) =>
-        searchPost && (
-          <ListBlock
-            rowCount={searchPost.length}
-            rowHeight={250}
-            rowRenderer={rowRenderer}
-            list={searchPost}
-            width={width}
-            height={600}
-            style={{ outline: 'none' }}
-          />
-        )
-      }
-    </AutoSizerBlock>
+    <>
+      {loading ? (
+        <h2>로딩 중...</h2>
+      ) : (
+        <AutoSizerBlock disableHeight>
+          {({ width }: any) =>
+            searchPost && (
+              <ListBlock
+                rowCount={searchPost.length}
+                rowHeight={250}
+                rowRenderer={rowRenderer}
+                list={searchPost}
+                width={width}
+                height={600}
+                style={{ outline: 'none' }}
+              />
+            )
+          }
+        </AutoSizerBlock>
+      )}
+    </>
   );
 };
 

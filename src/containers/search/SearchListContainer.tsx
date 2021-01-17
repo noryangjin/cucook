@@ -3,11 +3,14 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../module/index';
 
 const SearchListContainer = () => {
-  const { searchPost } = useSelector(({ searchPost }: RootState) => ({
-    searchPost: searchPost.searchPost,
-  }));
+  const { searchPost, loading } = useSelector(
+    ({ searchPost, loading }: RootState) => ({
+      searchPost: searchPost.searchPost,
+      loading: loading['searchPost/SEARCH_POST'],
+    })
+  );
 
-  return <SearchList searchPost={searchPost} />;
+  return <SearchList searchPost={searchPost} loading={loading} />;
 };
 
 export default SearchListContainer;
