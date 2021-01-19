@@ -1,12 +1,12 @@
-import React, { MouseEvent } from 'react';
+import React from 'react';
 import { ButtonStyled, LinkStyled } from '../styles/common/Button.style';
 
 type Props = {
-  children: string;
+  children: any;
   cyan?: boolean;
   fullWidth?: boolean;
   to?: any;
-  onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
+  onClick?: () => void;
 };
 
 const Button = (props: Props) => {

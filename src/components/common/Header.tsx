@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, MouseEvent } from 'react';
+import React, { ChangeEvent, FormEvent } from 'react';
 import Button from './Button';
 import { Link } from 'react-router-dom';
 import FlashMessage from 'react-flash-message';
@@ -14,7 +14,7 @@ import { GrSearch } from 'react-icons/gr';
 
 type typeProps = {
   user: any;
-  onLogout: (e: MouseEvent<HTMLButtonElement>) => void;
+  onLogout: () => void;
   welcomeMessage: string;
   term: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;

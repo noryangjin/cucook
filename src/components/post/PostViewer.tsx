@@ -47,7 +47,7 @@ const PostViewer = ({ post, error, loading, ownPost, onEdit }: any) => {
             <span>
               {new Date(publishedDate).toLocaleDateString().replace(/\s/g, '')}
             </span>
-            <PostUpdateDeleteButton onEdit={onEdit} />
+            {ownPost && <PostUpdateDeleteButton onEdit={onEdit} />}
           </UserDateBlock>
         </div>
         <Spacer />

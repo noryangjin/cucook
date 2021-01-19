@@ -1,5 +1,4 @@
 import React, {
-  MouseEvent,
   useState,
   useEffect,
   useCallback,
@@ -31,13 +30,10 @@ const HeaderContainer = ({ history }: RouteComponentProps) => {
     }
   }, [authLogin, dispatch]);
 
-  const onLogout = useCallback(
-    (e: MouseEvent<HTMLButtonElement>) => {
-      dispatch(logout());
-      window.location.reload();
-    },
-    [dispatch]
-  );
+  const onLogout = useCallback(() => {
+    dispatch(logout());
+    window.location.reload();
+  }, [dispatch]);
 
   const onChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
