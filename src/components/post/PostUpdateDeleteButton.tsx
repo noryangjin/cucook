@@ -3,10 +3,14 @@ import {
   ActionButton,
 } from '../styles/post/PostUpdateDeleteButton.style';
 
-const PostUpdateDeleteButton = () => {
+type Props = {
+  onEdit: () => void;
+};
+
+const PostUpdateDeleteButton = ({ onEdit }: Props) => {
   return (
     <ButtonBlock>
-      <ActionButton>수정</ActionButton>
+      <ActionButton onClick={onEdit}>수정</ActionButton>
       <ActionButton>삭제</ActionButton>
     </ButtonBlock>
   );

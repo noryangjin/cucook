@@ -8,6 +8,7 @@ type insert = {
   body: string | any;
   ingredients: Array<string>;
   tags: Array<string>;
+  id?: string;
 };
 
 export const writePost = ({
@@ -53,4 +54,24 @@ export const listPosts = ({
 
 export const searchPost = ({ search }: string) => {
   return client.get(`api/post/search/?term=${search}`);
+};
+
+export const updatePost = ({
+  id,
+  category,
+  title,
+  body,
+  ingredients,
+  tags,
+  titleImg,
+}: insert) => {
+  return client.patch(`/api/post/${id}`, {
+    id,
+    category,
+    title,
+    body,
+    ingredients,
+    tags,
+    titleImg,
+  });
 };
