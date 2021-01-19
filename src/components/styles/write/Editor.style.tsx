@@ -26,6 +26,15 @@ export const QuillWrapper = styled.div`
     min-height: 320px;
     font-size: 1.125rem;
     line-height: 1.5;
+    overflow: auto;
+    max-height: 600px;
+    @media (max-width: 700px) {
+      max-height: 450px;
+    }
+  }
+  img {
+    display: block;
+    margin: 5px auto;
   }
   .ql-editor .ql-blank::before {
     left: 0px;
