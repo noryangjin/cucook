@@ -9,9 +9,8 @@ import { searchInitialstate } from '../../module/searchPost';
 
 const PostListContainer = ({ location, history }: RouteComponentProps) => {
   const dispatch = useDispatch();
-  const { posts, loading } = useSelector(({ posts, loading }: RootState) => ({
+  const { posts } = useSelector(({ posts }: RootState) => ({
     posts: posts.posts,
-    loading: loading['posts/LIST_POSTS'],
   }));
   const query = qs.parse(location.search);
   const qs_ = Object.keys(query);
@@ -54,9 +53,7 @@ const PostListContainer = ({ location, history }: RouteComponentProps) => {
     dispatch(listPosts({ tag, username, ingredient, category, sort, page }));
   }, [dispatch, location]);
 
-  return (
-    <PostList posts={posts} loading={loading} qs_={qs_} onScroll={onScroll} />
-  );
+  return <PostList posts={posts} qs_={qs_} onScroll={onScroll} />;
 };
 
 export default withRouter(PostListContainer);

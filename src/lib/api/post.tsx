@@ -52,6 +52,5 @@ export const listPosts = ({
 };
 
 export const searchPost = ({ search }: string) => {
-  console.log(search);
   return client.get(`api/post/search/?term=${search}`);
 };

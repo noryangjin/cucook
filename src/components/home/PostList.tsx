@@ -5,12 +5,11 @@ import { AutoSizerBlock, ListBlock } from '../styles/home/PostList.style';
 
 type Props = {
   posts: any;
-  loading: boolean;
   qs_: any;
   onScroll: any;
 };
 
-const PostList = ({ posts, loading, qs_, onScroll }: Props) => {
+const PostList = ({ posts, qs_, onScroll }: Props) => {
   const rowRenderer = useCallback(
     ({ index, key, style }) => {
       const item = posts[index];
@@ -24,27 +23,23 @@ const PostList = ({ posts, loading, qs_, onScroll }: Props) => {
 
   return (
     <>
-      {loading ? (
-        <h2>로딩 중...</h2>
-      ) : (
-        <AutoSizerBlock disableHeight>
-          {({ width }: any) =>
-            posts && (
-              <ListBlock
-                onScroll={onScroll}
-                className="PostList"
-                rowCount={posts.length}
-                rowHeight={700}
-                rowRenderer={rowRenderer}
-                list={posts}
-                height={600}
-                width={width}
-                style={{ outline: 'none' }}
-              />
-            )
-          }
-        </AutoSizerBlock>
-      )}
+      <AutoSizerBlock disableHeight>
+        {({ width }: any) =>
+          posts && (
+            <ListBlock
+              onScroll={onScroll}
+              className="PostList"
+              rowCount={posts.length}
+              rowHeight={700}
+              rowRenderer={rowRenderer}
+              list={posts}
+              height={600}
+              width={width}
+              style={{ outline: 'none' }}
+            />
+          )
+        }
+      </AutoSizerBlock>
     </>
   );
 };

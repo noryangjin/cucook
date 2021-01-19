@@ -19,6 +19,9 @@ export const PostViewerBlock = styled.div`
 
 export const UserDateBlock = styled.div`
   color: ${palette.gray[6]};
+  position: relative;
+  width: 100%;
+  text-align: center;
   span {
     font-size: 1.125rem;
   }

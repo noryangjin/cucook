@@ -38,10 +38,15 @@ const SearchList = ({ searchPost, loading, query }: Props) => {
     },
     [searchPost]
   );
+
   return (
     <>
       {loading ? (
         <h2>로딩 중...</h2>
+      ) : !searchPost || searchPost.length === 0 ? (
+        <div style={{ width: '100%', textAlign: 'center', marginTop: '1rem' }}>
+          검색 내역이 없습니다.
+        </div>
       ) : (
         <AutoSizerBlock disableHeight>
           {({ width }: any) =>

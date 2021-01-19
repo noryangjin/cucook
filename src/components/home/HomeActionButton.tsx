@@ -25,8 +25,21 @@ const HomeActionButton = ({ user, onChange, key_, val_ }: any) => {
     <HomeActionButtonBlock>
       <SortCategory>
         <select onChange={onChange}>
-          <option value="">정렬</option>
-          <option value="sort=views">조회수 순</option>
+          {val ? (
+            <>
+              <option value="">정렬</option>
+              <option value="sort=views" selected>
+                조회수 순
+              </option>
+            </>
+          ) : (
+            <>
+              <option value="" selected>
+                정렬
+              </option>
+              <option value="sort=views">조회수 순</option>
+            </>
+          )}
         </select>
         <CategoryImgBlock vals={val_[0]} keys={key_[0]}>
           <Link to={`?${val}`} className="ALL">
