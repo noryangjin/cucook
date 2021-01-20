@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Responsive from '../../common/Responsive';
 import palette from '../palette';
 
@@ -46,7 +46,11 @@ export const Spacer = styled.div`
   height: 3.1rem;
 `;
 
-export const Message = styled.div`
+type Props = {
+  error?: string;
+};
+
+export const Message = styled.div<Props>`
   z-index: 50;
   position: fixed;
   background: ${palette.cyan[3]};
@@ -55,6 +59,13 @@ export const Message = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  ${(props) =>
+    props.error &&
+    css`
+      z-index: 51;
+      background: ${palette.errorColor};
+    `}
 
   @keyframes okAnimation {
     0% {

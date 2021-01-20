@@ -30,13 +30,15 @@ const HeaderContainer = ({ history }: RouteComponentProps) => {
     if (authLogin) {
       setWelcomeMessage('로그인 성공~~~ 환영합니다!!!😁');
     }
-    if (message) {
+    if (message.includes('포스트가 삭제되었습니다.')) {
       setWelcomeMessage(message);
+    }
+    if (message) {
       return () => {
         dispatch(changeMessage(''));
       };
     }
-  }, [authLogin, dispatch, message]);
+  }, [welcomeMessage, authLogin, dispatch, message]);
 
   const onLogout = useCallback(() => {
     dispatch(logout());
@@ -72,6 +74,7 @@ const HeaderContainer = ({ history }: RouteComponentProps) => {
       onChange={onChange}
       user={user}
       onLogout={onLogout}
+      message={message}
       welcomeMessage={welcomeMessage}
     />
   );

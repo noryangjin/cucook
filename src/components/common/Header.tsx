@@ -15,6 +15,7 @@ import { GrSearch } from 'react-icons/gr';
 type typeProps = {
   user: any;
   onLogout: () => void;
+  message: string;
   welcomeMessage: string;
   term: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -25,15 +26,23 @@ const Header = ({
   user,
   onSubmit,
   onLogout,
-  welcomeMessage,
+  message,
   term,
+  welcomeMessage,
   onChange,
 }: typeProps) => {
-  console.log(welcomeMessage);
+  console.log(message);
   return (
     <>
+      {message && (
+        <FlashMessage duration={3500}>
+          <Message error="error">
+            <div className="text">{message}</div>
+          </Message>
+        </FlashMessage>
+      )}
       {welcomeMessage && (
-        <FlashMessage duration={35000000}>
+        <FlashMessage duration={3500}>
           <Message>
             <div className="text">{welcomeMessage}</div>
           </Message>

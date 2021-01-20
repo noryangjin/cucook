@@ -6,6 +6,7 @@ import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { readRoomList } from '../../module/chatRoom';
 import { joinRoom_API } from '../../lib/api/chatRoom';
 import { readRoom } from '../../module/chatReadRoom';
+import { changeMessage } from '../../module/message';
 
 const ChatRoomContainer = ({
   match,
@@ -30,13 +31,17 @@ const ChatRoomContainer = ({
   const joinRoom = useCallback(
     async ({ id, max, participants, password }) => {
       if (!user) {
-        alert('로그인이 필요합니다.');
-        return;
+        return [
+          dispatch(changeMessage('로그인이 필요합니다.')),
+          setTimeout(() => dispatch(changeMessage('')), 3500),
+        ];
       }
       if (max && participants) {
         if (participants.length >= max) {
-          alert('인원 초과');
-          return;
+          return [
+            dispatch(changeMessage('인원 초과입니다.')),
+            setTimeout(() => dispatch(changeMessage('')), 3500),
+          ];
         }
       }
       if (username && postId) {
