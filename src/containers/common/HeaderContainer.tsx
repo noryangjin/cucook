@@ -11,16 +11,18 @@ import { RootState } from '../../module/index';
 import { logout } from '../../module/user';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { search_Post, searchValue } from '../../module/searchPost';
+import { changeMessage } from '../../module/message';
 
 const HeaderContainer = ({ history }: RouteComponentProps) => {
   const [welcomeMessage, setWelcomeMessage] = useState<string>('');
 
   const dispatch = useDispatch();
-  const { user, authLogin, term } = useSelector(
-    ({ user, auth, searchPost }: RootState) => ({
+  const { user, authLogin, term, message } = useSelector(
+    ({ user, auth, searchPost, message }: RootState) => ({
       user: user.user,
       authLogin: auth.authLogin,
       term: searchPost.term,
+      message: message.message,
     })
   );
 
@@ -28,7 +30,13 @@ const HeaderContainer = ({ history }: RouteComponentProps) => {
     if (authLogin) {
       setWelcomeMessage('로그인 성공~~~ 환영합니다!!!😁');
     }
-  }, [authLogin, dispatch]);
+    if (message) {
+      setWelcomeMessage(message);
+      return () => {
+        dispatch(changeMessage(''));
+      };
+    }
+  }, [authLogin, dispatch, message]);
 
   const onLogout = useCallback(() => {
     dispatch(logout());

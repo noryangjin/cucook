@@ -29,10 +29,11 @@ const Header = ({
   term,
   onChange,
 }: typeProps) => {
+  console.log(welcomeMessage);
   return (
     <>
       {welcomeMessage && (
-        <FlashMessage duration={3500}>
+        <FlashMessage duration={35000000}>
           <Message>
             <div className="text">{welcomeMessage}</div>
           </Message>

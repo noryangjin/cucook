@@ -12,7 +12,9 @@ import {
   Height,
   Error,
 } from '../styles/post/PostViewer.style';
-import PostUpdateDeleteButton from './PostUpdateDeleteButton';
+import loadable from '@loadable/component';
+
+const Split = loadable(() => import('./PostUpdateDeleteButton'));
 
 const PostViewer = ({ post, error, loading, ownPost, onEdit }: any) => {
   if (error) {
@@ -47,7 +49,7 @@ const PostViewer = ({ post, error, loading, ownPost, onEdit }: any) => {
             <span>
               {new Date(publishedDate).toLocaleDateString().replace(/\s/g, '')}
             </span>
-            {ownPost && <PostUpdateDeleteButton onEdit={onEdit} />}
+            {ownPost && <Split onEdit={onEdit} />}
           </UserDateBlock>
         </div>
         <Spacer />

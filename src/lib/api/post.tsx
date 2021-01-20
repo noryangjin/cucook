@@ -75,3 +75,7 @@ export const updatePost = ({
     titleImg,
   });
 };
+
+export const deletePost = (id: string) => {
+  return client.delete(`/api/post/${id}`);
+};

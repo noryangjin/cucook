@@ -10,6 +10,7 @@ import posts, { postsSaga } from './posts';
 import chatRoom, { chatRoomSaga } from './chatRoom';
 import chatReadRoom, { chatReadRoomSaga } from './chatReadRoom';
 import searchPost, { searchPostSaga } from './searchPost';
+import message from './message';
 
 const rootReducer = combineReducers({
   chatRoom,
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   loading,
   write,
   searchPost,
+  message,
 });
 
 export function* rootSaga() {

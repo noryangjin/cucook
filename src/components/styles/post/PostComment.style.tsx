@@ -116,7 +116,7 @@ export const Message: any = styled.div<Props>`
   top: 0;
   right: 0;
   left: 0;
-  z-index: 1;
+  z-index: 50;
   background: ${palette.cyan[3]};
   height: 3rem;
   text-align: center;
