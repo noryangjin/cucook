@@ -31,7 +31,6 @@ const Header = ({
   welcomeMessage,
   onChange,
 }: typeProps) => {
-  console.log(message);
   return (
     <>
       {message && (
