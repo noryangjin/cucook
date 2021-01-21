@@ -5,7 +5,7 @@ import createRequestSaga, {
 import { takeLatest } from 'redux-saga/effects';
 import * as commentAPI from '../lib/api/comment';
 
-const UNLOADCOMMENT = 'comment/UNLOADCOMMENT';
+const UNLOADCOMMENT = 'comment/UNLOADCOMMENT' as const;
 const [
   READ_COMMENT,
   READ_COMMENT_SUCCESS,

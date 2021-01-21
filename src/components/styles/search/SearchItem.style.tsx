@@ -24,6 +24,7 @@ export const Content = styled.div`
   .title {
     margin: 0;
     overflow: hidden;
+    word-break: break-all;
   }
   .nameDate {
     span + span::before {

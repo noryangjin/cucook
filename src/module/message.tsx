@@ -1,6 +1,6 @@
 import { createAction, handleActions } from 'redux-actions';
 
-const MESSAGE = 'message/MESSAGE';
+const MESSAGE = 'message/MESSAGE' as const;
 
 export const changeMessage = createAction(MESSAGE, (value: string) => value);
 

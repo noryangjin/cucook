@@ -10,7 +10,7 @@ const [
   READ_ROOM_SUCCESS,
   READ_ROOM_FAILURE,
 ] = createRequestActionTypes('chatReadRoom/READ_ROOM');
-const INITIALIZEROOM = 'chatReadRoom/INITIALIZEROOM';
+const INITIALIZEROOM = 'chatReadRoom/INITIALIZEROOM' as const;
 
 type insert = {
   roomId: string;

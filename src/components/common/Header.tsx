@@ -62,7 +62,9 @@ const Header = ({
           <div className="right">
             {user ? (
               <>
-                <UserInfo>{user.username}</UserInfo>
+                <UserInfo>
+                  <Link to={`/@${user.username}`}>{user.username}</Link>
+                </UserInfo>
                 <Button onClick={onLogout}>logout</Button>
               </>
             ) : (

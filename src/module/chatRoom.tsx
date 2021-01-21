@@ -15,8 +15,8 @@ const [
   ROOM_LIST_SUCCESS,
   ROOM_LIST_FAILURE,
 ] = createRequestActionTypes('chatRoom/ROOM_LIST');
-const ROOM_OPTION = 'chatRoom/ROOM_OPTION';
-const ROOM_OPTION_INITIALIZE = 'chatRoom/ROOM_OPTION_INITIALIZE';
+const ROOM_OPTION = 'chatRoom/ROOM_OPTION' as const;
+const ROOM_OPTION_INITIALIZE = 'chatRoom/ROOM_OPTION_INITIALIZE' as const;
 
 type insert = {
   title: string;

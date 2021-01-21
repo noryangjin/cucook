@@ -6,6 +6,8 @@ export const PostViewerBlock = styled.div`
   h2 {
     font-size: 2rem;
     margin: 1rem 0;
+    word-break: break-all;
+    text-align: center;
   }
   .titleUser {
     display: flex;
@@ -13,7 +15,7 @@ export const PostViewerBlock = styled.div`
     align-items: center;
   }
   .views {
-    display: in;
+    margin-top: 10px;
   }
 `;
 
@@ -87,6 +89,9 @@ export const Tag = styled.div`
     height: 184px;
     word-break: break-all;
     line-height: 1.5;
+    span + span {
+      margin-left: 10px;
+    }
   }
   @media (max-width: 750px) {
     margin-top: 1rem;
@@ -172,5 +177,7 @@ export const Height = styled.div`
 `;
 
 export const Error = styled.div`
+  margin-top: 1rem;
+  text-align: center;
   color: ${palette.errorColor};
 `;

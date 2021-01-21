@@ -5,7 +5,7 @@ export const ButtonBlock = styled.div`
   position: absolute;
   display: flex;
   right: 0;
-  top: 0;
+  top: -4px;
   button + button {
     margin-left: 5px;
   }

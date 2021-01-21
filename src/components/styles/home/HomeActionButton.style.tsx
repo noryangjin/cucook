@@ -4,11 +4,21 @@ import palette from '../palette';
 
 export const HomeActionButtonBlock = styled.div`
   text-align: right;
-  margin: 10px 0;
+  padding: 10px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: fixed;
+  width: 1014px;
+  z-index: 30;
+  background: ${palette.backgroundColor};
 
+  @media (max-width: 1024px) {
+    width: 690px;
+  }
+  @media (max-width: 700px) {
+    width: 540px;
+  }
   img {
     height: 40px;
     width: 40px;
@@ -16,6 +26,7 @@ export const HomeActionButtonBlock = styled.div`
     object-fit: cover;
   }
   @media (max-width: 500px) {
+    width: 360px;
     justify-content: space-between;
   }
 `;
@@ -146,4 +157,8 @@ export const Spacer = styled.span`
   @media (max-width: 500px) {
     display: none;
   }
+`;
+
+export const Spacer2 = styled.div`
+  height: 60px;
 `;

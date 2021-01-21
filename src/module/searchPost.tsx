@@ -10,8 +10,8 @@ const [
   SERACH_POST_SUCCESS,
   SEARCH_POST_FAILURE,
 ] = createRequestActionTypes('searchPost/SEARCH_POST');
-const SEARCH_VALUE = 'searchPost/SEARCH_VALUE';
-const SEARCH_INITIALSTATE = 'searchPost/SEARCH_INITIALSTATE';
+const SEARCH_VALUE = 'searchPost/SEARCH_VALUE' as const;
+const SEARCH_INITIALSTATE = 'searchPost/SEARCH_INITIALSTATE' as const;
 
 export const search_Post = createAction(SEARCH_POST, ({ search }: any) => ({
   search,

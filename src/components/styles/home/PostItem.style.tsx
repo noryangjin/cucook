@@ -23,6 +23,7 @@ export const PostItemBlock = styled.div<any>`
     color: ${palette.gray[6]};
   }
   h3 {
+    word-break: break-all;
     margin: 1rem 0;
   }
   .tagIngre {

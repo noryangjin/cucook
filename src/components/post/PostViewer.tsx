@@ -13,6 +13,7 @@ import {
   Error,
 } from '../styles/post/PostViewer.style';
 import loadable from '@loadable/component';
+import { Link } from 'react-router-dom';
 
 const Split = loadable(() => import('./PostUpdateDeleteButton'));
 
@@ -38,14 +39,16 @@ const PostViewer = ({ post, error, loading, ownPost, onEdit }: any) => {
   return (
     <>
       <PostViewerBlock>
-        <span className="views">조회수 : {views}</span>
+        <div className="views">조회수 : {views}</div>
         <div className="titleUser">
           <h2>
             {title}({category})
           </h2>
 
           <UserDateBlock>
-            <span>{username}</span>
+            <span>
+              <Link to={`/@${username}`}>{username}</Link>
+            </span>
             <span>
               {new Date(publishedDate).toLocaleDateString().replace(/\s/g, '')}
             </span>

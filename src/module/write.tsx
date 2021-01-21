@@ -10,7 +10,7 @@ const CHANGE_FIELD = 'write/CHANGE_FIELD' as const;
 const [WRITE, WRITE_SUCCESS, WRITE_FAILURE] = createRequestActionTypes(
   'write/WRITE'
 );
-const SET_ORIGINAL_POST = 'write/SET_ORIGINAL_POST';
+const SET_ORIGINAL_POST = 'write/SET_ORIGINAL_POST' as const;
 const [
   UPDATE_POST,
   UPDATE_POST_SUCCESS,

@@ -44,13 +44,13 @@ const PostListContainer = ({ location, history }: RouteComponentProps) => {
   );
 
   useEffect(() => {
-    const { tag, ingredient, username, category, sort, page } = qs.parse(
+    const { tag, ingredient, category, sort, page } = qs.parse(
       location.search,
       {
         ignoreQueryPrefix: true,
       }
     );
-    dispatch(listPosts({ tag, username, ingredient, category, sort, page }));
+    dispatch(listPosts({ tag, ingredient, category, sort, page }));
   }, [dispatch, location]);
 
   return <PostList posts={posts} qs_={qs_} onScroll={onScroll} />;

@@ -43,7 +43,7 @@ export const UserInfo = styled.div`
 `;
 
 export const Spacer = styled.div`
-  height: 3.1rem;
+  height: 3rem;
 `;
 
 type Props = {

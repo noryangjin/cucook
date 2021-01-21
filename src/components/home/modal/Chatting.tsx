@@ -8,6 +8,7 @@ import {
   Content,
   Error,
 } from '../../styles/home/modal/Chatting.style';
+import { Link } from 'react-router-dom';
 import { IoMdOptions } from 'react-icons/io';
 import { BsLockFill } from 'react-icons/bs';
 import { BsPeopleFill } from 'react-icons/bs';
@@ -104,13 +105,15 @@ const Chatting = ({
                           &lt;참여 인원&gt;
                           {room.participants.map((ro: any) => (
                             <div key={ro._id} className="mem">
-                              {ro.user.username}
+                              <Link to={`/@${ro.user.username}`}>
+                                {ro.user.username}
+                              </Link>
                             </div>
                           ))}
                         </div>
                       )}
                     </div>
-                    <div>
+                    <div className="option_Icon">
                       <IoMdOptions onClick={onClickOption} />
                     </div>
                   </div>
@@ -137,7 +140,9 @@ const Chatting = ({
                                 <div className="my-content" key={ch._id}>
                                   <div className="block">
                                     <div className="name">
-                                      {ch.user.username}
+                                      <Link to={`/@${ch.user.username}`}>
+                                        {ch.user.username}
+                                      </Link>
                                     </div>
                                     <div
                                       className="text"
@@ -151,7 +156,9 @@ const Chatting = ({
                                 <div className="other-content" key={ch._id}>
                                   <div className="block">
                                     <div className="name">
-                                      {ch.user.username}
+                                      <Link to={`/@${ch.user.username}`}>
+                                        {ch.user.username}
+                                      </Link>
                                     </div>
                                     <div
                                       className="text"
@@ -177,14 +184,18 @@ const Chatting = ({
                   ) : ch.user === user.username ? (
                     <div className="my-content" key={index}>
                       <div className="block">
-                        <div className="name">{ch.user}</div>
+                        <div className="name">
+                          <Link to={`/@${ch.user}`}>{ch.user}</Link>
+                        </div>
                         <div className="text">{ch.text}</div>
                       </div>
                     </div>
                   ) : (
                     <div className="other-content" key={index}>
                       <div className="block">
-                        <div className="name">{ch.user}</div>
+                        <div className="name">
+                          <Link to={`/@${ch.user}`}>{ch.user}</Link>
+                        </div>
                         <div className="text">{ch.text}</div>
                       </div>
                     </div>

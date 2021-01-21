@@ -64,10 +64,13 @@ export const Title = styled.div`
       div {
         margin-top: 3px;
         margin-right: 10px;
+      }
+      .option_Icon {
         cursor: pointer;
       }
       .member {
         position: relative;
+        cursor: pointer;
         .mem_list {
           overflow-y: auto;
           word-break: break-all;
@@ -78,13 +81,16 @@ export const Title = styled.div`
           text-align: center;
           background: white;
           position: absolute;
-          cursor: text;
+
           left: -75px;
           top: 19px;
           .mem {
             margin-right: 0;
             margin: 0 5px;
             border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            &:hover {
+              color: ${palette.cyan[4]};
+            }
           }
         }
       }
@@ -167,7 +173,6 @@ export const Content = styled.div`
 
   .other-content {
     display: flex;
-
     .block {
       margin-top: 5px;
       .text {
