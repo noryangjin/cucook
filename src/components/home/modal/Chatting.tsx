@@ -105,7 +105,7 @@ const Chatting = ({
                           &lt;참여 인원&gt;
                           {room.participants.map((ro: any) => (
                             <div key={ro._id} className="mem">
-                              <Link to={`/@${ro.user.username}`}>
+                              <Link to={`/user/@${ro.user.username}`}>
                                 {ro.user.username}
                               </Link>
                             </div>
@@ -140,7 +140,7 @@ const Chatting = ({
                                 <div className="my-content" key={ch._id}>
                                   <div className="block">
                                     <div className="name">
-                                      <Link to={`/@${ch.user.username}`}>
+                                      <Link to={`/user/@${ch.user.username}`}>
                                         {ch.user.username}
                                       </Link>
                                     </div>
@@ -156,7 +156,7 @@ const Chatting = ({
                                 <div className="other-content" key={ch._id}>
                                   <div className="block">
                                     <div className="name">
-                                      <Link to={`/@${ch.user.username}`}>
+                                      <Link to={`/user/@${ch.user.username}`}>
                                         {ch.user.username}
                                       </Link>
                                     </div>
@@ -185,7 +185,7 @@ const Chatting = ({
                     <div className="my-content" key={index}>
                       <div className="block">
                         <div className="name">
-                          <Link to={`/@${ch.user}`}>{ch.user}</Link>
+                          <Link to={`/user/@${ch.user}`}>{ch.user}</Link>
                         </div>
                         <div className="text">{ch.text}</div>
                       </div>
@@ -194,7 +194,7 @@ const Chatting = ({
                     <div className="other-content" key={index}>
                       <div className="block">
                         <div className="name">
-                          <Link to={`/@${ch.user}`}>{ch.user}</Link>
+                          <Link to={`/user/@${ch.user}`}>{ch.user}</Link>
                         </div>
                         <div className="text">{ch.text}</div>
                       </div>

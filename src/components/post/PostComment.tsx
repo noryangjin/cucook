@@ -86,7 +86,7 @@ const PostComment = ({
             return (
               <ComBlock key={id}>
                 <div className="writer">
-                  <Link to={`/@${username}`}>{username}</Link>
+                  <Link to={`/user/@${username}`}>{username}</Link>
                 </div>
                 <div className="comment">{text}</div>
                 <div className="commentDate">

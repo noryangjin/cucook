@@ -16,7 +16,7 @@ const scrollToRef = (ref: any) =>
   window.scrollTo({ left: 0, top: ref.current.offsetTop, behavior: 'smooth' });
 
 const PostLeadPage = () => {
-  const [chatOn, setChatOn] = useState<boolean | null>(null);
+  const [chatOn, setChatOn] = useState<boolean>(false);
   const myRef = useRef<any>(null);
   const executeScroll = () => scrollToRef(myRef);
 

@@ -29,7 +29,7 @@ const PostItem = ({ item, style, qs_ }: any) => {
       <PostItemBlock style={style}>
         <span className="Block">
           <span className="nameDate">
-            <Link to={`/@${username}`} className="name">
+            <Link to={`/user/@${username}`} className="name">
               {username}
             </Link>
             <div className="date">

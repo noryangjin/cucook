@@ -46,6 +46,8 @@ const ChatRoomContainer = ({
       }
       if (username && postId) {
         history.push(`/@${username}/${postId}/chat/${id}/${location.search}`);
+      } else if (username) {
+        history.push(`/user/@${username}/chat/${id}/${location.search}`);
       } else {
         history.push(`/chat/${id}/${location.search}`);
       }
@@ -65,6 +67,8 @@ const ChatRoomContainer = ({
     (id: string) => {
       if (username && postId) {
         history.push(`/@${username}/${postId}/chat/${id}/${location.search}`);
+      } else if (username) {
+        history.push(`/user/@${username}/chat/${id}/${location.search}`);
       } else {
         history.push(`/chat/${id}/${location.search}`);
       }

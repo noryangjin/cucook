@@ -66,6 +66,8 @@ const ChattingContainer = ({
   const onCancel = useCallback(() => {
     if (username && postId) {
       history.push(`/@${username}/${postId}`);
+    } else if (username) {
+      history.push(`/user/@${username}/${location.search}`);
     } else {
       history.push(`/${location.search}`);
     }
@@ -87,6 +89,8 @@ const ChattingContainer = ({
       .then(() => {
         if (username && postId) {
           history.push(`/@${username}/${postId}`);
+        } else if (username) {
+          history.push(`/user/@${username}/${location.search}`);
         } else {
           history.push(`/${location.search}`);
         }

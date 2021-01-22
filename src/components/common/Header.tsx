@@ -63,7 +63,7 @@ const Header = ({
             {user ? (
               <>
                 <UserInfo>
-                  <Link to={`/@${user.username}`}>{user.username}</Link>
+                  <Link to={`/user/@${user.username}`}>{user.username}</Link>
                 </UserInfo>
                 <Button onClick={onLogout}>logout</Button>
               </>
