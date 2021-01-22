@@ -4,9 +4,13 @@ import UserInfo from '../../components/user/UserInfo';
 import { readUserPost, initializeUserInfo } from '../../module/user';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { RootState } from '../../module/index';
+import qs from 'qs';
 
-const UserInfoContainer = ({ match }: RouteComponentProps<any>) => {
+const UserInfoContainer = ({ match, location }: RouteComponentProps<any>) => {
   const { username } = match.params;
+  const { category, sort } = qs.parse(location.search, {
+    ignoreQueryPrefix: true,
+  });
   const [error, setError] = useState<string>('');
   const dispatch = useDispatch();
   const { post, postError, loading } = useSelector(
@@ -33,7 +37,14 @@ const UserInfoContainer = ({ match }: RouteComponentProps<any>) => {
   }, [postError]);
 
   return (
-    <UserInfo error={error} post={post} loading={loading} username={username} />
+    <UserInfo
+      error={error}
+      post={post}
+      loading={loading}
+      username={username}
+      category={category}
+      sort={sort}
+    />
   );
 };
 

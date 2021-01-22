@@ -3,7 +3,7 @@ import { AutoSizerBlock, ListBlock } from '../styles/search/SearchList.style';
 import SearchItem from './SearchItem';
 
 type Props = {
-  searchPost: any;
+  searchPost: Array<any>;
   loading: boolean;
   query: any;
 };
@@ -11,23 +11,19 @@ type Props = {
 const SearchList = ({ searchPost, loading, query }: Props) => {
   if (searchPost && query && query.category) {
     searchPost = searchPost.filter(
-      (sear: any) => sear.category.includes(query.category) === true
+      (sear) => sear.category.includes(query.category) === true
     );
   }
 
   if (searchPost && query && query.sort === 'views') {
-    searchPost.sort((a: any, b: any) => {
-      if (a.views > b.views) return -1;
-      else if (b.views > a.views) return 1;
-      else return 0;
-    });
+    searchPost.sort((a, b) =>
+      a.views > b.views ? -1 : a.views < b.views ? 1 : 0
+    );
   }
   if (searchPost && query && !query.sort) {
-    searchPost.sort((a: any, b: any) => {
-      if (a.publishedDate > b.publishedDate) return -1;
-      else if (b.publishedDate > a.publishedDate) return 1;
-      else return 0;
-    });
+    searchPost.sort((a, b) =>
+      a.views > b.views ? -1 : a.views < b.views ? 1 : 0
+    );
   }
 
   const rowRenderer = useCallback(

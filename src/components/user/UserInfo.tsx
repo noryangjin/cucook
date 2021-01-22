@@ -13,9 +13,18 @@ type Props = {
   post: Array<any>;
   loading: boolean;
   username: string;
+  category: any;
+  sort: any;
 };
 
-const UserInfo = ({ error, post, loading, username }: Props) => {
+const UserInfo = ({
+  error,
+  post,
+  loading,
+  username,
+  category,
+  sort,
+}: Props) => {
   if ((!post || loading) && !error) {
     return <h2>로딩 중...</h2>;
   }
@@ -27,6 +36,25 @@ const UserInfo = ({ error, post, loading, username }: Props) => {
     return <Error>게시글이 없습니다.</Error>;
   }
 
+  if (post && category) {
+    post = post.filter((po) => po.category === category);
+  }
+
+  if (post && sort) {
+    post = post.sort((a, b) =>
+      a.views > b.views ? -1 : a.views < b.views ? 1 : 0
+    );
+  }
+
+  if (post && !sort) {
+    post = post.sort((a, b) =>
+      a.publishedDate > b.publishedDate
+        ? -1
+        : a.publishedDate < b.publishedDate
+        ? 1
+        : 0
+    );
+  }
   return (
     <UserInfoBlock>
       <h2 style={{ display: 'block' }}>
