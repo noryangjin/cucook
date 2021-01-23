@@ -44,10 +44,9 @@ const PostViewer = ({ post, error, loading, ownPost, onEdit }: any) => {
           <h2>
             {title}({category})
           </h2>
-
           <UserDateBlock>
             <span>
-              <Link to={`/@${username}`}>{username}</Link>
+              <Link to={`/user/@${username}`}>{username}</Link>
             </span>
             <span>
               {new Date(publishedDate).toLocaleDateString().replace(/\s/g, '')}

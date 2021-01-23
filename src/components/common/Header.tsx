@@ -54,7 +54,6 @@ const Header = ({
           </div>
           <Form onSubmit={onSubmit}>
             <input value={term} onChange={onChange} placeholder="search.." />
-
             <button>
               <GrSearch />
             </button>

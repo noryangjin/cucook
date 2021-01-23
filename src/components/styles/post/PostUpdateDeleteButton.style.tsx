@@ -9,6 +9,12 @@ export const ButtonBlock = styled.div`
   button + button {
     margin-left: 5px;
   }
+
+  @media (max-width: 500px) {
+    position: relative;
+    justify-content: flex-end;
+    margin-top: 1rem;
+  }
 `;
 
 export const ActionButton = styled(Button)``;

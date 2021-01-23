@@ -36,6 +36,14 @@ export const Img = styled.img`
 `;
 
 export const PostInfo = styled.div`
+  .title {
+    @media (max-width: 700px) {
+      width: 260px;
+    }
+    @media (max-width: 500px) {
+      width: 100%;
+    }
+  }
   .viewsDate {
     color: ${palette.gray[6]};
     span + span::before {

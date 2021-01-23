@@ -66,7 +66,7 @@ const UserInfo = ({
             <Link to={`/@${username}/${po._id}`}>
               <Img src={po.titleImg} alt="" />
               <PostInfo>
-                <div>
+                <div className="title">
                   {po.title.length > 24
                     ? `${po.title.slice(0, 19)}...`
                     : po.title}

@@ -36,10 +36,18 @@ export const Wrapper = styled(Responsive)`
 `;
 
 export const UserInfo = styled.div`
-  font-size: 1.125rem;
   margin-right: 5px;
   display: flex;
   align-items: center;
+  max-width: 50px;
+  font-size: x-small;
+  font-weight: bold;
+  justify-content: flex-end;
+  letter-spacing: 2px;
+  @media (max-width: 500px) {
+    max-width: 30.5px;
+    overflow: auto;
+  }
 `;
 
 export const Spacer = styled.div`
@@ -136,6 +144,6 @@ export const Form = styled.form`
     width: 200px;
   }
   @media (max-width: 500px) {
-    display: none;
+    width: 120px;
   }
 `;

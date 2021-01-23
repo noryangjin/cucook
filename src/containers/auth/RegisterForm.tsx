@@ -38,7 +38,7 @@ const RegisterForm = ({ history }: RouteComponentProps<any>) => {
         return;
       }
       if (authError.response.status === 400) {
-        setError('아이디는 3~20자 이어야 합니다.');
+        setError('아이디는 3~10자 이어야 합니다.');
         return;
       }
     }
