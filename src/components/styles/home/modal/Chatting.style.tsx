@@ -112,7 +112,6 @@ const text_ = css`
   box-shadow: 1.2px 2px 2px ${palette.gray[6]};
   padding: 5px;
   border-radius: 10px;
-  text-align: right;
   word-break: break-all;
 `;
 
@@ -159,26 +158,27 @@ export const Content = styled.div`
   .my-content {
     display: flex;
     justify-content: flex-end;
-    .block {
-      margin-top: 5px;
-      .name {
-        text-align: right;
-      }
-      .text {
-        background: yellow;
-        ${text_}
-      }
+    margin-top: 5px;
+    flex-direction: column;
+    align-items: flex-end;
+    .name {
+      text-align: right;
+    }
+    .text {
+      background: yellow;
+      text-align: right;
+      ${text_}
     }
   }
 
   .other-content {
     display: flex;
-    .block {
-      margin-top: 5px;
-      .text {
-        background: white;
-        ${text_}
-      }
+    margin-top: 5px;
+    flex-direction: column;
+    align-items: flex-start;
+    .text {
+      background: white;
+      ${text_}
     }
   }
 `;

@@ -138,34 +138,30 @@ const Chatting = ({
                             <div key={ch._id}>
                               {ch.user._id === user._id ? (
                                 <div className="my-content" key={ch._id}>
-                                  <div className="block">
-                                    <div className="name">
-                                      <Link to={`/user/@${ch.user.username}`}>
-                                        {ch.user.username}
-                                      </Link>
-                                    </div>
-                                    <div
-                                      className="text"
-                                      style={{ background: '#dee2e6' }}
-                                    >
-                                      {ch.chat}
-                                    </div>
+                                  <div className="name">
+                                    <Link to={`/user/@${ch.user.username}`}>
+                                      {ch.user.username}
+                                    </Link>
+                                  </div>
+                                  <div
+                                    className="text"
+                                    style={{ background: '#dee2e6' }}
+                                  >
+                                    {ch.chat}
                                   </div>
                                 </div>
                               ) : (
                                 <div className="other-content" key={ch._id}>
-                                  <div className="block">
-                                    <div className="name">
-                                      <Link to={`/user/@${ch.user.username}`}>
-                                        {ch.user.username}
-                                      </Link>
-                                    </div>
-                                    <div
-                                      className="text"
-                                      style={{ background: '#dee2e6' }}
-                                    >
-                                      {ch.chat}
-                                    </div>
+                                  <div className="name">
+                                    <Link to={`/user/@${ch.user.username}`}>
+                                      {ch.user.username}
+                                    </Link>
+                                  </div>
+                                  <div
+                                    className="text"
+                                    style={{ background: '#dee2e6' }}
+                                  >
+                                    {ch.chat}
                                   </div>
                                 </div>
                               )}
@@ -183,21 +179,17 @@ const Chatting = ({
                     </div>
                   ) : ch.user === user.username ? (
                     <div className="my-content" key={index}>
-                      <div className="block">
-                        <div className="name">
-                          <Link to={`/user/@${ch.user}`}>{ch.user}</Link>
-                        </div>
-                        <div className="text">{ch.text}</div>
+                      <div className="name">
+                        <Link to={`/user/@${ch.user}`}>{ch.user}</Link>
                       </div>
+                      <div className="text">{ch.text}</div>
                     </div>
                   ) : (
                     <div className="other-content" key={index}>
-                      <div className="block">
-                        <div className="name">
-                          <Link to={`/user/@${ch.user}`}>{ch.user}</Link>
-                        </div>
-                        <div className="text">{ch.text}</div>
+                      <div className="name">
+                        <Link to={`/user/@${ch.user}`}>{ch.user}</Link>
                       </div>
+                      <div className="text">{ch.text}</div>
                     </div>
                   )
                 )}
