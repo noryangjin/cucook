@@ -14,8 +14,11 @@ export const PostViewerBlock = styled.div`
     flex-direction: column;
     align-items: center;
   }
-  .views {
+  .viewsWrite {
+    display: flex;
+    align-items: center;
     margin-top: 10px;
+    justify-content: space-between;
   }
 `;
 

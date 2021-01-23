@@ -12,12 +12,22 @@ import {
   Height,
   Error,
 } from '../styles/post/PostViewer.style';
+import { WriteButton } from '../styles/home/HomeActionButton.style';
 import loadable from '@loadable/component';
 import { Link } from 'react-router-dom';
 
 const Split = loadable(() => import('./PostUpdateDeleteButton'));
 
-const PostViewer = ({ post, error, loading, ownPost, onEdit }: any) => {
+type Props = {
+  post: any;
+  error: string;
+  loading: boolean;
+  ownPost: boolean;
+  onEdit: () => void;
+  user: Array<any>;
+};
+
+const PostViewer = ({ post, error, loading, ownPost, onEdit, user }: Props) => {
   if (error) {
     return <Error>{error}</Error>;
   }
@@ -39,7 +49,14 @@ const PostViewer = ({ post, error, loading, ownPost, onEdit }: any) => {
   return (
     <>
       <PostViewerBlock>
-        <div className="views">조회수 : {views}</div>
+        <div className="viewsWrite">
+          <div>조회수 : {views}</div>
+          {user && (
+            <WriteButton to="/write" cyan>
+              글쓰기
+            </WriteButton>
+          )}
+        </div>
         <div className="titleUser">
           <h2>
             {title}({category})

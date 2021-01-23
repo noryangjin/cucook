@@ -9,7 +9,7 @@ import axios from 'axios';
 
 const PostViewerContainer = ({ match, history }: RouteComponentProps<any>) => {
   const { postId } = match.params;
-  const [error, setError] = useState<null | string>(null);
+  const [error, setError] = useState<string>('');
   const dispatch = useDispatch();
   const { post, postError, loading, user } = useSelector(
     ({ post, loading, user }: RootState) => ({
@@ -54,6 +54,7 @@ const PostViewerContainer = ({ match, history }: RouteComponentProps<any>) => {
       loading={loading}
       ownPost={ownPost}
       onEdit={onEdit}
+      user={user}
     />
   );
 };
