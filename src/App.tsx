@@ -8,6 +8,7 @@ import WritePage from './pages/WritePage';
 import PostLeadPage from './pages/PostLeadPage';
 import SearchPage from './pages/SearchPage';
 import UserPage from './pages/UserPage';
+import MapPage from './pages/MapPage';
 
 const App: FunctionComponent = () => {
   return (
@@ -17,6 +18,7 @@ const App: FunctionComponent = () => {
       <Route path="/register" component={RegisterPage} />
       <Route path="/write" component={WritePage} />
       <Route path="/search" component={SearchPage} />
+      <Route path="/map" component={MapPage} />
       <Route
         path={['/@:username/:postId/chat/:chatRoomId', '/@:username/:postId']}
         component={PostLeadPage}

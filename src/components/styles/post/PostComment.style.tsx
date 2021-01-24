@@ -61,6 +61,9 @@ export const ComBlock = styled.div`
     word-break: break-all;
   }
   .writer {
+    a {
+      color: black;
+    }
     width: 20%;
     text-align: center;
   }

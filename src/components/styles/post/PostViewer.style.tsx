@@ -23,6 +23,9 @@ export const PostViewerBlock = styled.div`
 `;
 
 export const UserDateBlock = styled.div`
+  a {
+    color: ${palette.gray[6]};
+  }
   color: ${palette.gray[6]};
   position: relative;
   width: 100%;

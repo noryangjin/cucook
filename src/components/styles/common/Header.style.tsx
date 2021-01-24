@@ -24,6 +24,7 @@ export const Wrapper = styled(Responsive)`
     font-weight: bold;
   }
   a {
+    color: black;
     text-transform: uppercase;
   }
   button {

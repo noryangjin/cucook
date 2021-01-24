@@ -3,6 +3,9 @@ import Button from '../../common/Button';
 import palette from '../palette';
 
 export const HomeActionButtonBlock = styled.div`
+  a {
+    color: black;
+  }
   text-align: right;
   padding: 10px 0;
   display: flex;
@@ -32,6 +35,8 @@ export const HomeActionButtonBlock = styled.div`
 `;
 
 export const WriteButton = styled(Button)`
+  color: black;
+
   width: 150px;
   height: 30px;
   @media (max-width: 700px) {

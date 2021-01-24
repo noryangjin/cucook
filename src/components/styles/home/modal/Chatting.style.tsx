@@ -69,6 +69,9 @@ export const Title = styled.div`
         cursor: pointer;
       }
       .member {
+        a {
+          color: black;
+        }
         position: relative;
         cursor: pointer;
         .mem_list {
@@ -100,7 +103,7 @@ export const Title = styled.div`
     cursor: pointer;
   }
   .delete {
-    margin-top: 3px;
+    width: 72px;
     border: none;
     outline: none;
     border-radius: 5px;
@@ -162,6 +165,9 @@ export const Content = styled.div`
     flex-direction: column;
     align-items: flex-end;
     .name {
+      a {
+        color: black;
+      }
       text-align: right;
     }
     .text {
@@ -176,6 +182,9 @@ export const Content = styled.div`
     margin-top: 5px;
     flex-direction: column;
     align-items: flex-start;
+    a {
+      color: black;
+    }
     .text {
       background: white;
       ${text_}

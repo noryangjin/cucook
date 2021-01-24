@@ -2,6 +2,9 @@ import styled from 'styled-components';
 import palette from '../../styles/palette';
 
 export const AuthTemplateBlock = styled.div`
+  a {
+    color: black;
+  }
   position: absolute;
   bottom: 0;
   left: 0;

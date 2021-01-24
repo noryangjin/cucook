@@ -27,6 +27,7 @@ export const Content = styled.div`
     word-break: break-all;
   }
   .nameDate {
+    color: black;
     span + span::before {
       content: '\\B7';
       padding: 0 5px;
@@ -34,6 +35,7 @@ export const Content = styled.div`
   }
   .ingredients,
   .tags {
+    color: black;
     overflow: auto;
     max-width: 582px;
     height: 80px;
