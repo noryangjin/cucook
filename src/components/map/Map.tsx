@@ -10,7 +10,6 @@ import { Key } from './Key';
 import Geocode from 'react-geocode';
 import 'antd/dist/antd.css';
 import { Descriptions } from 'antd';
-import { StyledAutoComplete } from '../styles/map/map.style';
 
 Geocode.setApiKey(Key);
 
@@ -82,6 +81,7 @@ const Map = () => {
     let newLng = e.latLng.lng();
 
     Geocode.fromLatLng(newLat, newLng).then((response) => {
+      console.log(response);
       const address = response.results[0].formatted_address,
         addressArray = response.results[0].address_components,
         city = getCity(addressArray),
@@ -104,33 +104,10 @@ const Map = () => {
     });
   };
 
-  const placeSelected = (place: any) => {
-    const address = place.formatted_address,
-      addressArray = place.address_components,
-      city = getCity(addressArray),
-      area = getArea(addressArray),
-      state = getState(addressArray),
-      newLat = place.geometry.location.lat(),
-      newLng = place.geometry.location.lng();
-    SetStates({
-      address: address || '',
-      area: area || '',
-      city: city || '',
-      state: state || '',
-      markerPosition: {
-        lat: newLat,
-        lng: newLng,
-      },
-      mapPosition: {
-        lat: newLat,
-        lng: newLng,
-      },
-    });
-  };
-
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position: any) => {
+        console.log(position);
         SetStates({
           mapPosition: {
             lat: position.coords.latitude,
@@ -149,38 +126,33 @@ const Map = () => {
 
   const MapWithAMarker = withScriptjs(
     withGoogleMap((props: any) => (
-      <>
-        <StyledAutoComplete
-          types={['(regions)']}
-          onPlaceSelected={placeSelected}
-        />
-        <GoogleMap
-          defaultZoom={17}
-          defaultCenter={{
-            lat: states.mapPosition.lat,
-            lng: states.mapPosition.lng,
+      <GoogleMap
+        defaultZoom={17}
+        defaultCenter={{
+          lat: states.mapPosition.lat,
+          lng: states.mapPosition.lng,
+        }}
+        onClick={onMarkerDragEnd}
+      >
+        <Marker
+          draggable={true}
+          onDragEnd={onMarkerDragEnd}
+          position={{
+            lat: states.markerPosition.lat,
+            lng: states.markerPosition.lng,
           }}
         >
-          <Marker
-            draggable={true}
-            onDragEnd={onMarkerDragEnd}
-            position={{
-              lat: states.markerPosition.lat,
-              lng: states.markerPosition.lng,
-            }}
-          >
-            <InfoWindow>
-              <div>ssss</div>
-            </InfoWindow>
-          </Marker>
-        </GoogleMap>
-      </>
+          <InfoWindow>
+            <div style={{ padding: '0' }}>{states.address || '현재 위치'}</div>
+          </InfoWindow>
+        </Marker>
+      </GoogleMap>
     ))
   );
 
   return (
     <div style={{ position: 'relative' }}>
-      <h2>Map</h2>
+      <h2 style={{ marginTop: '10px' }}>Map</h2>
       <Descriptions bordered style={{ marginBottom: '2rem' }}>
         <Descriptions.Item label="City">{states.city}</Descriptions.Item>
         <Descriptions.Item label="Area">{states.area}</Descriptions.Item>
@@ -188,7 +160,7 @@ const Map = () => {
         <Descriptions.Item label="Address">{states.address}</Descriptions.Item>
       </Descriptions>
       <MapWithAMarker
-        googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${Key}&v=3.exp&libraries=geometry,drawing,places&language=ko`}
+        googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${Key}&v=3.exp&libraries=geometry,drawing,places`}
         loadingElement={<div style={{ height: `100%` }} />}
         containerElement={<div style={{ height: `400px` }} />}
         mapElement={<div style={{ height: `100%` }} />}
