@@ -16,7 +16,10 @@ const App: FunctionComponent = () => {
       <Route path={['/', '/chat/:chatRoomId']} component={HomePage} exact />
       <Route path="/login" component={LoginPage} />
       <Route path="/register" component={RegisterPage} />
-      <Route path="/write" component={WritePage} />
+      <Route
+        path={['/write/chat/:chatRoomId', '/write']}
+        component={WritePage}
+      />
       <Route path="/search" component={SearchPage} />
       <Route
         path={['/@:username/:postId/chat/:chatRoomId', '/@:username/:postId']}

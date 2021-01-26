@@ -5,27 +5,34 @@ export const historyPush = ({
   id,
   location,
 }: any) => {
+  const { search, pathname } = location;
+  const includes = (value: string) => {
+    return pathname.includes(value);
+  };
+
   if (id) {
     if (username && postId) {
-      return history.push(
-        `/@${username}/${postId}/chat/${id}/${location.search}`
-      );
+      return history.push(`/@${username}/${postId}/chat/${id}/${search}`);
     } else if (username) {
-      return history.push(`/user/@${username}/chat/${id}/${location.search}`);
-    } else if (location.pathname.includes('/map')) {
+      return history.push(`/user/@${username}/chat/${id}/${search}`);
+    } else if (includes('/map')) {
       return history.push(`/map/chat/${id}/`);
+    } else if (includes('/write')) {
+      return history.push(`/write/chat/${id}`);
     } else {
-      return history.push(`/chat/${id}/${location.search}`);
+      return history.push(`/chat/${id}/${search}`);
     }
   } else {
     if (username && postId) {
       return history.push(`/@${username}/${postId}`);
     } else if (username) {
-      return history.push(`/user/@${username}/${location.search}`);
-    } else if (location.pathname.includes('/map')) {
+      return history.push(`/user/@${username}/${search}`);
+    } else if (includes('/map')) {
       return history.push(`/map`);
+    } else if (includes('/write')) {
+      return history.push(`/write`);
     } else {
-      return history.push(`/${location.search}`);
+      return history.push(`/${search}`);
     }
   }
 };
