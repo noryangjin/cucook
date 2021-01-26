@@ -25,6 +25,7 @@
     "@types/styled-components": "^5.1.5",
     "antd": "^4.11.1",
     "axios": "^0.21.0",
+    "emailjs-com": "^2.6.4",
     "google-map-react": "^2.1.9",
     "immer": "^8.0.0",
     "qs": "^6.9.4",

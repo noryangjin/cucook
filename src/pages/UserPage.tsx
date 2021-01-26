@@ -4,13 +4,13 @@ import Responsive from '../components/common/Responsive';
 import UserInfoContainer from '../containers/user/UserInfoContainer';
 import HomeActionButtonContainer from '../containers/home/HomeActionButtonContainer';
 import ChatRoomContainer from '../containers/home/ChatRoomContainer';
-import { BsFillChatDotsFill } from 'react-icons/bs';
 import {
   ChatBlock,
   ScrollButton,
 } from '../components/styles/common/SideMenu.style';
-import { FaMapMarkedAlt } from 'react-icons/fa';
 import { RouteComponentProps } from 'react-router-dom';
+import { FaMapMarkedAlt } from 'react-icons/fa';
+import { BsFillChatDotsFill, BsFillQuestionCircleFill } from 'react-icons/bs';
 
 const UserPage = ({ history }: RouteComponentProps) => {
   const [chatOn, setChatOn] = useState<boolean>(false);
@@ -36,6 +36,12 @@ const UserPage = ({ history }: RouteComponentProps) => {
         </div>
         <div className="icon">
           <FaMapMarkedAlt onClick={() => history.push('/map')} size="22" />
+        </div>
+        <div className="icon">
+          <BsFillQuestionCircleFill
+            onClick={() => history.push('/ask')}
+            size="22"
+          />
         </div>
       </ScrollButton>
     </>

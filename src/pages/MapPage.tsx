@@ -7,13 +7,14 @@ import {
   ScrollButton,
 } from '../components/styles/common/SideMenu.style';
 import ChatRoomContainer from '../containers/home/ChatRoomContainer';
-import { BsFillChatDotsFill } from 'react-icons/bs';
+import { BsFillChatDotsFill, BsFillQuestionCircleFill } from 'react-icons/bs';
+import { RouteComponentProps } from 'react-router-dom';
 
 const Split = loadable(() => import('../containers/map/MapContainer'), {
   fallback: <h2>로딩 중...</h2>,
 });
 
-const MapPage = () => {
+const MapPage = ({ history }: RouteComponentProps) => {
   const [chatOn, setChatOn] = useState<boolean>(false);
 
   const onClick = () => {
@@ -33,6 +34,12 @@ const MapPage = () => {
       <ScrollButton>
         <div className="icon">
           <BsFillChatDotsFill onClick={onClick} size="23" />
+        </div>
+        <div className="icon">
+          <BsFillQuestionCircleFill
+            onClick={() => history.push('/ask')}
+            size="22"
+          />
         </div>
       </ScrollButton>
     </>

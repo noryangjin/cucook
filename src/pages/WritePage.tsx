@@ -7,9 +7,9 @@ import {
   ChatBlock,
   ScrollButton,
 } from '../components/styles/common/SideMenu.style';
-import { BsFillChatDotsFill } from 'react-icons/bs';
-import { FaMapMarkedAlt } from 'react-icons/fa';
 import { RouteComponentProps } from 'react-router-dom';
+import { BsFillChatDotsFill, BsFillQuestionCircleFill } from 'react-icons/bs';
+import { FaMapMarkedAlt } from 'react-icons/fa';
 
 const Split = loadable(() => import('./Split/WritePage.split'), {
   fallback: <h2>로딩 중...</h2>,
@@ -37,6 +37,12 @@ const WritePage = ({ history }: RouteComponentProps) => {
         </div>
         <div className="icon">
           <FaMapMarkedAlt onClick={() => history.push('/map')} size="22" />
+        </div>
+        <div className="icon">
+          <BsFillQuestionCircleFill
+            onClick={() => history.push('/ask')}
+            size="22"
+          />
         </div>
       </ScrollButton>
     </>
