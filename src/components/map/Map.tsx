@@ -10,10 +10,16 @@ import { Key } from './Key';
 import Geocode from 'react-geocode';
 import 'antd/dist/antd.css';
 import { Descriptions } from 'antd';
+import { WriteButton } from '../styles/home/HomeActionButton.style';
+import { TitleButton } from '../styles/map/Map.style';
 
 Geocode.setApiKey(Key);
 
-const Map = () => {
+type Props = {
+  user: object;
+};
+
+const Map = ({ user }: Props) => {
   const [states, SetStates] = useState<any>({
     address: '',
     city: '',
@@ -81,7 +87,6 @@ const Map = () => {
     let newLng = e.latLng.lng();
 
     Geocode.fromLatLng(newLat, newLng).then((response) => {
-      console.log(response);
       const address = response.results[0].formatted_address,
         addressArray = response.results[0].address_components,
         city = getCity(addressArray),
@@ -152,7 +157,14 @@ const Map = () => {
 
   return (
     <div style={{ position: 'relative' }}>
-      <h2 style={{ marginTop: '10px' }}>Map</h2>
+      <TitleButton>
+        <h2 style={{ marginTop: '10px' }}>Map</h2>
+        {user && (
+          <WriteButton to="/write" cyan>
+            글쓰기
+          </WriteButton>
+        )}
+      </TitleButton>
       <Descriptions bordered style={{ marginBottom: '2rem' }}>
         <Descriptions.Item label="City">{states.city}</Descriptions.Item>
         <Descriptions.Item label="Area">{states.area}</Descriptions.Item>

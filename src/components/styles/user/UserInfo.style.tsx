@@ -37,6 +37,7 @@ export const Img = styled.img`
 
 export const PostInfo = styled.div`
   .title {
+    color: black;
     @media (max-width: 700px) {
       width: 260px;
     }
