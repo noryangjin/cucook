@@ -12,7 +12,7 @@ export const ScrollButton = styled.button`
   align-items: center;
   cursor: pointer;
 
-  .chatBlock {
+  .icon {
     display: flex;
     justify-content: center;
     align-items: center;

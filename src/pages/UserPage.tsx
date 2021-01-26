@@ -9,8 +9,10 @@ import {
   ChatBlock,
   ScrollButton,
 } from '../components/styles/common/SideMenu.style';
+import { FaMapMarkedAlt } from 'react-icons/fa';
+import { RouteComponentProps } from 'react-router-dom';
 
-const UserPage = () => {
+const UserPage = ({ history }: RouteComponentProps) => {
   const [chatOn, setChatOn] = useState<boolean>(false);
 
   const onClick = () => {
@@ -29,8 +31,11 @@ const UserPage = () => {
       </Responsive>
       <ChatBlock>{chatOn && <ChatRoomContainer />}</ChatBlock>
       <ScrollButton>
-        <div className="chatBlock">
-          <BsFillChatDotsFill className="chat" onClick={onClick} size="23" />
+        <div className="icon">
+          <BsFillChatDotsFill onClick={onClick} size="23" />
+        </div>
+        <div className="icon">
+          <FaMapMarkedAlt onClick={() => history.push('/map')} size="22" />
         </div>
       </ScrollButton>
     </>

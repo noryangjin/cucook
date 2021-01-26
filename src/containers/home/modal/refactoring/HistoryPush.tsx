@@ -19,6 +19,8 @@ export const historyPush = ({
       return history.push(`/map/chat/${id}/`);
     } else if (includes('/write')) {
       return history.push(`/write/chat/${id}`);
+    } else if (includes('/search')) {
+      return history.push(`/search/chat/${id}`);
     } else {
       return history.push(`/chat/${id}/${search}`);
     }
@@ -28,9 +30,11 @@ export const historyPush = ({
     } else if (username) {
       return history.push(`/user/@${username}/${search}`);
     } else if (includes('/map')) {
-      return history.push(`/map`);
+      return history.push('/map');
     } else if (includes('/write')) {
-      return history.push(`/write`);
+      return history.push('/write');
+    } else if (includes('/search')) {
+      return history.push('/search');
     } else {
       return history.push(`/${search}`);
     }

@@ -9,13 +9,15 @@ import { BiArrowToTop } from 'react-icons/bi';
 import { BsFillChatDotsFill } from 'react-icons/bs';
 import loadable from '@loadable/component';
 import ChatRoomContainer from '../containers/home/ChatRoomContainer';
+import { FaMapMarkedAlt } from 'react-icons/fa';
+import { RouteComponentProps } from 'react-router-dom';
 
 const Split = loadable(() => import('./Split/PostLeadPage.split'));
 
 const scrollToRef = (ref: any) =>
   window.scrollTo({ left: 0, top: ref.current.offsetTop, behavior: 'smooth' });
 
-const PostLeadPage = () => {
+const PostLeadPage = ({ history }: RouteComponentProps) => {
   const [chatOn, setChatOn] = useState<boolean>(false);
   const myRef = useRef<any>(null);
   const executeScroll = () => scrollToRef(myRef);
@@ -36,8 +38,11 @@ const PostLeadPage = () => {
       </Responsive>
       <ChatBlock>{chatOn && <ChatRoomContainer />}</ChatBlock>
       <ScrollButton>
-        <div className="chatBlock">
-          <BsFillChatDotsFill className="chat" onClick={onClick} size="23" />
+        <div className="icon">
+          <BsFillChatDotsFill onClick={onClick} size="23" />
+        </div>
+        <div className="icon">
+          <FaMapMarkedAlt onClick={() => history.push('/map')} size="22" />
         </div>
         <div>
           <BiArrowToTop className="up" onClick={executeScroll} size="30" />

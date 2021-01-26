@@ -31,8 +31,8 @@ const MapPage = () => {
       </Responsive>
       <ChatBlock>{chatOn && <ChatRoomContainer />}</ChatBlock>
       <ScrollButton>
-        <div className="chatBlock">
-          <BsFillChatDotsFill className="chat" onClick={onClick} size="23" />
+        <div className="icon">
+          <BsFillChatDotsFill onClick={onClick} size="23" />
         </div>
       </ScrollButton>
     </>

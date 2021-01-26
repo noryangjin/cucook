@@ -20,7 +20,10 @@ const App: FunctionComponent = () => {
         path={['/write/chat/:chatRoomId', '/write']}
         component={WritePage}
       />
-      <Route path="/search" component={SearchPage} />
+      <Route
+        path={['/search/chat/:chatRoomId', '/search']}
+        component={SearchPage}
+      />
       <Route
         path={['/@:username/:postId/chat/:chatRoomId', '/@:username/:postId']}
         component={PostLeadPage}
