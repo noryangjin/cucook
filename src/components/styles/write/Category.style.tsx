@@ -4,7 +4,7 @@ import palette from '../palette';
 export const CategoryBlock = styled.div`
   padding: 0 5px;
   max-width: 280px;
-
+  margin-top: 10px;
   .cusSelectbox {
     height: 32px;
     width: 100%;

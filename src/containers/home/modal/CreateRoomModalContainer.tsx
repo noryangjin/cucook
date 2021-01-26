@@ -16,6 +16,7 @@ import {
 import { withRouter } from 'react-router-dom';
 import { readRoomList } from '../../../module/chatRoom';
 import { readRoom } from '../../../module/chatReadRoom';
+import { historyPush } from './refactoring/HistoryPush';
 
 const CreateRoomModalContainer = ({
   match,
@@ -83,11 +84,7 @@ const CreateRoomModalContainer = ({
       if (!password) {
         dispatch(readRoom({ roomId: chatRoom, password: '' }));
       }
-      if (username && postId) {
-        history.push(`/@${username}/${postId}/chat/${chatRoom}`);
-      } else {
-        history.push(`/chat/${chatRoom}${location.search}`);
-      }
+      historyPush({ history, postId, username, id: chatRoom, location });
     }
     if (chatRoomError && chatRoomError.response.status === 403) {
       setError('로그인 하셔야 합니다.');

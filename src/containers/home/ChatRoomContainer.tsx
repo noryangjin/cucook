@@ -7,6 +7,7 @@ import { readRoomList } from '../../module/chatRoom';
 import { joinRoom_API } from '../../lib/api/chatRoom';
 import { readRoom } from '../../module/chatReadRoom';
 import { changeMessage } from '../../module/message';
+import { historyPush } from './modal/refactoring/HistoryPush';
 
 const ChatRoomContainer = ({
   match,
@@ -22,7 +23,7 @@ const ChatRoomContainer = ({
     user: user.user,
     roomList: chatRoom.roomList,
   }));
-
+  console.log(chatRoomId);
   useEffect(() => {
     dispatch(readRoomList());
     setSearchRoom('');
@@ -44,13 +45,7 @@ const ChatRoomContainer = ({
           ];
         }
       }
-      if (username && postId) {
-        history.push(`/@${username}/${postId}/chat/${id}/${location.search}`);
-      } else if (username) {
-        history.push(`/user/@${username}/chat/${id}/${location.search}`);
-      } else {
-        history.push(`/chat/${id}/${location.search}`);
-      }
+      historyPush({ history, postId, username, id, location });
 
       if (!password) {
         dispatch(readRoom({ roomId: id, password: '' }));
@@ -60,21 +55,15 @@ const ChatRoomContainer = ({
         });
       }
     },
-    [history, location, user, dispatch, username, postId]
+    [user, history, postId, username, location, dispatch]
   );
 
   const joinRoom_ING = useCallback(
     (id: string) => {
-      if (username && postId) {
-        history.push(`/@${username}/${postId}/chat/${id}/${location.search}`);
-      } else if (username) {
-        history.push(`/user/@${username}/chat/${id}/${location.search}`);
-      } else {
-        history.push(`/chat/${id}/${location.search}`);
-      }
+      historyPush({ history, postId, username, id, location });
       dispatch(readRoom({ roomId: id, password: '' }));
     },
-    [history, location, dispatch, username, postId]
+    [history, postId, username, location, dispatch]
   );
 
   const onPlusClick = useCallback(() => {

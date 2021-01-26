@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   InfoWindow,
   withScriptjs,
@@ -112,7 +112,6 @@ const Map = ({ user }: Props) => {
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position: any) => {
-        console.log(position);
         SetStates({
           mapPosition: {
             lat: position.coords.latitude,
@@ -181,4 +180,4 @@ const Map = ({ user }: Props) => {
   );
 };
 
-export default Map;
+export default React.memo(Map);

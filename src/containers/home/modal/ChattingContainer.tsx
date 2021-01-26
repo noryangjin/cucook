@@ -14,6 +14,7 @@ import { leaveRoom_API, joinRoom_API } from '../../../lib/api/chatRoom';
 import { readRoom, initializeRoom } from '../../../module/chatReadRoom';
 import socketIOClient from 'socket.io-client';
 import { chatting_API } from '../../../lib/api/chatting';
+import { historyPush } from './refactoring/HistoryPush';
 
 let socket_: any;
 
@@ -64,13 +65,7 @@ const ChattingContainer = ({
   }, [option]);
 
   const onCancel = useCallback(() => {
-    if (username && postId) {
-      history.push(`/@${username}/${postId}`);
-    } else if (username) {
-      history.push(`/user/@${username}/${location.search}`);
-    } else {
-      history.push(`/${location.search}`);
-    }
+    historyPush({ history, postId, username, location });
     setOption(false);
     setCheckMem(false);
     dispatch(readRoomList());
@@ -87,13 +82,7 @@ const ChattingContainer = ({
         setOption(false);
       })
       .then(() => {
-        if (username && postId) {
-          history.push(`/@${username}/${postId}`);
-        } else if (username) {
-          history.push(`/user/@${username}/${location.search}`);
-        } else {
-          history.push(`/${location.search}`);
-        }
+        historyPush({ history, postId, username, location });
         dispatch(readRoomList());
       });
   }, [dispatch, chatRoomId, location, history, username, postId]);

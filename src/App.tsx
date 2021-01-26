@@ -18,7 +18,6 @@ const App: FunctionComponent = () => {
       <Route path="/register" component={RegisterPage} />
       <Route path="/write" component={WritePage} />
       <Route path="/search" component={SearchPage} />
-      <Route path="/map" component={MapPage} />
       <Route
         path={['/@:username/:postId/chat/:chatRoomId', '/@:username/:postId']}
         component={PostLeadPage}
@@ -27,6 +26,7 @@ const App: FunctionComponent = () => {
         path={['/user/@:username/chat/:chatRoomId', '/user/@:username']}
         component={UserPage}
       />
+      <Route path={['/map/chat/:chatRoomId', '/map']} component={MapPage} />
       <Route
         render={({ location }) => (
           <div>
