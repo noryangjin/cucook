@@ -8,6 +8,7 @@ import {
 import React, { ChangeEvent, FormEvent } from 'react';
 import { TitleButton } from '../styles/map/Map.style';
 import { WriteButton } from '../styles/home/HomeActionButton.style';
+import SendLoading from './SendLoading';
 
 type Props = {
   user: object;
@@ -18,9 +19,11 @@ type Props = {
     content: string;
   };
   onClickBack: () => void;
+  onClickSend: () => void;
   error: string;
   onSubmit: (e: FormEvent) => void;
   onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  loading: boolean;
 };
 
 const Ask = ({
@@ -30,10 +33,13 @@ const Ask = ({
   error,
   onClickBack,
   onSubmit,
+  onClickSend,
+  loading,
 }: Props) => {
   const { username, guestEmail, title, content } = values;
   return (
     <>
+      <SendLoading />
       <TitleButton>
         <h2 style={{ margin: '10px 0' }}>문의하기</h2>
         {user && (
@@ -53,7 +59,7 @@ const Ask = ({
             <input value={username} name="username" onChange={onChange} />
           </div>
           <div>
-            <label>Your Email</label>
+            <label>Your Email Address</label>
             <input value={guestEmail} name="guestEmail" onChange={onChange} />
           </div>
           <div>
@@ -66,7 +72,7 @@ const Ask = ({
           </div>
           {error && <span className="error">{error}</span>}
           <ButtonBlock>
-            <Button>전송</Button>
+            <Button onClick={onClickSend}>전송</Button>
             <Button onClick={onClickBack}>뒤로 가기</Button>
           </ButtonBlock>
         </WrapperForm>

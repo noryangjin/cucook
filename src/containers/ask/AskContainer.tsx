@@ -18,6 +18,7 @@ const AskContainer = ({ history }: RouteComponentProps) => {
     title: '',
     content: '',
   });
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
   const dispatch = useDispatch();
   const { user } = useSelector(({ user }: RootState) => ({
@@ -47,6 +48,7 @@ const AskContainer = ({ history }: RouteComponentProps) => {
         return [
           setTimeout(() => dispatch(changeMessage('')), 3500),
           setError(''),
+          setLoading(false),
           setValues({
             ...values,
             username: '',
@@ -68,7 +70,6 @@ const AskContainer = ({ history }: RouteComponentProps) => {
           func();
         })
         .catch((e) => {
-          console.error(e);
           dispatch(
             changeMessage('전송에 실패하였습니다. 나중에 다시 시도해 주세요.')
           );
@@ -78,6 +79,14 @@ const AskContainer = ({ history }: RouteComponentProps) => {
     [values, dispatch]
   );
 
+  const onClickSend = useCallback(() => {
+    const { username, guestEmail, title, content } = values;
+    if ([username, guestEmail, title, content].includes('')) {
+      return null;
+    }
+    setLoading(true);
+  }, [values]);
+
   return (
     <Ask
       user={user}
@@ -85,7 +94,9 @@ const AskContainer = ({ history }: RouteComponentProps) => {
       onChange={onChange}
       onClickBack={onClickBack}
       onSubmit={onSubmit}
+      onClickSend={onClickSend}
       error={error}
+      loading={loading}
     />
   );
 };
