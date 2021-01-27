@@ -33,13 +33,19 @@ export const AskBlock = styled.div`
   }
 `;
 
-export const Wrapper = styled.div`
+export const WrapperForm = styled.form`
   padding: 5px 10px;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
   width: 600px;
   background: ${palette.Header};
+  .error {
+    color: ${palette.errorColor};
+    text-align: center;
+    margin-bottom: 5px;
+    letter-spacing: 2px;
+  }
 `;
 
 export const ButtonBlock = styled.div`

@@ -1,19 +1,37 @@
 import {
   AskBlock,
-  Wrapper,
+  WrapperForm,
   Button,
   ButtonBlock,
   Alert,
 } from '../styles/ask/Ask.style';
-import React from 'react';
+import React, { ChangeEvent, FormEvent } from 'react';
 import { TitleButton } from '../styles/map/Map.style';
 import { WriteButton } from '../styles/home/HomeActionButton.style';
 
 type Props = {
   user: object;
+  values: {
+    username: string;
+    guestEmail: string;
+    title: string;
+    content: string;
+  };
+  onClickBack: () => void;
+  error: string;
+  onSubmit: (e: FormEvent) => void;
+  onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 };
 
-const Ask = ({ user }: Props) => {
+const Ask = ({
+  user,
+  values,
+  onChange,
+  error,
+  onClickBack,
+  onSubmit,
+}: Props) => {
+  const { username, guestEmail, title, content } = values;
   return (
     <>
       <TitleButton>
@@ -29,28 +47,29 @@ const Ask = ({ user }: Props) => {
         <div>24시간 내로 답변드리겠습니다.</div>
       </Alert>
       <AskBlock>
-        <Wrapper>
+        <WrapperForm onSubmit={onSubmit}>
           <div>
             <label>Username</label>
-            <input />
+            <input value={username} name="username" onChange={onChange} />
           </div>
           <div>
             <label>Your Email</label>
-            <input />
+            <input value={guestEmail} name="guestEmail" onChange={onChange} />
           </div>
           <div>
             <label>Title</label>
-            <input />
+            <input value={title} name="title" onChange={onChange} />
           </div>
           <div>
             <label>Content</label>
-            <textarea />
+            <textarea value={content} name="content" onChange={onChange} />
           </div>
+          {error && <span className="error">{error}</span>}
           <ButtonBlock>
             <Button>전송</Button>
-            <Button>뒤로 가기</Button>
+            <Button onClick={onClickBack}>뒤로 가기</Button>
           </ButtonBlock>
-        </Wrapper>
+        </WrapperForm>
       </AskBlock>
     </>
   );

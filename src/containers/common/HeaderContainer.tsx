@@ -33,6 +33,9 @@ const HeaderContainer = ({ history }: RouteComponentProps) => {
     if (message.includes('포스트가 삭제되었습니다.')) {
       setWelcomeMessage(message);
     }
+    if (message.includes('메일이 전송되었습니다. 감사합니다.')) {
+      setWelcomeMessage(message);
+    }
     if (message) {
       return () => {
         dispatch(changeMessage(''));

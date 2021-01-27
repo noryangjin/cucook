@@ -23,7 +23,7 @@ const ChatRoomContainer = ({
     user: user.user,
     roomList: chatRoom.roomList,
   }));
-  console.log(chatRoomId);
+
   useEffect(() => {
     dispatch(readRoomList());
     setSearchRoom('');

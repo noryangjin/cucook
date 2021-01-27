@@ -91,7 +91,6 @@ const ChatRoom = ({
   chatRoomId,
   joinRoom,
 }: Props) => {
-  console.log(chatRoomId);
   return (
     <ChatBlock>
       <Header>
