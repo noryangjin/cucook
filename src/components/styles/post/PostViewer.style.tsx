@@ -15,6 +15,7 @@ export const PostViewerBlock = styled.div`
     align-items: center;
   }
   .viewsWrite {
+    height: 40px;
     display: flex;
     align-items: center;
     margin-top: 10px;

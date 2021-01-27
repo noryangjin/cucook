@@ -45,6 +45,9 @@ export const UserInfo = styled.div`
   font-weight: bold;
   justify-content: flex-end;
   letter-spacing: 2px;
+  a:hover {
+    color: black;
+  }
   @media (max-width: 500px) {
     max-width: 30.5px;
     overflow: auto;
