@@ -12,119 +12,64 @@ export const LoadingBlock = styled.div<any>`
   background: rgba(0, 0, 0, 0.1);
   z-index: 100;
 
-  span::before {
-    content: '';
-    position: absolute;
-    width: 6px;
-    height: 6px;
-    background: #fff;
-    border-radius: 50%;
-    animation: loadingAnimate 2s linear infinite;
-    transform: scale(0);
-    @keyframes loadingAnimate {
-      0% {
-        transform: scale(0);
-      }
-      10% {
-        transform: scale(1.2);
-      }
-      80% {
-        background: red;
-        transform: scale(0);
-      }
-      100% {
-        transform: scale(0);
-      }
-    }
-  }
-
   .loading {
-    width: 65px;
-    height: 65px;
+    background: #fff;
+    padding: 1rem;
+    padding-right: 21px;
+    border-radius: 5px;
     display: flex;
     justify-content: center;
   }
 `;
 
 export const Span = styled.span<any>`
+  margin-left: 5px;
+  font-size: 1.125rem;
+  transform: scale(0);
+  @keyframes loadingAni {
+    0% {
+      transform: scale(0.7);
+    }
+    50% {
+      transform: scale(1.3);
+    }
+    100% {
+      transform: scale(0.7);
+    }
+  }
   ${(props) =>
     props.val === '1'
       ? css`
-          transform: rotate(calc(18deg));
+          animation-delay: 0.1s;
+          animation: loadingAni 1.7s linear infinite;
         `
       : props.val === '2'
       ? css`
-          transform: rotate(calc(36deg));
+          animation: loadingAni 1.7s linear infinite;
+          animation-delay: 0.2s;
         `
       : props.val === '3'
       ? css`
-          transform: rotate(calc(54deg));
+          animation: loadingAni 1.7s linear infinite;
+          animation-delay: 0.3s;
         `
       : props.val === '4'
       ? css`
-          transform: rotate(calc(72deg));
+          animation: loadingAni 1.7s linear infinite;
+          animation-delay: 0.4s;
         `
       : props.val === '5'
       ? css`
-          transform: rotate(calc(90deg));
+          animation: loadingAni 1.7s linear infinite;
+          animation-delay: 0.5s;
         `
       : props.val === '6'
       ? css`
-          transform: rotate(calc(108deg));
-        `
-      : props.val === '7'
-      ? css`
-          transform: rotate(calc(126deg));
-        `
-      : props.val === '8'
-      ? css`
-          transform: rotate(calc(144deg));
-        `
-      : props.val === '9'
-      ? css`
-          transform: rotate(calc(162deg));
-        `
-      : props.val === '10'
-      ? css`
-          transform: rotate(calc(180deg));
-        `
-      : props.val === '11'
-      ? css`
-          transform: rotate(calc(198deg));
-        `
-      : props.val === '12'
-      ? css`
-          transform: rotate(calc(216deg));
-        `
-      : props.val === '13'
-      ? css`
-          transform: rotate(calc(234deg));
-        `
-      : props.val === '14'
-      ? css`
-          transform: rotate(calc(252deg));
-        `
-      : props.val === '15'
-      ? css`
-          transform: rotate(calc(270deg));
-        `
-      : props.val === '16'
-      ? css`
-          transform: rotate(calc(288deg));
-        `
-      : props.val === '17'
-      ? css`
-          transform: rotate(calc(306deg));
-        `
-      : props.val === '18'
-      ? css`
-          transform: rotate(calc(324deg));
-        `
-      : props.val === '19'
-      ? css`
-          transform: rotate(calc(342deg));
+          animation: loadingAni 1.7s linear infinite;
+          animation-delay: 0.6s;
         `
       : css`
-          transform: rotate(calc(360deg));
+          animation: loadingAni 1.7s linear infinite;
+          animation-delay: 0.7s;
         `}
 `;

@@ -39,7 +39,7 @@ const Ask = ({
   const { username, guestEmail, title, content } = values;
   return (
     <>
-      <SendLoading />
+      {loading && <SendLoading />}
       <TitleButton>
         <h2 style={{ margin: '10px 0' }}>문의하기</h2>
         {user && (
