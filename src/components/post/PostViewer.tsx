@@ -12,8 +12,22 @@ import {
   Height,
   Error,
 } from '../styles/post/PostViewer.style';
+import { WriteButton } from '../styles/home/HomeActionButton.style';
+import loadable from '@loadable/component';
+import { Link } from 'react-router-dom';
 
-const PostViewer = ({ post, error, loading }: any) => {
+const Split = loadable(() => import('./PostUpdateDeleteButton'));
+
+type Props = {
+  post: any;
+  error: string;
+  loading: boolean;
+  ownPost: boolean;
+  onEdit: () => void;
+  user: Array<any>;
+};
+
+const PostViewer = ({ post, error, loading, ownPost, onEdit, user }: Props) => {
   if (error) {
     return <Error>{error}</Error>;
   }
@@ -35,17 +49,26 @@ const PostViewer = ({ post, error, loading }: any) => {
   return (
     <>
       <PostViewerBlock>
-        <span className="views">조회수 : {views}</span>
+        <div className="viewsWrite">
+          <div>조회수 : {views}</div>
+          {user && (
+            <WriteButton to="/write" cyan>
+              글쓰기
+            </WriteButton>
+          )}
+        </div>
         <div className="titleUser">
           <h2>
             {title}({category})
           </h2>
-
           <UserDateBlock>
-            <span>{username}</span>
+            <span>
+              <Link to={`/user/@${username}`}>{username}</Link>
+            </span>
             <span>
               {new Date(publishedDate).toLocaleDateString().replace(/\s/g, '')}
             </span>
+            {ownPost && <Split onEdit={onEdit} />}
           </UserDateBlock>
         </div>
         <Spacer />

@@ -21,7 +21,7 @@ const check_ = () => {
   try {
     store.dispatch(check());
   } catch (e) {
-    console.log(e);
+    console.error(e);
   }
 };
 
@@ -29,13 +29,13 @@ sagaMiddleware.run(rootSaga);
 check_();
 
 ReactDOM.render(
-  <React.StrictMode>
+  <React.Fragment>
     <Provider store={store}>
       <BrowserRouter>
         <App />
       </BrowserRouter>
     </Provider>
-  </React.StrictMode>,
+  </React.Fragment>,
   document.getElementById('root')
 );
 

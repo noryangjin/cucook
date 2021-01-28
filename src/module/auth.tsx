@@ -14,6 +14,7 @@ const [LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE] = createRequestActionTypes(
 const [REGISTER, REGISTER_SUCCESS, REGISTER_FAILURE] = createRequestActionTypes(
   'auth/REGISTER'
 );
+const UNLOAD = 'auth/UNLOAD';
 
 type type = {
   form?: string;
@@ -36,12 +37,14 @@ export const register = createAction(
   REGISTER,
   ({ username, password }: type) => ({ username, password })
 );
+export const unLoadAuth = createAction(UNLOAD);
 
 type typeAction =
   | ReturnType<typeof changeField>
   | ReturnType<typeof initialize>
   | ReturnType<typeof login>
-  | ReturnType<typeof register>;
+  | ReturnType<typeof register>
+  | ReturnType<typeof unLoadAuth>;
 
 const loginSaga = createRequestSaga(LOGIN, authAPI.login);
 const registerSaga = createRequestSaga(REGISTER, authAPI.register);
@@ -95,6 +98,7 @@ const auth = handleActions<any | typeAction>(
       ...state,
       authError: error,
     }),
+    [UNLOAD]: () => initialState,
   },
   initialState
 );

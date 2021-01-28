@@ -1,24 +1,50 @@
+import { useState } from 'react';
 import HeaderContainer from '../containers/common/HeaderContainer';
-import EditorContainer from '../containers/write/EditorContainer';
-import TagBoxContainer from '../containers/write/TagBoxContainer';
-import PostActionButtonContainer from '../containers/write/PostActionButtonContainer';
-import TitleImgContainer from '../containers/write/TitleImgContainer';
-import CategoryContainer from '../containers/write/CategoryContainer';
-import IngredientContainer from '../containers/write/IngredientContainer';
 import Responsive from '../components/common/Responsive';
+import loadable from '@loadable/component';
+import ChatRoomContainer from '../containers/home/ChatRoomContainer';
+import {
+  ChatBlock,
+  ScrollButton,
+} from '../components/styles/common/SideMenu.style';
+import { RouteComponentProps } from 'react-router-dom';
+import { BsFillChatDotsFill, BsFillQuestionCircleFill } from 'react-icons/bs';
+import { FaMapMarkedAlt } from 'react-icons/fa';
 
-const WritePage = () => {
+const Split = loadable(() => import('./Split/WritePage.split'), {
+  fallback: <h2>로딩 중...</h2>,
+});
+
+const WritePage = ({ history }: RouteComponentProps) => {
+  const [chatOn, setChatOn] = useState<boolean>(false);
+
+  const onClick = () => {
+    setChatOn(true);
+    if (chatOn) {
+      setChatOn(false);
+    }
+  };
   return (
     <>
       <HeaderContainer />
       <Responsive>
-        <CategoryContainer />
-        <EditorContainer />
-        <TitleImgContainer />
-        <IngredientContainer />
-        <TagBoxContainer />
-        <PostActionButtonContainer />
+        <Split />
       </Responsive>
+      <ChatBlock>{chatOn && <ChatRoomContainer />}</ChatBlock>
+      <ScrollButton>
+        <div className="icon">
+          <BsFillChatDotsFill onClick={onClick} size="23" />
+        </div>
+        <div className="icon">
+          <FaMapMarkedAlt onClick={() => history.push('/map')} size="22" />
+        </div>
+        <div className="icon">
+          <BsFillQuestionCircleFill
+            onClick={() => history.push('/ask')}
+            size="22"
+          />
+        </div>
+      </ScrollButton>
     </>
   );
 };

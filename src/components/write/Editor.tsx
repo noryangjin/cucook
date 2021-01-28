@@ -24,13 +24,11 @@ const Editor = ({ title, body, onChange }: Props) => {
       modules: {
         toolbar: [
           ['bold', 'italic', 'underline', 'strike', 'image', 'link'], // toggled buttons
-          ['blockquote', 'code-block'],
 
           [{ header: 1 }, { header: 2 }], // custom button values
           [{ list: 'ordered' }, { list: 'bullet' }],
           [{ script: 'sub' }, { script: 'super' }], // superscript/subscript
           [{ indent: '-1' }, { indent: '+1' }], // outdent/indent
-          [{ direction: 'rtl' }], // text direction
 
           [{ size: ['small', false, 'large', 'huge'] }], // custom dropdown
           [{ header: [1, 2, 3, 4, 5, 6, false] }],
@@ -51,6 +49,13 @@ const Editor = ({ title, body, onChange }: Props) => {
       }
     });
   }, [onChange]);
+
+  const mounted = useRef(false);
+  useEffect(() => {
+    if (mounted.current) return;
+    mounted.current = true;
+    quillInstance.current.root.innerHTML = body;
+  }, [body]);
 
   const onChangeTitle = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {

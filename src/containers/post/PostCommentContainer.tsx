@@ -71,7 +71,6 @@ const PostCommentContainer = ({ match }: RouteComponentProps<any>) => {
   const onRemove = useCallback(
     async (e: any) => {
       const { value } = await e.target;
-      console.log('ss', value);
       deleteComment(value)
         .then(() => {
           dispatch(readComment(postId));

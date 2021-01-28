@@ -10,7 +10,7 @@ const [
   READ_POST_SUCCESS,
   READ_POST_FAILURE,
 ] = createRequestActionTypes('post/READ_POST');
-const UNLOAD_POST = 'post/UNLOAD_POST';
+const UNLOAD_POST = 'post/UNLOAD_POST' as const;
 
 export const readPost = createAction(READ_POST, (id: string) => id);
 export const unloadPost = createAction(UNLOAD_POST);

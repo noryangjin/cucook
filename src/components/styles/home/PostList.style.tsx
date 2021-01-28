@@ -3,23 +3,17 @@ import styled from 'styled-components';
 import palette from '../palette';
 
 export const AutoSizerBlock = styled(AutoSizer)`
-  .block {
-    display: inline-flex;
-    .chat {
-      border: 1px solid red;
-
-      width: 60%;
-      height: 500px;
-    }
-    @media (max-width: 700px) {
-      .chat {
-        display: none;
-      }
-    }
-  }
+  max-width: 614px;
 `;
 
 export const ListBlock = styled(List)`
+  max-width: 614px;
+  @media (max-width: 1024px) {
+    max-width: 390px;
+  }
+  @media (max-width: 700px) {
+    max-width: 600px;
+  }
   a {
     color: ${palette.cyan[4]};
   }

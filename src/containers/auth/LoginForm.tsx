@@ -7,7 +7,7 @@ import React, {
 } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import AuthForm from '../../components/auth/AuthForm';
-import { changeField, initialize, login } from '../../module/auth';
+import { changeField, initialize, login, unLoadAuth } from '../../module/auth';
 import { RootState } from '../../module/index';
 import { check } from '../../module/user';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
@@ -26,6 +26,9 @@ const LoginForm = ({ history }: RouteComponentProps<any>) => {
 
   useEffect(() => {
     dispatch(initialize('login'));
+    return () => {
+      dispatch(unLoadAuth());
+    };
   }, [dispatch]);
 
   useEffect(() => {
@@ -47,7 +50,7 @@ const LoginForm = ({ history }: RouteComponentProps<any>) => {
     if (user) {
       history.push('/');
     }
-  }, [history, user]);
+  }, [history, user, dispatch]);
 
   const onChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
@@ -57,15 +60,18 @@ const LoginForm = ({ history }: RouteComponentProps<any>) => {
     [dispatch]
   );
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const { username, password } = form;
-    if ([username, password].includes('')) {
-      setError('빈 칸을 모두 입력하세요');
-      return;
-    }
-    dispatch(login({ username, password }));
-  };
+  const onSubmit = useCallback(
+    (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      const { username, password } = form;
+      if ([username, password].includes('')) {
+        setError('빈 칸을 모두 입력하세요');
+        return;
+      }
+      dispatch(login({ username, password }));
+    },
+    [dispatch, form]
+  );
 
   return (
     <AuthForm
