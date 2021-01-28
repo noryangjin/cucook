@@ -139,9 +139,12 @@ const ChattingContainer = ({
   }, []);
 
   useEffect(() => {
-    socket_ = socketIOClient('http://localhost:4000/chat', {
-      path: '/socket.io',
-    });
+    socket_ = socketIOClient(
+      'http://ec2-3-36-49-236.ap-northeast-2.compute.amazonaws.com:4000/chat',
+      {
+        path: '/socket.io',
+      }
+    );
     socket_.emit('join', { roomId: chatRoomId, user }, (error: any) => {
       if (error) {
         window.location.reload();
