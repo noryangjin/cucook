@@ -8,7 +8,6 @@ import WritePage from './pages/WritePage';
 import PostLeadPage from './pages/PostLeadPage';
 import SearchPage from './pages/SearchPage';
 import UserPage from './pages/UserPage';
-import MapPage from './pages/MapPage';
 import AskPage from './pages/AskPage';
 
 const App: FunctionComponent = () => {
@@ -33,7 +32,7 @@ const App: FunctionComponent = () => {
         path={['/user/@:username/chat/:chatRoomId', '/user/@:username']}
         component={UserPage}
       />
-      <Route path={['/map/chat/:chatRoomId', '/map']} component={MapPage} />
+
       <Route path="/ask" component={AskPage} />
       <Route
         render={({ location }) => (
