@@ -5,6 +5,9 @@ import palette from '../palette';
 export const AuthFormBlock = styled.div`
   display: flex;
   flex-direction: column;
+  a {
+    color: black;
+  }
   h2 {
     margin: 0;
     margin-bottom: 1rem;

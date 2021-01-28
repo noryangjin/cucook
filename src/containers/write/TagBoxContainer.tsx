@@ -7,7 +7,9 @@ import { onChange, onSubmit, onRemove } from './event/TagIngredientEvent';
 
 const TagBoxContainer = () => {
   const dispatch = useDispatch();
-  const { tags } = useSelector((state: RootState) => state.write.tags);
+  const { tags } = useSelector(({ write }: RootState) => ({
+    tags: write.tags,
+  }));
 
   const [input, setInput] = useState<string>('');
   const [local, setLocal] = useState<Array<string>>([]);

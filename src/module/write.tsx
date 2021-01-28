@@ -10,6 +10,12 @@ const CHANGE_FIELD = 'write/CHANGE_FIELD' as const;
 const [WRITE, WRITE_SUCCESS, WRITE_FAILURE] = createRequestActionTypes(
   'write/WRITE'
 );
+const SET_ORIGINAL_POST = 'write/SET_ORIGINAL_POST' as const;
+const [
+  UPDATE_POST,
+  UPDATE_POST_SUCCESS,
+  UPDATE_POST_FAILURE,
+] = createRequestActionTypes('write/UPDATE_POST');
 
 type type = {
   key?: string;
@@ -20,6 +26,7 @@ type type = {
   body?: string | any;
   ingredients?: Array<string>;
   tags?: Array<string>;
+  id?: string;
 };
 
 export const initialize = createAction(INITIALIZE);
@@ -38,15 +45,35 @@ export const writePost = createAction(
     tags,
   })
 );
+export const setOriginalPost = createAction(
+  SET_ORIGINAL_POST,
+  (post: any) => post
+);
+export const updatePost = createAction(
+  UPDATE_POST,
+  ({ id, title, body, tags, ingredients, titleImg, category }: type) => ({
+    id,
+    title,
+    body,
+    tags,
+    ingredients,
+    titleImg,
+    category,
+  })
+);
 
 type typeAction =
   | ReturnType<typeof initialize>
   | ReturnType<typeof changeField>
-  | ReturnType<typeof writePost>;
+  | ReturnType<typeof writePost>
+  | ReturnType<typeof setOriginalPost>
+  | ReturnType<typeof updatePost>;
 
 const writePostSaga = createRequestSaga(WRITE, postAPI.writePost);
+const updatePostSaga = createRequestSaga(UPDATE_POST, postAPI.updatePost);
 export function* writeSaga() {
   yield takeLatest(WRITE, writePostSaga);
+  yield takeLatest(UPDATE_POST, updatePostSaga);
 }
 
 type typeInitialState = {
@@ -58,6 +85,7 @@ type typeInitialState = {
   tags: Array<string>;
   post: any;
   postError: any;
+  originalPostId: string | null;
 };
 
 const initialState: typeInitialState = {
@@ -69,6 +97,7 @@ const initialState: typeInitialState = {
   tags: [],
   post: null,
   postError: null,
+  originalPostId: null,
 };
 
 const write = handleActions<(typeInitialState | any) | typeAction>(
@@ -88,6 +117,25 @@ const write = handleActions<(typeInitialState | any) | typeAction>(
       post,
     }),
     [WRITE_FAILURE]: (state, { payload: postError }) => ({
+      ...state,
+      post: null,
+      postError,
+    }),
+    [SET_ORIGINAL_POST]: (state, { payload: post }) => ({
+      ...state,
+      title: post.title,
+      body: post.body,
+      tags: post.tags,
+      ingredients: post.ingredients,
+      category: post.category,
+      titleImg: post.titleImg,
+      originalPostId: post._id,
+    }),
+    [UPDATE_POST_SUCCESS]: (state, { payload: post }) => ({
+      ...state,
+      post,
+    }),
+    [UPDATE_POST_FAILURE]: (state, { payload: postError }) => ({
       ...state,
       post: null,
       postError,

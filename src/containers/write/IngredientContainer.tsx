@@ -9,9 +9,9 @@ const IngredientContainer = () => {
   const [input, setInput] = useState<string>('');
   const [local, setLocal] = useState<Array<string>>([]);
   const dispatch = useDispatch();
-  const { ingredients } = useSelector(
-    (state: RootState) => state.write.ingredients
-  );
+  const { ingredients } = useSelector(({ write }: RootState) => ({
+    ingredients: write.ingredients,
+  }));
 
   useEffect(() => {
     ingredients && setLocal(ingredients);

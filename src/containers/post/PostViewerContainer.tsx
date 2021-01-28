@@ -1,20 +1,22 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import PostViewer from '../../components/post/PostViewer';
 import { readPost, unloadPost } from '../../module/post';
+import { setOriginalPost } from '../../module/write';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { RootState } from '../../module/index';
 import axios from 'axios';
 
-const PostViewerContainer = ({ match }: RouteComponentProps<any>) => {
+const PostViewerContainer = ({ match, history }: RouteComponentProps<any>) => {
   const { postId } = match.params;
-  const [error, setError] = useState<null | string>(null);
+  const [error, setError] = useState<string>('');
   const dispatch = useDispatch();
-  const { post, postError, loading } = useSelector(
-    ({ post, loading }: RootState) => ({
+  const { post, postError, loading, user } = useSelector(
+    ({ post, loading, user }: RootState) => ({
       post: post.post,
       postError: post.postError,
       loading: loading['post/READ_POST'],
+      user: user.user,
     })
   );
 
@@ -38,7 +40,23 @@ const PostViewerContainer = ({ match }: RouteComponentProps<any>) => {
     };
   }, [dispatch, postId]);
 
-  return <PostViewer post={post} error={error} loading={loading} />;
+  const onEdit = useCallback(() => {
+    dispatch(setOriginalPost(post));
+    history.push('/write');
+  }, [history, post, dispatch]);
+
+  const ownPost = (user && user._id) === (post && post.writer._id);
+
+  return (
+    <PostViewer
+      post={post}
+      error={error}
+      loading={loading}
+      ownPost={ownPost}
+      onEdit={onEdit}
+      user={user}
+    />
+  );
 };
 
 export default withRouter(PostViewerContainer);

@@ -1,7 +1,7 @@
-import { useCallback, MouseEvent, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { writePost } from '../../module/write';
+import { writePost, updatePost } from '../../module/write';
 import PostActionButton from '../../components/write/PostActionButton';
 import { RootState } from '../../module/index';
 
@@ -17,6 +17,7 @@ const PostActionButtonContainer = ({ history }: RouteComponentProps<any>) => {
     titleImg,
     post,
     postError,
+    originalPostId,
   } = useSelector(({ write }: RootState) => ({
     category: write.category,
     title: write.title,
@@ -26,6 +27,7 @@ const PostActionButtonContainer = ({ history }: RouteComponentProps<any>) => {
     tags: write.tags,
     post: write.post,
     postError: write.postError,
+    originalPostId: write.originalPostId,
   }));
 
   useEffect(() => {
@@ -57,26 +59,48 @@ const PostActionButtonContainer = ({ history }: RouteComponentProps<any>) => {
     );
   }, [category, title, body, history, titleImg, post, postError]);
 
-  const onPublish = useCallback(
-    (e?: MouseEvent<HTMLButtonElement>) => {
-      if (title && body && titleImg && category) {
-        dispatch(
-          writePost({ category, title, titleImg, body, ingredients, tags })
-        );
-      }
-    },
-    [dispatch, category, title, body, ingredients, tags, titleImg]
-  );
+  const onPublish = useCallback(() => {
+    if (title && body && titleImg && category && !originalPostId) {
+      return dispatch(
+        writePost({ category, title, titleImg, body, ingredients, tags })
+      );
+    }
 
-  const onCancel = useCallback(
-    (e?: MouseEvent<HTMLButtonElement>) => {
-      history.goBack();
-    },
-    [history]
-  );
+    if (originalPostId) {
+      return dispatch(
+        updatePost({
+          id: originalPostId,
+          title,
+          body,
+          tags,
+          ingredients,
+          category,
+          titleImg,
+        })
+      );
+    }
+  }, [
+    dispatch,
+    category,
+    title,
+    body,
+    ingredients,
+    tags,
+    titleImg,
+    originalPostId,
+  ]);
+
+  const onCancel = useCallback(() => {
+    history.goBack();
+  }, [history]);
 
   return (
-    <PostActionButton onPublish={onPublish} onCancel={onCancel} error={error} />
+    <PostActionButton
+      onPublish={onPublish}
+      onCancel={onCancel}
+      error={error}
+      isEdit={!!originalPostId}
+    />
   );
 };
 

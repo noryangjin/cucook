@@ -10,6 +10,7 @@ import {
   ComListBlock,
   Message,
 } from '../styles/post/PostComment.style';
+import { Link } from 'react-router-dom';
 import FlashMessage from 'react-flash-message';
 import { MdCancel } from 'react-icons/md';
 import { IoMdOptions } from 'react-icons/io';
@@ -75,22 +76,32 @@ const PostComment = ({
           )}
         </div>
         {comments.length > 0 ? (
-          comments.map((com: any) => (
-            <ComBlock key={com._id}>
-              <div className="writer">{com.commentWriter.username}</div>
-              <div className="comment">{com.text}</div>
-              <div className="commentDate">
-                {new Date(com.publishedDate).toLocaleDateString()}
-              </div>
-              {option && user && com.commentWriter._id === user._id && (
-                <div style={{ fontSize: '10px', fontWeight: 'bold' }}>
-                  <button value={com._id} key={com._id} onClick={onRemove}>
-                    ❌
-                  </button>
+          comments.map((com: any) => {
+            const {
+              commentWriter: { username, _id },
+              publishedDate,
+              text,
+              _id: id,
+            } = com;
+            return (
+              <ComBlock key={id}>
+                <div className="writer">
+                  <Link to={`/user/@${username}`}>{username}</Link>
                 </div>
-              )}
-            </ComBlock>
-          ))
+                <div className="comment">{text}</div>
+                <div className="commentDate">
+                  {new Date(publishedDate).toLocaleDateString()}
+                </div>
+                {option && user && _id === user._id && (
+                  <div style={{ fontSize: '10px', fontWeight: 'bold' }}>
+                    <button value={id} key={id} onClick={onRemove}>
+                      ❌
+                    </button>
+                  </div>
+                )}
+              </ComBlock>
+            );
+          })
         ) : (
           <div style={{ textAlign: 'center' }}>댓글이 없습니다.</div>
         )}

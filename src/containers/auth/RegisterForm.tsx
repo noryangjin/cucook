@@ -38,7 +38,7 @@ const RegisterForm = ({ history }: RouteComponentProps<any>) => {
         return;
       }
       if (authError.response.status === 400) {
-        setError('아이디는 3~20자 이어야 합니다.');
+        setError('아이디는 3~12자 이어야 합니다.');
         return;
       }
     }
@@ -61,23 +61,26 @@ const RegisterForm = ({ history }: RouteComponentProps<any>) => {
     [dispatch]
   );
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const { username, password, confirmPassword } = form;
-    if (password !== confirmPassword) {
-      setError('비밀번호가 일치하지 않습니다.');
-      dispatch(changeField({ form: 'register', key: 'password', value: '' }));
-      dispatch(
-        changeField({ form: 'register', key: 'confirmPassword', value: '' })
-      );
-      return;
-    }
-    if ([username, password, confirmPassword].includes('')) {
-      setError('빈 칸을 모두 입력하세요');
-      return;
-    }
-    dispatch(register({ username, password }));
-  };
+  const onSubmit = useCallback(
+    (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      const { username, password, confirmPassword } = form;
+      if (password !== confirmPassword) {
+        setError('비밀번호가 일치하지 않습니다.');
+        dispatch(changeField({ form: 'register', key: 'password', value: '' }));
+        dispatch(
+          changeField({ form: 'register', key: 'confirmPassword', value: '' })
+        );
+        return;
+      }
+      if ([username, password, confirmPassword].includes('')) {
+        setError('빈 칸을 모두 입력하세요');
+        return;
+      }
+      dispatch(register({ username, password }));
+    },
+    [dispatch, form]
+  );
 
   return (
     <AuthForm

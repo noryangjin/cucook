@@ -1,10 +1,10 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Responsive from '../../common/Responsive';
 import palette from '../palette';
 
 export const HeaderBlock = styled.div`
   background: ${palette.Header};
-  z-index: 1;
+  z-index: 40;
   width: 100%;
   position: fixed;
   border-bottom: 1px solid ${palette.gray[3]};
@@ -15,7 +15,7 @@ export const Wrapper = styled(Responsive)`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 4rem;
+  height: 3rem;
 
   .logo {
     letter-spacing: 2px;
@@ -24,6 +24,7 @@ export const Wrapper = styled(Responsive)`
     font-weight: bold;
   }
   a {
+    color: black;
     text-transform: uppercase;
   }
   button {
@@ -31,27 +32,52 @@ export const Wrapper = styled(Responsive)`
   }
   .right {
     display: flex;
+    height: 30px;
   }
 `;
 
 export const UserInfo = styled.div`
-  font-size: 1.125rem;
   margin-right: 5px;
+  display: flex;
+  align-items: center;
+  max-width: 50px;
+  font-size: x-small;
+  font-weight: bold;
+  justify-content: flex-end;
+  letter-spacing: 2px;
+  a:hover {
+    color: black;
+  }
+  @media (max-width: 500px) {
+    max-width: 30.5px;
+    overflow: auto;
+  }
 `;
 
 export const Spacer = styled.div`
-  height: 4.5rem;
+  height: 3rem;
 `;
 
-export const Message = styled.div`
-  z-index: 2;
+type Props = {
+  error?: string;
+};
+
+export const Message = styled.div<Props>`
+  z-index: 50;
   position: fixed;
   background: ${palette.cyan[3]};
   width: 100%;
-  height: 4rem;
+  height: 3rem;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  ${(props) =>
+    props.error &&
+    css`
+      z-index: 51;
+      background: ${palette.errorColor};
+    `}
 
   @keyframes okAnimation {
     0% {
@@ -83,5 +109,45 @@ export const Message = styled.div`
   .text {
     font-weight: bold;
     letter-spacing: 2px;
+  }
+`;
+
+export const Form = styled.form`
+  display: flex;
+  width: 500px;
+  height: 25px;
+  border-bottom: 1px solid ${palette.gray[4]};
+
+  input {
+    width: 100%;
+    outline: none;
+    border: none;
+    background: none;
+    height: 25px;
+    &:focus {
+      border-bottom: 1px solid black;
+    }
+  }
+  button {
+    width: 50px;
+    padding-right: 0;
+    padding-left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+  }
+
+  @media (max-width: 1024px) {
+    width: 350px;
+  }
+  @media (max-width: 700px) {
+    width: 200px;
+  }
+  @media (max-width: 500px) {
+    width: 120px;
   }
 `;

@@ -1,12 +1,20 @@
-import { ChangeEvent, useState, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import { ChangeEvent, useState, useCallback, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import TitleImg from '../../components/write/TitleImg';
 import { changeField } from '../../module/write';
+import { RootState } from '../../module/index';
 import Axios from 'axios';
 
 const TitleImgContainer = () => {
   const [imgFile, setImgFile] = useState<null | any>(null);
+  const { titleImg } = useSelector(({ write }: RootState) => ({
+    titleImg: write.titleImg,
+  }));
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    titleImg && setImgFile(titleImg);
+  }, [titleImg]);
 
   const onChange = useCallback(
     (e: ChangeEvent<any>) => {

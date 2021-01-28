@@ -61,6 +61,9 @@ export const ComBlock = styled.div`
     word-break: break-all;
   }
   .writer {
+    a {
+      color: black;
+    }
     width: 20%;
     text-align: center;
   }
@@ -116,9 +119,9 @@ export const Message: any = styled.div<Props>`
   top: 0;
   right: 0;
   left: 0;
-  z-index: 1;
+  z-index: 50;
   background: ${palette.cyan[3]};
-  height: 4rem;
+  height: 3rem;
   text-align: center;
   align-items: center;
   display: flex;
