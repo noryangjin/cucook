@@ -38,6 +38,7 @@ const AskContainer = ({ history }: RouteComponentProps) => {
 
   const onClickBack = useCallback(() => {
     history.goBack();
+    setError('');
     dispatch(changeMessage(''));
   }, [history, dispatch]);
 

@@ -54,6 +54,22 @@ export const ButtonBlock = styled.div`
   button + button {
     margin-left: 1rem;
   }
+  .back {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    font-size: 1rem;
+    padding: 5px 10px;
+    background: ${palette.gray[3]};
+    &:hover {
+      background: ${palette.gray[5]};
+    }
+  }
 `;
 
 export const Button = styled(button)`

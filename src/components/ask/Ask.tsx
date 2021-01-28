@@ -73,7 +73,9 @@ const Ask = ({
           {error && <span className="error">{error}</span>}
           <ButtonBlock>
             <Button onClick={onClickSend}>전송</Button>
-            <Button onClick={onClickBack}>뒤로 가기</Button>
+            <button className="back" type="button" onClick={onClickBack}>
+              뒤로 가기
+            </button>
           </ButtonBlock>
         </WrapperForm>
       </AskBlock>

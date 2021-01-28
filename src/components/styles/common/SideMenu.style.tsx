@@ -44,7 +44,8 @@ export const ChatBlock = styled.div`
   position: fixed;
   width: 330px;
   bottom: 70px;
-  right: 100px;
+  right: 110px;
+  z-index: 40;
   @media (max-width: 395px) {
     display: none;
   }
