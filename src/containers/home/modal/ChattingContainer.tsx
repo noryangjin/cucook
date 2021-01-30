@@ -140,7 +140,7 @@ const ChattingContainer = ({
 
   useEffect(() => {
     socket_ = socketIOClient(
-      'http://ec2-15-165-235-194.ap-northeast-2.compute.amazonaws.com:4000/chat',
+      'http://ec2-52-79-240-152.ap-northeast-2.compute.amazonaws.com:4000/chat',
       {
         path: '/socket.io',
       }

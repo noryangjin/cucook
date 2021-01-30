@@ -33,7 +33,7 @@ const PostViewerContainer = ({ match, history }: RouteComponentProps<any>) => {
     dispatch(readPost(postId));
     axios(`/api/post/view/${postId}`, {
       baseURL:
-        'http://ec2-15-165-235-194.ap-northeast-2.compute.amazonaws.com:4000',
+        'http://ec2-52-79-240-152.ap-northeast-2.compute.amazonaws.com:4000',
       method: 'POST',
     });
     return () => {
