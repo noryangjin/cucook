@@ -139,12 +139,9 @@ const ChattingContainer = ({
   }, []);
 
   useEffect(() => {
-    socket_ = socketIOClient(
-      'http://ec2-52-79-240-152.ap-northeast-2.compute.amazonaws.com:4000/chat',
-      {
-        path: '/socket.io',
-      }
-    );
+    socket_ = socketIOClient('http://www.cucook.net/chat', {
+      path: '/socket.io',
+    });
     socket_.emit('join', { roomId: chatRoomId, user }, (error: any) => {
       if (error) {
         window.location.reload();

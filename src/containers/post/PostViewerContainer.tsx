@@ -32,8 +32,7 @@ const PostViewerContainer = ({ match, history }: RouteComponentProps<any>) => {
   useEffect(() => {
     dispatch(readPost(postId));
     axios(`/api/post/view/${postId}`, {
-      baseURL:
-        'http://ec2-52-79-240-152.ap-northeast-2.compute.amazonaws.com:4000',
+      baseURL: 'http://www.cucook.net/',
       method: 'POST',
     });
     return () => {
