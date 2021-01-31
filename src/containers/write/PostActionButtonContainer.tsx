@@ -7,6 +7,7 @@ import { RootState } from '../../module/index';
 
 const PostActionButtonContainer = ({ history }: RouteComponentProps<any>) => {
   const [error, setError] = useState<null | string>(null);
+  const [loading, setLoading] = useState<boolean>(false);
   const dispatch = useDispatch();
   const {
     category,
@@ -36,6 +37,7 @@ const PostActionButtonContainer = ({ history }: RouteComponentProps<any>) => {
         writer: { username },
         _id,
       } = post;
+      setLoading(false);
       history.push(`/@${username}/${_id}`);
     }
     if (postError) {
@@ -61,9 +63,12 @@ const PostActionButtonContainer = ({ history }: RouteComponentProps<any>) => {
 
   const onPublish = useCallback(() => {
     if (title && body && titleImg && category && !originalPostId) {
-      return dispatch(
-        writePost({ category, title, titleImg, body, ingredients, tags })
-      );
+      return [
+        dispatch(
+          writePost({ category, title, titleImg, body, ingredients, tags })
+        ),
+        setLoading(true),
+      ];
     }
 
     if (originalPostId) {
@@ -99,6 +104,7 @@ const PostActionButtonContainer = ({ history }: RouteComponentProps<any>) => {
       onPublish={onPublish}
       onCancel={onCancel}
       error={error}
+      loading={loading}
       isEdit={!!originalPostId}
     />
   );

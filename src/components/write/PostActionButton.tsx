@@ -5,17 +5,26 @@ import {
   ErrorBlock,
   Spacer,
 } from '../styles/write/PostActionButton.style';
+import Loading from '../ask/SendLoading';
 
 type Props = {
   onPublish: () => void;
   onCancel: () => void;
   error?: null | string;
   isEdit: boolean;
+  loading: boolean;
 };
 
-const PostActionButton = ({ onPublish, onCancel, error, isEdit }: Props) => {
+const PostActionButton = ({
+  onPublish,
+  onCancel,
+  error,
+  isEdit,
+  loading,
+}: Props) => {
   return (
     <>
+      {loading && <Loading />}
       <PostActionButtonBlock>
         <ErrorBlock>{error && error}</ErrorBlock>
         <div style={{ display: 'flex' }}>

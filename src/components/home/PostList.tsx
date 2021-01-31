@@ -25,7 +25,7 @@ const PostList = ({ posts, qs_, onScroll }: Props) => {
     <>
       <AutoSizerBlock disableHeight>
         {({ width }: any) =>
-          posts && (
+          posts ? (
             <ListBlock
               onScroll={onScroll}
               className="PostList"
@@ -37,6 +37,8 @@ const PostList = ({ posts, qs_, onScroll }: Props) => {
               width={width}
               style={{ outline: 'none' }}
             />
+          ) : (
+            <h2 style={{ width: '300px' }}>로딩 중...</h2>
           )
         }
       </AutoSizerBlock>
