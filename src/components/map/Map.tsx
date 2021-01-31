@@ -8,7 +8,6 @@ import {
 } from 'react-google-maps';
 import { Key } from './Key';
 import Geocode from 'react-geocode';
-import 'antd/dist/antd.css';
 import { Descriptions } from 'antd';
 import { WriteButton } from '../styles/home/HomeActionButton.style';
 import { TitleButton } from '../styles/map/Map.style';
@@ -110,8 +109,12 @@ const Map = ({ user }: Props) => {
   };
 
   useEffect(() => {
+    console.log('11111111111111');
+
     if ('geolocation' in navigator) {
+      console.log('22222222222222222222');
       navigator.geolocation.getCurrentPosition((position: any) => {
+        console.log(position);
         SetStates({
           mapPosition: {
             lat: position.coords.latitude,
