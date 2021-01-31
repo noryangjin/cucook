@@ -8,6 +8,7 @@ import { deletePost } from '../../lib/api/post';
 import { withRouter } from 'react-router-dom';
 import AskDeleteModalContainer from '../../containers/post/modal/AskDeleteModalContainer';
 import { changeMessage } from '../../module/message';
+import Loading from '../ask/SendLoading';
 
 const PostUpdateDeleteButton = ({ onEdit, match, history }: any) => {
   const { postId } = match.params;
@@ -40,16 +41,13 @@ const PostUpdateDeleteButton = ({ onEdit, match, history }: any) => {
 
   return (
     <>
+      {loading && <Loading />}
       <ButtonBlock>
         <ActionButton onClick={onEdit}>수정</ActionButton>
         <ActionButton onClick={onRemoveClick}>삭제</ActionButton>
       </ButtonBlock>
       {modal && (
-        <AskDeleteModalContainer
-          onCancel={onCancel}
-          onConfirm={onConfirm}
-          loading={loading}
-        />
+        <AskDeleteModalContainer onCancel={onCancel} onConfirm={onConfirm} />
       )}
     </>
   );

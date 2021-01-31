@@ -26,12 +26,12 @@ const Map = ({ user }: Props) => {
     zoom: 10,
     height: 400,
     mapPosition: {
-      lat: 37,
-      lng: 126,
+      lat: 37.413294,
+      lng: 127.269311,
     },
     markerPosition: {
-      lat: 37,
-      lng: 126,
+      lat: 37.413294,
+      lng: 127.269311,
     },
   });
 
