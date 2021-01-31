@@ -139,7 +139,7 @@ const ChattingContainer = ({
   }, []);
 
   useEffect(() => {
-    socket_ = socketIOClient('http://www.cucook.net/chat', {
+    socket_ = socketIOClient('http://www.cucook.net:4000/chat', {
       path: '/socket.io',
     });
     socket_.emit('join', { roomId: chatRoomId, user }, (error: any) => {

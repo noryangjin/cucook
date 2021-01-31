@@ -32,7 +32,7 @@ const PostViewerContainer = ({ match, history }: RouteComponentProps<any>) => {
   useEffect(() => {
     dispatch(readPost(postId));
     axios(`/api/post/view/${postId}`, {
-      baseURL: 'http://www.cucook.net/',
+      baseURL: 'http://www.cucook.net:4000/',
       method: 'POST',
     });
     return () => {
