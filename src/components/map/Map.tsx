@@ -110,7 +110,7 @@ const Map = ({ user }: Props) => {
   };
 
   useEffect(() => {
-    if (navigator.geolocation) {
+    if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition((position: any) => {
         SetStates({
           mapPosition: {
