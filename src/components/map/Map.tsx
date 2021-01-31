@@ -8,9 +8,8 @@ import {
 } from 'react-google-maps';
 import { Key } from './Key';
 import Geocode from 'react-geocode';
-import { Descriptions } from 'antd';
 import { WriteButton } from '../styles/home/HomeActionButton.style';
-import { TitleButton } from '../styles/map/Map.style';
+import { TitleButton, StyleDescriptions } from '../styles/map/Map.style';
 
 Geocode.setApiKey(Key);
 
@@ -24,7 +23,7 @@ const Map = ({ user }: Props) => {
     city: '',
     area: '',
     state: '',
-    zoom: 15,
+    zoom: 10,
     height: 400,
     mapPosition: {
       lat: 0,
@@ -109,12 +108,8 @@ const Map = ({ user }: Props) => {
   };
 
   useEffect(() => {
-    console.log('11111111111111');
-
     if ('geolocation' in navigator) {
-      console.log('22222222222222222222');
       navigator.geolocation.getCurrentPosition((position: any) => {
-        console.log(position);
         SetStates({
           mapPosition: {
             lat: position.coords.latitude,
@@ -167,12 +162,20 @@ const Map = ({ user }: Props) => {
           </WriteButton>
         )}
       </TitleButton>
-      <Descriptions bordered style={{ marginBottom: '2rem' }}>
-        <Descriptions.Item label="City">{states.city}</Descriptions.Item>
-        <Descriptions.Item label="Area">{states.area}</Descriptions.Item>
-        <Descriptions.Item label="State">{states.state}</Descriptions.Item>
-        <Descriptions.Item label="Address">{states.address}</Descriptions.Item>
-      </Descriptions>
+      <StyleDescriptions bordered style={{ marginBottom: '2rem' }}>
+        <StyleDescriptions.Item label="City">
+          {states.city}
+        </StyleDescriptions.Item>
+        <StyleDescriptions.Item label="Area">
+          {states.area}
+        </StyleDescriptions.Item>
+        <StyleDescriptions.Item label="State">
+          {states.state}
+        </StyleDescriptions.Item>
+        <StyleDescriptions.Item label="Address">
+          {states.address}
+        </StyleDescriptions.Item>
+      </StyleDescriptions>
       <MapWithAMarker
         googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${Key}&v=3.exp&libraries=geometry,drawing,places`}
         loadingElement={<div style={{ height: `100%` }} />}
