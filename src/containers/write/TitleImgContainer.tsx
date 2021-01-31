@@ -24,7 +24,7 @@ const TitleImgContainer = () => {
 
       if (files[0]) {
         Axios.post('/api/post/titleImg', formData, {
-          baseURL: 'http://localhost:4000/',
+          baseURL: 'http://www.cucook.com:4000/',
           headers: {
             'content-type': 'multipart/form-data;',
           },
