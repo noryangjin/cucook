@@ -12,6 +12,7 @@ import { changeMessage } from '../../module/message';
 const PostUpdateDeleteButton = ({ onEdit, match, history }: any) => {
   const { postId } = match.params;
   const [modal, setMoDal] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const dispatch = useDispatch();
 
   const onRemoveClick = () => {
@@ -24,9 +25,11 @@ const PostUpdateDeleteButton = ({ onEdit, match, history }: any) => {
 
   const onConfirm = useCallback(async () => {
     setMoDal(false);
+    setLoading(true);
     try {
       await deletePost(postId)
         .then(() => {
+          setLoading(false);
           dispatch(changeMessage('포스트가 삭제되었습니다.'));
         })
         .then(() => history.push('/'));
@@ -42,7 +45,11 @@ const PostUpdateDeleteButton = ({ onEdit, match, history }: any) => {
         <ActionButton onClick={onRemoveClick}>삭제</ActionButton>
       </ButtonBlock>
       {modal && (
-        <AskDeleteModalContainer onCancel={onCancel} onConfirm={onConfirm} />
+        <AskDeleteModalContainer
+          onCancel={onCancel}
+          onConfirm={onConfirm}
+          loading={loading}
+        />
       )}
     </>
   );
