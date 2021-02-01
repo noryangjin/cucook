@@ -14,6 +14,7 @@ import { Link } from 'react-router-dom';
 import FlashMessage from 'react-flash-message';
 import { MdCancel } from 'react-icons/md';
 import { IoMdOptions } from 'react-icons/io';
+import Loading from '../ask/SendLoading';
 
 type Props = {
   comments: any;
@@ -27,6 +28,7 @@ type Props = {
   onClick: any;
   onCancel: any;
   message: string | null;
+  submitLoading: boolean;
 };
 
 const PostComment = ({
@@ -41,6 +43,7 @@ const PostComment = ({
   message,
   user,
   onRemove,
+  submitLoading,
 }: Props) => {
   if (!loading && !comments) {
     return null;
@@ -48,6 +51,7 @@ const PostComment = ({
 
   return (
     <>
+      {submitLoading && <Loading />}
       {message && (
         <FlashMessage duration={3500}>
           <Message messageStyle={message}>

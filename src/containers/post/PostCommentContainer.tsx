@@ -16,7 +16,7 @@ const PostCommentContainer = ({ match }: RouteComponentProps<any>) => {
   const [input, setInput] = useState<string>('');
   const [message, setMessage] = useState<null | string>(null);
   const [option, setOption] = useState<boolean>(false);
-
+  const [submitloading, setSubmitLoading] = useState<boolean>(false);
   const dispatch = useDispatch();
   const { postId } = match.params;
   const { user, comments, loading } = useSelector(
@@ -53,9 +53,13 @@ const PostCommentContainer = ({ match }: RouteComponentProps<any>) => {
         setInput('');
         return null;
       }
+      setSubmitLoading(true);
       await writeComment({ id: postId, text: input })
         .then(() => {
           dispatch(readComment(postId));
+        })
+        .then(() => {
+          setSubmitLoading(false);
           setMessage('댓글 등록 완료');
           setTimeout(() => setMessage(''), 3500);
         })
@@ -70,10 +74,14 @@ const PostCommentContainer = ({ match }: RouteComponentProps<any>) => {
 
   const onRemove = useCallback(
     async (e: any) => {
-      const { value } = await e.target;
-      deleteComment(value)
+      const { value } = e.target;
+      setSubmitLoading(true);
+      await deleteComment(value)
         .then(() => {
           dispatch(readComment(postId));
+        })
+        .then(() => {
+          setSubmitLoading(false);
           setMessage('댓글 삭제 완료');
           setTimeout(() => setMessage(''), 3500);
         })
@@ -98,6 +106,7 @@ const PostCommentContainer = ({ match }: RouteComponentProps<any>) => {
       message={message}
       user={user}
       onRemove={onRemove}
+      submitLoading={submitloading}
     />
   );
 };
