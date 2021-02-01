@@ -65,7 +65,6 @@ const PostCommentContainer = ({ match }: RouteComponentProps<any>) => {
         })
         .catch((e) => {
           setSubmitLoading(false);
-          alert('처리 중 입니다.');
           e.response.status === 403 && setMessage('로그인이 필요합니다.');
           setTimeout(() => setMessage(''), 3500);
         });
@@ -85,7 +84,6 @@ const PostCommentContainer = ({ match }: RouteComponentProps<any>) => {
         .then(() => {
           setSubmitLoading(false);
           setMessage('댓글 삭제 완료');
-          alert('처리 중 입니다.');
           setTimeout(() => setMessage(''), 3500);
         })
         .catch((e) => {
