@@ -16,6 +16,7 @@ const PostCommentContainer = ({ match }: RouteComponentProps<any>) => {
   const [input, setInput] = useState<string>('');
   const [message, setMessage] = useState<null | string>(null);
   const [option, setOption] = useState<boolean>(false);
+  const [submitloading, setSubmitLoading] = useState<boolean>(false);
   const dispatch = useDispatch();
   const { postId } = match.params;
   const { user, comments, loading, commentLoading } = useSelector(
@@ -23,7 +24,7 @@ const PostCommentContainer = ({ match }: RouteComponentProps<any>) => {
       comments: comment.comments,
       user: user.user,
       loading: loading['post/POST_READ'],
-      commentLoading: loading['post/READ_COMMENT'],
+      commentLoading: loading['comment/READ_COMMENT'],
     })
   );
 
@@ -39,6 +40,15 @@ const PostCommentContainer = ({ match }: RouteComponentProps<any>) => {
     setInput(value);
   }, []);
 
+  useEffect(() => {
+    if (commentLoading) {
+      setSubmitLoading(true);
+    }
+    if (!commentLoading) {
+      setSubmitLoading(false);
+    }
+  }, [commentLoading]);
+
   const onClick = useCallback(() => {
     setOption(true);
   }, []);
@@ -53,6 +63,7 @@ const PostCommentContainer = ({ match }: RouteComponentProps<any>) => {
         setInput('');
         return null;
       }
+      setSubmitLoading(true);
       await writeComment({ id: postId, text: input })
         .then(() => {
           dispatch(readComment(postId));
@@ -62,6 +73,7 @@ const PostCommentContainer = ({ match }: RouteComponentProps<any>) => {
           setTimeout(() => setMessage(''), 3500);
         })
         .catch((e) => {
+          setSubmitLoading(false);
           e.response.status === 403 && setMessage('로그인이 필요합니다.');
           setTimeout(() => setMessage(''), 3500);
         });
@@ -73,6 +85,7 @@ const PostCommentContainer = ({ match }: RouteComponentProps<any>) => {
   const onRemove = useCallback(
     async (e: any) => {
       const { value } = e.target;
+      setSubmitLoading(true);
       await deleteComment(value)
         .then(() => {
           dispatch(readComment(postId));
@@ -82,6 +95,7 @@ const PostCommentContainer = ({ match }: RouteComponentProps<any>) => {
           setTimeout(() => setMessage(''), 3500);
         })
         .catch((e) => {
+          setSubmitLoading(false);
           e.response.status === 403 && setMessage('로그인이 필요합니다.');
           setTimeout(() => setMessage(''), 3500);
         });
@@ -102,7 +116,7 @@ const PostCommentContainer = ({ match }: RouteComponentProps<any>) => {
       message={message}
       user={user}
       onRemove={onRemove}
-      commentLoading={commentLoading}
+      submitLoading={submitloading}
     />
   );
 };

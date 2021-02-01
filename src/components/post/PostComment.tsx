@@ -28,7 +28,7 @@ type Props = {
   onClick: any;
   onCancel: any;
   message: string | null;
-  commentLoading: boolean;
+  submitLoading: boolean;
 };
 
 const PostComment = ({
@@ -43,7 +43,7 @@ const PostComment = ({
   message,
   user,
   onRemove,
-  commentLoading,
+  submitLoading,
 }: Props) => {
   if (!loading && !comments) {
     return null;
@@ -51,7 +51,7 @@ const PostComment = ({
 
   return (
     <>
-      {commentLoading && <Loading />}
+      {submitLoading && <Loading />}
       {message && (
         <FlashMessage duration={3500}>
           <Message messageStyle={message}>
